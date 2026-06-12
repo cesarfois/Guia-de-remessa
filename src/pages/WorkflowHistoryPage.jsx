@@ -1225,11 +1225,7 @@ const WorkflowHistoryPage = () => {
             if (detectedTypeField && selectedDocType) {
                 queryFilters.push({
                     fieldName: detectedTypeField.DBFieldName || detectedTypeField.FieldName,
-<<<<<<< HEAD
                     value: selectedDocType
-=======
-                    value: "Pedido de Pagamento"
->>>>>>> 3a1e637 (feat: implement payment request features and layout adjustments)
                 });
             }
 
