@@ -46,11 +46,8 @@ COPY docker-server.js ./
 COPY scheduler.js ./
 COPY tokenManager.js ./
 
-# Initialize data files and create exports directory
-RUN echo "[]" > schedules.json && \
-    echo "[]" > history.json && \
-    echo "{}" > tokens.json && \
-    mkdir -p exports
+# Create empty data files and create exports directory
+RUN echo "[]" > schedules.json && echo "[]" > history.json && echo "{}" > tokens.json && mkdir -p exports
 
 # Runtime variables (used by proxy-server.js, tokenManager.js, scheduler.js)
 ARG VITE_DOCUWARE_CLIENT_ID
