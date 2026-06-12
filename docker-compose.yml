@@ -30,5 +30,12 @@ services:
       - DOCUWARE_USERNAME=${DOCUWARE_USERNAME}
       - DOCUWARE_PASSWORD=${DOCUWARE_PASSWORD_DOCKER}
       - DOCUWARE_ORG_ID=${DOCUWARE_ORG_ID}
+    networks:
+      - default
     restart: unless-stopped
+
+networks:
+  default:
+    name: pedidodepagamento_default
+    external: true
 
