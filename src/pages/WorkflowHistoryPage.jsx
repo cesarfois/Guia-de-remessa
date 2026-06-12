@@ -1616,15 +1616,10 @@ const WorkflowHistoryPage = () => {
                     'Etapa Atual': prog.activeTaskName || '',
                     'Responsável': prog.responsible && prog.responsible !== '-' ? prog.responsible : '',
                     'Tempo Parado': timeStopped,
-<<<<<<< HEAD
-                    'Comentários': comments,
-                    'Valor': getDocumentValor(doc)
-=======
                     'Prioridade': getDocFieldValue(doc, 'PRIORIDADE') || '',
                     'Forma de Pagamento': getDocFieldValue(doc, 'FORMA_DE_PAGAMENTO') || '',
                     'Valor': getDocFieldValue(doc, 'CHAMP_10') || '',
                     'Comentários': comments
->>>>>>> 3a1e637 (feat: implement payment request features and layout adjustments)
                 };
             });
 
@@ -2097,20 +2092,6 @@ const WorkflowHistoryPage = () => {
                                                             )}
                                                         </td>
 
-<<<<<<< HEAD
-                                                        {/* Matricula (Valor) */}
-                                                        <td className="py-3 px-2">
-                                                            {isProgLoading ? (
-                                                                <span className="inline-block w-12 h-3 bg-slate-100 animate-pulse rounded"></span>
-                                                            ) : (
-                                                                <div className="text-slate-600 text-xs truncate max-w-[90px]" title={getDocumentValor(doc) || '-'}>
-                                                                    {getDocumentValor(doc) || '-'}
-                                                                </div>
-                                                            )}
-                                                        </td>
-
-=======
->>>>>>> 3a1e637 (feat: implement payment request features and layout adjustments)
                                                         {/* History */}
                                                         <td className="py-3 px-0.5 text-center w-[38px]">
                                                             <button
