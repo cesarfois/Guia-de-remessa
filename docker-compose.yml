@@ -12,9 +12,9 @@ services:
         - DOCUWARE_USERNAME=${DOCUWARE_USERNAME}
         - DOCUWARE_PASSWORD=${DOCUWARE_PASSWORD_DOCKER}
         - DOCUWARE_ORG_ID=${DOCUWARE_ORG_ID}
-    container_name: rcsvision-app
+    container_name: rcsvision-pagamento-app
     ports:
-      - "3001:3001"
+      - "3002:3001"
     volumes:
       - ./exports:/app/exports
     environment:
