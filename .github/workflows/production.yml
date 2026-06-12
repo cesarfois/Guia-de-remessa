@@ -71,10 +71,13 @@ jobs:
             if [ ! -d "/app/pedido-de-pagamento/.git" ]; then
               echo "Pasta não existe ou não é um repositório Git. Clonando..."
               rm -rf /app/pedido-de-pagamento
-              git clone https://github.com/cesarfois/Pedido_de_pagamento.git /app/pedido-de-pagamento
+              git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/cesarfois/Pedido_de_pagamento.git /app/pedido-de-pagamento
             fi
             
             cd /app/pedido-de-pagamento
+            
+            # Atualizar URL com token temporário para permitir o fetch
+            git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/cesarfois/Pedido_de_pagamento.git
             
             # Resetar alterações locais para evitar conflitos no pull
             git fetch origin main
