@@ -785,14 +785,10 @@ const WorkflowHistoryPage = () => {
         
         const fetchProgressForDocs = async () => {
             const docsToFetch = [...documents];
-<<<<<<< HEAD
             const batchSize = 35;
 
             // Ensure global cache object exists
             window._historyCache = window._historyCache || {};
-=======
-            const batchSize = 15;
->>>>>>> 3a1e637 (feat: implement payment request features and layout adjustments)
 
             for (let i = 0; i < docsToFetch.length; i += batchSize) {
                 if (!active) break;
@@ -1068,11 +1064,7 @@ const WorkflowHistoryPage = () => {
                     }
                 }));
 
-<<<<<<< HEAD
                 await new Promise(resolve => setTimeout(resolve, 10));
-=======
-                await new Promise(resolve => setTimeout(resolve, 50));
->>>>>>> 3a1e637 (feat: implement payment request features and layout adjustments)
             }
         };
 
