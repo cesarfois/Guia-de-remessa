@@ -1,0 +1,72 @@
+name: Production Deployment
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-push-prod:
+    # if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build dynamic version
+        id: get_version
+        run: |
+          BASE_VERSION=$(jq -r '.version' package.json)
+          VERSION="${BASE_VERSION}.${GITHUB_RUN_NUMBER}.${GITHUB_RUN_ATTEMPT}"
+          echo "BASE_VERSION=$BASE_VERSION" >> $GITHUB_ENV
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "Using dynamic version: $VERSION"
+
+      - name: Check if Tag Already Exists
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const version = process.env.VERSION;
+            const tagName = `prod-${version}`;
+            
+            try {
+              await github.rest.git.getRef({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                ref: `tags/${tagName}`
+              });
+              
+              core.setFailed(`Tag ${tagName} already exists. Aborting to avoid duplicate release tag.`);
+            } catch (e) {
+              if (e.status !== 404) {
+                throw e;
+              }
+              console.log(`Tag ${tagName} is available.`);
+            }
+
+      - name: Create and Push Git Tag
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git tag prod-$VERSION
+          git push origin prod-$VERSION
+
+      - name: Deploy to Contabo VPS via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: 22
+          script: |
+            cd /app/pedido-de-pagamento
+            git pull origin main
+            
+            # Build e restart dos containers via docker-compose
+            docker compose down || true
+            docker compose up -d --build

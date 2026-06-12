@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "rewrites": [
+    { "source": "/DocuWare/:path*", "destination": "/api" },
+    { "source": "/docuware-proxy/:path*", "destination": "/api" },
+    { "source": "/discovery", "destination": "/api" },
+    { "source": "/api/:path*", "destination": "/api" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
