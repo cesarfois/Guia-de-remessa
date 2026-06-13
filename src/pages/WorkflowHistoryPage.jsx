@@ -29,6 +29,7 @@ import { WorkflowGraphBuilder } from '../services/workflow/WorkflowGraphBuilder'
 import { WorkflowHistoryAnalyzer } from '../services/workflow/WorkflowHistoryAnalyzer';
 import { WorkflowTimelineEngine } from '../services/workflow/WorkflowTimelineEngine';
 import { TimelineViewer } from '../components/Workflow/TimelineViewer';
+import ColumnFilter from '../components/Documents/ColumnFilter';
 
 const isTaskType = (typeStr) => {
     if (!typeStr) return false;
@@ -342,6 +343,53 @@ const WorkflowHistoryPage = () => {
     const [sortDirection, setSortDirection] = useState('desc');
     const [filterStep, setFilterStep] = useState('all');
     const [filterResponsible, setFilterResponsible] = useState('all');
+    const [columnFilters, setColumnFilters] = useState({});
+
+    const toggleFilterValue = (columnName, value) => {
+        setColumnFilters(prev => {
+            const current = prev[columnName] || [];
+            const newValues = current.includes(value)
+                ? current.filter(v => v !== value)
+                : [...current, value];
+
+            if (newValues.length === 0) {
+                const { [columnName]: _, ...rest } = prev;
+                return rest;
+            }
+
+            return { ...prev, [columnName]: newValues };
+        });
+    };
+
+    const clearColumnFilter = (columnName) => {
+        setColumnFilters(prev => {
+            const { [columnName]: _, ...rest } = prev;
+            return rest;
+        });
+    };
+
+    const getUniqueColumnValues = (columnName) => {
+        const values = new Set();
+        documents.forEach(doc => {
+            let val = '';
+            if (columnName === 'requerente') {
+                val = getDocFieldValue(doc, 'REQUERENTE');
+            } else if (columnName === 'activeTaskName') {
+                val = documentProgress[doc.Id]?.activeTaskName;
+            } else if (columnName === 'responsible') {
+                val = documentProgress[doc.Id]?.responsible;
+            } else if (columnName === 'prioridade') {
+                val = getDocFieldValue(doc, 'PRIORIDADE');
+            } else if (columnName === 'formaPagamento') {
+                val = getDocFieldValue(doc, 'FORMA_DE_PAGAMENTO');
+            }
+            
+            if (val !== undefined && val !== null && val !== '') {
+                values.add(String(val).trim());
+            }
+        });
+        return Array.from(values).sort();
+    };
     
     // Document Grid / List States
     const [documents, setDocuments] = useState([]);
@@ -622,6 +670,28 @@ const WorkflowHistoryPage = () => {
             // Responsible Filter
             if (filterResponsible !== 'all' && prog.responsible !== filterResponsible && !(prog.responsible && prog.responsible.includes(filterResponsible))) return false;
 
+            // Column filters
+            for (const [colName, selectedValues] of Object.entries(columnFilters)) {
+                if (selectedValues && selectedValues.length > 0) {
+                    let val = '';
+                    if (colName === 'requerente') {
+                        val = getDocFieldValue(doc, 'REQUERENTE');
+                    } else if (colName === 'activeTaskName') {
+                        val = prog.activeTaskName;
+                    } else if (colName === 'responsible') {
+                        val = prog.responsible;
+                    } else if (colName === 'prioridade') {
+                        val = getDocFieldValue(doc, 'PRIORIDADE');
+                    } else if (colName === 'formaPagamento') {
+                        val = getDocFieldValue(doc, 'FORMA_DE_PAGAMENTO');
+                    }
+
+                    if (!selectedValues.includes(String(val || '').trim())) {
+                        return false;
+                    }
+                }
+            }
+
             return true;
         });
 
@@ -684,17 +754,17 @@ const WorkflowHistoryPage = () => {
 
             if (typeof valA === 'string' && typeof valB === 'string') {
                 return sortDirection === 'asc' 
-                    ? valA.localeCompare(valB, 'pt-BR') 
-                    : valB.localeCompare(valA, 'pt-BR');
+                     ? valA.localeCompare(valB, 'pt-BR') 
+                     : valB.localeCompare(valA, 'pt-BR');
             } else {
                 return sortDirection === 'asc' 
-                    ? (valA > valB ? 1 : valA < valB ? -1 : 0) 
-                    : (valB > valA ? 1 : valB < valA ? -1 : 0);
+                     ? (valA > valB ? 1 : valA < valB ? -1 : 0) 
+                     : (valB > valA ? 1 : valB < valA ? -1 : 0);
             }
         });
 
         return result;
-    }, [documents, documentProgress, quickFilter, filterStep, filterResponsible, sortField, sortDirection]);
+    }, [documents, documentProgress, quickFilter, filterStep, filterResponsible, columnFilters, sortField, sortDirection]);
 
     // Pipeline visual steps aggregated for the cockpit
     const flowPipelineSteps = useMemo(() => {
@@ -1927,27 +1997,82 @@ const WorkflowHistoryPage = () => {
                                                 <th className="py-3 px-2 text-left cursor-pointer hover:bg-slate-100 select-none transition-colors" onClick={() => handleSort('percent')}>
                                                     Progresso {sortField === 'percent' ? (sortDirection === 'asc' ? '↑' : '↓') : '↕'}
                                                 </th>
-                                                <th className="py-3 px-2 text-left cursor-pointer hover:bg-slate-100 select-none transition-colors" onClick={() => handleSort('requerente')}>
-                                                    Requerente {sortField === 'requerente' ? (sortDirection === 'asc' ? '↑' : '↓') : '↕'}
-                                                </th>
-                                                <th className="py-3 px-2 text-left cursor-pointer hover:bg-slate-100 select-none transition-colors" onClick={() => handleSort('activeTaskName')}>
-                                                    Etapa Atual {sortField === 'activeTaskName' ? (sortDirection === 'asc' ? '↑' : '↓') : '↕'}
-                                                </th>
-                                                <th className="py-3 px-2 text-left cursor-pointer hover:bg-slate-100 select-none transition-colors" onClick={() => handleSort('responsible')}>
-                                                    Responsável {sortField === 'responsible' ? (sortDirection === 'asc' ? '↑' : '↓') : '↕'}
-                                                </th>
-                                                <th className="py-3 px-2 text-left cursor-pointer hover:bg-slate-100 select-none transition-colors" onClick={() => handleSort('timeStoppedMs')}>
-                                                    Tempo Parado {sortField === 'timeStoppedMs' ? (sortDirection === 'asc' ? '↑' : '↓') : '↕'}
-                                                </th>
-                                                <th className="py-3 px-2 text-left cursor-pointer hover:bg-slate-100 select-none transition-colors" onClick={() => handleSort('prioridade')}>
-                                                    Prioridade {sortField === 'prioridade' ? (sortDirection === 'asc' ? '↑' : '↓') : '↕'}
-                                                </th>
-                                                <th className="py-3 px-2 text-left cursor-pointer hover:bg-slate-100 select-none transition-colors" onClick={() => handleSort('formaPagamento')}>
-                                                    Forma de Pagamento {sortField === 'formaPagamento' ? (sortDirection === 'asc' ? '↑' : '↓') : '↕'}
-                                                </th>
-                                                <th className="py-3 px-2 text-left cursor-pointer hover:bg-slate-100 select-none transition-colors" onClick={() => handleSort('valor')}>
-                                                    Valor {sortField === 'valor' ? (sortDirection === 'asc' ? '↑' : '↓') : '↕'}
-                                                </th>
+                                                <th className="py-3 px-2 text-left select-none transition-colors">
+                                                     <div className="flex items-center gap-1 justify-between">
+                                                         <span className="cursor-pointer hover:text-indigo-600 flex-grow" onClick={() => handleSort('requerente')}>
+                                                             Requerente {sortField === 'requerente' ? (sortDirection === 'asc' ? '↑' : '↓') : '↕'}
+                                                         </span>
+                                                         <ColumnFilter
+                                                             column={{ name: 'requerente', label: 'Requerente' }}
+                                                             uniqueValues={getUniqueColumnValues('requerente')}
+                                                             selectedValues={columnFilters['requerente'] || []}
+                                                             onToggleValue={toggleFilterValue}
+                                                             onClear={clearColumnFilter}
+                                                         />
+                                                     </div>
+                                                 </th>
+                                                 <th className="py-3 px-2 text-left select-none transition-colors">
+                                                     <div className="flex items-center gap-1 justify-between">
+                                                         <span className="cursor-pointer hover:text-indigo-600 flex-grow" onClick={() => handleSort('activeTaskName')}>
+                                                             Etapa Atual {sortField === 'activeTaskName' ? (sortDirection === 'asc' ? '↑' : '↓') : '↕'}
+                                                         </span>
+                                                         <ColumnFilter
+                                                             column={{ name: 'activeTaskName', label: 'Etapa Atual' }}
+                                                             uniqueValues={getUniqueColumnValues('activeTaskName')}
+                                                             selectedValues={columnFilters['activeTaskName'] || []}
+                                                             onToggleValue={toggleFilterValue}
+                                                             onClear={clearColumnFilter}
+                                                         />
+                                                     </div>
+                                                 </th>
+                                                 <th className="py-3 px-2 text-left select-none transition-colors">
+                                                     <div className="flex items-center gap-1 justify-between">
+                                                         <span className="cursor-pointer hover:text-indigo-600 flex-grow" onClick={() => handleSort('responsible')}>
+                                                             Responsável {sortField === 'responsible' ? (sortDirection === 'asc' ? '↑' : '↓') : '↕'}
+                                                         </span>
+                                                         <ColumnFilter
+                                                             column={{ name: 'responsible', label: 'Responsável' }}
+                                                             uniqueValues={getUniqueColumnValues('responsible')}
+                                                             selectedValues={columnFilters['responsible'] || []}
+                                                             onToggleValue={toggleFilterValue}
+                                                             onClear={clearColumnFilter}
+                                                         />
+                                                     </div>
+                                                 </th>
+                                                 <th className="py-3 px-2 text-left cursor-pointer hover:bg-slate-100 select-none transition-colors" onClick={() => handleSort('timeStoppedMs')}>
+                                                     Tempo Parado {sortField === 'timeStoppedMs' ? (sortDirection === 'asc' ? '↑' : '↓') : '↕'}
+                                                 </th>
+                                                 <th className="py-3 px-2 text-left select-none transition-colors">
+                                                     <div className="flex items-center gap-1 justify-between">
+                                                         <span className="cursor-pointer hover:text-indigo-600 flex-grow" onClick={() => handleSort('prioridade')}>
+                                                             Prioridade {sortField === 'prioridade' ? (sortDirection === 'asc' ? '↑' : '↓') : '↕'}
+                                                         </span>
+                                                         <ColumnFilter
+                                                             column={{ name: 'prioridade', label: 'Prioridade' }}
+                                                             uniqueValues={getUniqueColumnValues('prioridade')}
+                                                             selectedValues={columnFilters['prioridade'] || []}
+                                                             onToggleValue={toggleFilterValue}
+                                                             onClear={clearColumnFilter}
+                                                         />
+                                                     </div>
+                                                 </th>
+                                                 <th className="py-3 px-2 text-left select-none transition-colors">
+                                                     <div className="flex items-center gap-1 justify-between">
+                                                         <span className="cursor-pointer hover:text-indigo-600 flex-grow" onClick={() => handleSort('formaPagamento')}>
+                                                             Forma de Pagamento {sortField === 'formaPagamento' ? (sortDirection === 'asc' ? '↑' : '↓') : '↕'}
+                                                         </span>
+                                                         <ColumnFilter
+                                                             column={{ name: 'formaPagamento', label: 'Forma de Pagamento' }}
+                                                             uniqueValues={getUniqueColumnValues('formaPagamento')}
+                                                             selectedValues={columnFilters['formaPagamento'] || []}
+                                                             onToggleValue={toggleFilterValue}
+                                                             onClear={clearColumnFilter}
+                                                         />
+                                                     </div>
+                                                 </th>
+                                                 <th className="py-3 px-2 text-left cursor-pointer hover:bg-slate-100 select-none transition-colors" onClick={() => handleSort('valor')}>
+                                                     Valor {sortField === 'valor' ? (sortDirection === 'asc' ? '↑' : '↓') : '↕'}
+                                                 </th>
                                                 <th className="py-3 px-2 text-left">
                                                     Comentários
                                                 </th>
