@@ -859,19 +859,22 @@ const WorkflowHistoryPage = () => {
         
         const fetchProgressForDocs = async () => {
             const docsToFetch = [...documents];
-            const batchSize = 35;
-
             // Ensure global cache object exists
             window._historyCache = window._historyCache || {};
 
-            for (let i = 0; i < docsToFetch.length; i += batchSize) {
-                if (!active) break;
+            // Concurrency limit: 8 parallel workers
+            const CONCURRENCY_LIMIT = 8;
+            let index = 0;
 
-                const batch = docsToFetch.slice(i, i + batchSize);
-                
-                await Promise.all(batch.map(async (doc) => {
+            const worker = async () => {
+                while (index < docsToFetch.length) {
+                    if (!active) break;
+                    // Get next doc to process
+                    const doc = docsToFetch[index++];
+                    if (!doc) continue;
+
                     try {
-                        if (documentProgress[doc.Id]) return;
+                        if (documentProgress[doc.Id]) continue;
 
                         const cacheKey = `wf_history_${selectedCabinet}_${doc.Id}`;
                         let instances = null;
@@ -980,10 +983,7 @@ const WorkflowHistoryPage = () => {
                             const endNode = nodes.find(isEndNode);
                             isFinished = endNode && endNode.status === 'completed';
 
-                            // Detect rejection/cancellation: check if any decision taken
-                            // in the history contains a rejection/cancellation keyword.
-                            // The End node is always "Final" (neutral), so we must look at
-                            // the decisions, not the terminal node name.
+                            // Detect rejection/cancellation
                             if (isFinished) {
                                 const rejKw = ['recusad', 'cancelad', 'reprovad', 'rejeit', 'refused', 'reject'];
                                 const normalize = (s) => (s || '').toLowerCase()
@@ -1070,7 +1070,7 @@ const WorkflowHistoryPage = () => {
                                         statusText = 'Em Processamento';
                                     }
                                 }
-                            } // Close the else block of isFinished
+                            }
                             if (instances) {
                                 try {
                                     const expiresAt = isFinished ? null : Date.now() + 5 * 60 * 1000;
@@ -1101,7 +1101,7 @@ const WorkflowHistoryPage = () => {
                                     console.warn('Failed to write to sessionStorage', e);
                                 }
                             }
-                        } // Close the instances && instances.length > 0 block
+                        }
 
                         if (active) {
                             setDocumentProgress(prev => ({
@@ -1154,10 +1154,16 @@ const WorkflowHistoryPage = () => {
                             }));
                         }
                     }
-                }));
+                }
+            };
 
-                await new Promise(resolve => setTimeout(resolve, 10));
+            // Start up to CONCURRENCY_LIMIT parallel worker threads
+            const workers = [];
+            const activeWorkersCount = Math.min(CONCURRENCY_LIMIT, docsToFetch.length);
+            for (let w = 0; w < activeWorkersCount; w++) {
+                workers.push(worker());
             }
+            await Promise.all(workers);
         };
 
         fetchProgressForDocs();
