@@ -1,8 +1,6 @@
-import { FaSignOutAlt, FaBoxes, FaSyncAlt, FaArrowLeft } from 'react-icons/fa';
-import { useAuth } from '../../context/AuthContext';
+import { FaBoxes, FaSyncAlt, FaArrowLeft } from 'react-icons/fa';
 
 const Header = () => {
-    const { logout } = useAuth();
 
     return (
         <header className="bg-white shadow-sm border-b border-gray-100 px-8 py-5 flex items-center justify-between">
@@ -38,14 +36,6 @@ const Header = () => {
                 >
                     <FaSyncAlt className="text-xs" />
                     <span>Atualizar</span>
-                </button>
-                <button
-                    onClick={logout}
-                    className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-red-600 hover:bg-red-50 rounded-lg transition-colors border border-transparent hover:border-red-100"
-                    title="Sair do Sistema"
-                >
-                    <FaSignOutAlt className="text-base" />
-                    <span>Sair</span>
                 </button>
             </div>
         </header>
