@@ -1685,7 +1685,7 @@ const WorkflowHistoryPage = () => {
                 'Responsável',
                 'Tempo Parado',
                 'Prioridade',
-                'Forma de Pagamento',
+                'Forma Pagamento',
                 'Valor',
                 'Comentários'
             ];
@@ -1709,7 +1709,7 @@ const WorkflowHistoryPage = () => {
                     'Responsável': prog.responsible && prog.responsible !== '-' ? prog.responsible : '',
                     'Tempo Parado': timeStopped,
                     'Prioridade': getDocFieldValue(doc, 'PRIORIDADE') || '',
-                    'Forma de Pagamento': getDocFieldValue(doc, 'FORMA_DE_PAGAMENTO') || '',
+                    'Forma Pagamento': getDocFieldValue(doc, 'FORMA_DE_PAGAMENTO') || '',
                     'Valor': getDocFieldValue(doc, 'CHAMP_10') || '',
                     'Comentários': comments
                 };
@@ -1991,7 +1991,7 @@ const WorkflowHistoryPage = () => {
                                 ) : (
                                     <table className="table table-compact w-full border-collapse">
                                         <thead>
-                                            <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 text-[10px] uppercase tracking-wider font-semibold">
+                                            <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 text-[9px] uppercase tracking-wider font-semibold">
                                                 <th className="py-3 px-2 text-left select-none transition-colors">
                                                      <div className="flex items-center gap-1 justify-between">
                                                          <span className="cursor-pointer hover:text-indigo-600 flex-grow" onClick={() => handleSort('docNum')}>
@@ -2074,10 +2074,10 @@ const WorkflowHistoryPage = () => {
                                                  <th className="py-3 px-2 text-left select-none transition-colors">
                                                      <div className="flex items-center gap-1 justify-between">
                                                          <span className="cursor-pointer hover:text-indigo-600 flex-grow" onClick={() => handleSort('formaPagamento')}>
-                                                             Forma de Pagamento {sortField === 'formaPagamento' ? (sortDirection === 'asc' ? '↑' : '↓') : '↕'}
+                                                              Forma Pagamento {sortField === 'formaPagamento' ? (sortDirection === 'asc' ? '↑' : '↓') : '↕'}
                                                          </span>
                                                          <ColumnFilter
-                                                             column={{ name: 'formaPagamento', label: 'Forma de Pagamento' }}
+                                                             column={{ name: 'formaPagamento', label: 'Forma Pagamento' }}
                                                              uniqueValues={getUniqueColumnValues('formaPagamento')}
                                                              selectedValues={columnFilters['formaPagamento'] || []}
                                                              onToggleValue={toggleFilterValue}
@@ -2214,7 +2214,7 @@ const WorkflowHistoryPage = () => {
                                                             )}
                                                         </td>
 
-                                                        {/* Forma de Pagamento */}
+                                                        {/* Forma Pagamento */}
                                                         <td className="py-3 px-2">
                                                             {isProgLoading ? (
                                                                 <span className="inline-block w-20 h-3 bg-slate-100 animate-pulse rounded"></span>
