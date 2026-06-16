@@ -92,13 +92,25 @@ export const workflowAnalyticsService = {
                 return [];
             }
 
-            const response = await analyticsApi.get('/DocuWare/Platform/Workflow/Instances/DocumentHistory', {
-                baseURL: '/',
-                params: {
-                    fileCabinetId: cabinetId,
-                    documentId: docId
+            let response;
+            try {
+                response = await analyticsApi.get('/DocuWare/Platform/Workflow/Instances/DocumentHistory', {
+                    baseURL: '/',
+                    params: {
+                        fileCabinetId: cabinetId,
+                        documentId: docId
+                    }
+                });
+            } catch (apiErr) {
+                if (apiErr.response && apiErr.response.status === 404) {
+                    console.log(`[WorkflowAnalytics] No history found (404) for DocID: ${docId}`);
+                    memoryCache.set(docId, []);
+                    return [];
                 }
-            });
+                console.warn(`[WorkflowAnalytics] API error fetching history for DocID: ${docId}:`, apiErr.message || apiErr);
+                memoryCache.set(docId, []);
+                return [];
+            }
 
             console.log('[WorkflowAnalytics] History Response:', response.data);
 
@@ -146,11 +158,12 @@ export const workflowAnalyticsService = {
                 return instancesWithSteps;
             }
 
+            memoryCache.set(docId, []);
             return [];
 
         } catch (error) {
             console.error('[WorkflowAnalytics] Platform History fetch failed:', error);
-            throw error;
+            return [];
         }
     },
 
