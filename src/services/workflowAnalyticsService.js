@@ -51,6 +51,50 @@ analyticsApi.interceptors.request.use(
 // Memory Cache map to store instances locally in application memory
 const memoryCache = new Map();
 
+// Helper to prune workflow steps to minimize size in localStorage
+const pruneSteps = (steps) => {
+    if (!steps || !Array.isArray(steps)) return [];
+    return steps.map(step => {
+        const prunedInfo = {};
+        if (step.Info && step.Info.Item) {
+            const item = step.Info.Item;
+            prunedInfo.Item = {
+                DecisionName: item.DecisionName,
+                DecisionDate: item.DecisionDate,
+                UserName: item.UserName,
+                AssignedUsers: item.AssignedUsers,
+                '$type': item['$type']
+            };
+        }
+        return {
+            ActivityName: step.ActivityName,
+            Name: step.Name,
+            ActivityType: step.ActivityType,
+            StepType: step.StepType,
+            StepDate: step.StepDate,
+            TimeStamp: step.TimeStamp,
+            DecisionLabel: step.DecisionLabel,
+            User: step.User,
+            UserName: step.UserName,
+            StepNumber: step.StepNumber,
+            Info: prunedInfo
+        };
+    });
+};
+
+// Helper to prune instances to minimize size in localStorage
+const pruneInstances = (instances) => {
+    if (!instances || !Array.isArray(instances)) return [];
+    return instances.map(inst => ({
+        Id: inst.Id,
+        WorkflowId: inst.WorkflowId,
+        Name: inst.Name,
+        Version: inst.Version,
+        StartedAt: inst.StartedAt,
+        HistorySteps: pruneSteps(inst.HistorySteps)
+    }));
+};
+
 export const workflowAnalyticsService = {
     /**
      * Get Workflow History for a Document by DocID
@@ -158,10 +202,13 @@ export const workflowAnalyticsService = {
                             const detailResp = await analyticsApi.get(historyUrl, { baseURL: '/' });
                             const steps = detailResp.data.HistorySteps || detailResp.data || [];
 
+                            // Prune steps to minimize storage size
+                            const pruned = pruneSteps(steps);
+
                             // Determine if this instance has reached a completed state
                             let isInstFinished = false;
-                            if (steps.length > 0) {
-                                const lastStep = steps[steps.length - 1];
+                            if (pruned.length > 0) {
+                                const lastStep = pruned[pruned.length - 1];
                                 const lastStepName = (lastStep.ActivityName || lastStep.Name || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
                                 const lastStepType = (lastStep.ActivityType || '').toLowerCase();
                                 
@@ -186,7 +233,7 @@ export const workflowAnalyticsService = {
                             // 5-minute TTL for active workflows, null (forever) for finished ones
                             const expiresAt = isInstFinished ? null : Date.now() + 5 * 60 * 1000;
                             try {
-                                localStorage.setItem(instCacheKey, JSON.stringify({ steps, expiresAt }));
+                                localStorage.setItem(instCacheKey, JSON.stringify({ steps: pruned, expiresAt }));
                             } catch (cacheErr) {
                                 if (cacheErr.name === 'QuotaExceededError' || cacheErr.code === 22) {
                                     // Clean up oldest items if local storage is full
@@ -197,7 +244,7 @@ export const workflowAnalyticsService = {
                                         }
                                     }
                                     try {
-                                        localStorage.setItem(instCacheKey, JSON.stringify({ steps, expiresAt }));
+                                        localStorage.setItem(instCacheKey, JSON.stringify({ steps: pruned, expiresAt }));
                                     } catch (retryErr) {
                                         console.warn('[WorkflowAnalytics] Failed to cache steps after eviction:', retryErr);
                                     }
@@ -207,7 +254,7 @@ export const workflowAnalyticsService = {
                             // Attach steps to the instance object, DO NOT flatten yet
                             return {
                                 ...inst,
-                                HistorySteps: steps
+                                HistorySteps: pruned
                             };
                         }
                     } catch (detailErr) {
@@ -218,10 +265,11 @@ export const workflowAnalyticsService = {
                 });
 
                 const instancesWithSteps = await Promise.all(historyPromises);
+                const prunedInstances = pruneInstances(instancesWithSteps);
                 
                 // Cache in memory initially
-                memoryCache.set(docId, instancesWithSteps);
-                return instancesWithSteps;
+                memoryCache.set(docId, prunedInstances);
+                return prunedInstances;
             }
 
             memoryCache.set(docId, []);
