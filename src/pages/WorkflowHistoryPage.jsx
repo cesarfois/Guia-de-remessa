@@ -880,7 +880,8 @@ const WorkflowHistoryPage = () => {
                         let instances = null;
 
                         try {
-                            const cached = sessionStorage.getItem(cacheKey);
+                            const cacheKey = `wf_history_${selectedCabinet}_${doc.Id}`;
+                            const cached = localStorage.getItem(cacheKey);
                             if (cached) {
                                 const parsed = JSON.parse(cached);
                                 const isExpired = parsed.expiresAt && Date.now() > parsed.expiresAt;
@@ -889,7 +890,7 @@ const WorkflowHistoryPage = () => {
                                 }
                             }
                         } catch (e) {
-                            console.error('Failed to read from sessionStorage', e);
+                            console.error('Failed to read from localStorage', e);
                         }
 
                         if (!instances) {
@@ -1080,25 +1081,25 @@ const WorkflowHistoryPage = () => {
                                         isFinished
                                     });
                                     try {
-                                        sessionStorage.setItem(cacheKey, payload);
+                                        localStorage.setItem(cacheKey, payload);
                                     } catch (err) {
                                         if (err.name === 'QuotaExceededError' || err.code === 22) {
-                                            console.warn('[Cache] SessionStorage full. Evicting old workflow history items...');
+                                            console.warn('[Cache] LocalStorage full. Evicting old workflow history items...');
                                             const keys = [];
-                                            for (let idx = 0; idx < sessionStorage.length; idx++) {
-                                                const k = sessionStorage.key(idx);
+                                            for (let idx = 0; idx < localStorage.length; idx++) {
+                                                const k = localStorage.key(idx);
                                                 if (k && k.startsWith('wf_history_')) {
                                                     keys.push(k);
                                                 }
                                             }
-                                            keys.forEach(k => sessionStorage.removeItem(k));
-                                            sessionStorage.setItem(cacheKey, payload);
+                                            keys.forEach(k => localStorage.removeItem(k));
+                                            localStorage.setItem(cacheKey, payload);
                                         } else {
                                             throw err;
                                         }
                                     }
                                 } catch (e) {
-                                    console.warn('Failed to write to sessionStorage', e);
+                                    console.warn('Failed to write to localStorage', e);
                                 }
                             }
                         }

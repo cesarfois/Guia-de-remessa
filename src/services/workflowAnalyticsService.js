@@ -123,6 +123,23 @@ export const workflowAnalyticsService = {
                 // Fetch details for each instance to get actual steps
                 const historyPromises = instances.map(async (inst) => {
                     try {
+                        const instCacheKey = `dw_inst_steps_${inst.Id}`;
+                        const cachedInst = localStorage.getItem(instCacheKey);
+                        if (cachedInst) {
+                            try {
+                                const parsed = JSON.parse(cachedInst);
+                                const isExpired = parsed.expiresAt && Date.now() > parsed.expiresAt;
+                                if (!isExpired) {
+                                    return {
+                                        ...inst,
+                                        HistorySteps: parsed.steps
+                                    };
+                                }
+                            } catch (e) {
+                                // ignore cache parsing error
+                            }
+                        }
+
                         // Find the self link or construct it. The JSON had a 'self' link ending in /History
                         const selfLink = (inst.Links || []).find(l => l.Rel === 'self' || l.rel === 'self');
                         let historyUrl = null;
@@ -139,10 +156,58 @@ export const workflowAnalyticsService = {
                         if (historyUrl) {
                             console.log(`[WorkflowAnalytics] Fetching details: ${historyUrl}`);
                             const detailResp = await analyticsApi.get(historyUrl, { baseURL: '/' });
+                            const steps = detailResp.data.HistorySteps || detailResp.data || [];
+
+                            // Determine if this instance has reached a completed state
+                            let isInstFinished = false;
+                            if (steps.length > 0) {
+                                const lastStep = steps[steps.length - 1];
+                                const lastStepName = (lastStep.ActivityName || lastStep.Name || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+                                const lastStepType = (lastStep.ActivityType || '').toLowerCase();
+                                
+                                const isEnd = lastStepType.includes('end') || 
+                                              lastStepType.includes('fim') ||
+                                              lastStepName === 'end' || 
+                                              lastStepName.startsWith('end ') || 
+                                              lastStepName.endsWith(' end') || 
+                                              lastStepName.includes(' end ') ||
+                                              lastStepName.startsWith('fim') ||
+                                              lastStepName.includes(' fim') ||
+                                              lastStepName.includes('concluid') || 
+                                              lastStepName.includes('termin') || 
+                                              lastStepName.includes('conclusao') ||
+                                              lastStepName.includes('cancelad') ||
+                                              lastStepName.includes('reprovad');
+                                if (isEnd) {
+                                    isInstFinished = true;
+                                }
+                            }
+
+                            // 5-minute TTL for active workflows, null (forever) for finished ones
+                            const expiresAt = isInstFinished ? null : Date.now() + 5 * 60 * 1000;
+                            try {
+                                localStorage.setItem(instCacheKey, JSON.stringify({ steps, expiresAt }));
+                            } catch (cacheErr) {
+                                if (cacheErr.name === 'QuotaExceededError' || cacheErr.code === 22) {
+                                    // Clean up oldest items if local storage is full
+                                    for (let idx = 0; idx < localStorage.length; idx++) {
+                                        const k = localStorage.key(idx);
+                                        if (k && k.startsWith('dw_inst_steps_')) {
+                                            localStorage.removeItem(k);
+                                        }
+                                    }
+                                    try {
+                                        localStorage.setItem(instCacheKey, JSON.stringify({ steps, expiresAt }));
+                                    } catch (retryErr) {
+                                        console.warn('[WorkflowAnalytics] Failed to cache steps after eviction:', retryErr);
+                                    }
+                                }
+                            }
+
                             // Attach steps to the instance object, DO NOT flatten yet
                             return {
                                 ...inst,
-                                HistorySteps: detailResp.data.HistorySteps || detailResp.data || []
+                                HistorySteps: steps
                             };
                         }
                     } catch (detailErr) {
