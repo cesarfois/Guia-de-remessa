@@ -1,0 +1,737 @@
+{
+  "name": "WFP.340.07 -CGO- Pedido/Compra Integral Material",
+  "organizationId": "bcb91903-58eb-49c6-8572-be5e3bb9611e",
+  "activities": [
+    {
+      "id": "d1a261e7-11da-4b95-9c1b-b42832342ec5",
+      "name": "Final",
+      "type": "End",
+      "description": "",
+      "x": 9600,
+      "y": 592,
+      "width": 180,
+      "height": 80,
+      "color": "#3b49a2",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "a845f59a-be2d-4fdf-838a-81e8aa9dd135",
+      "name": "Atribuir dados",
+      "type": "AssignData",
+      "description": "",
+      "x": 400,
+      "y": 493,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "assign-task"
+    },
+    {
+      "id": "8ee763c1-5cfc-4c92-94f0-96dab6cb3ae7",
+      "name": "Validação SH",
+      "type": "Action",
+      "description": "Validação do Superior Hierárquico",
+      "x": 1200,
+      "y": 592,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "837aae53-2f00-4b42-b15e-10a13bff54a9",
+      "name": "Compras-Encomenda",
+      "type": "Action",
+      "description": "",
+      "x": 5600,
+      "y": 848,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "cd003c8d-b8b8-4df6-b556-ee69921d285f",
+      "name": "Procurement",
+      "type": "AssignData",
+      "description": "",
+      "x": 5200,
+      "y": 848,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "a185d90b-66d5-4edd-ba06-32d527d5da8a",
+      "name": "Armazem",
+      "type": "AssignData",
+      "description": "",
+      "x": 6400,
+      "y": 1529,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "2c1b88cb-f284-49c4-b078-59a4a5514038",
+      "name": "Aguardando Material",
+      "type": "Action",
+      "description": "",
+      "x": 6400,
+      "y": 1942,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "d7ac1725-3058-4eb1-a59e-fce8164204b0",
+      "name": "Superior Hierarquico",
+      "type": "AssignData",
+      "description": "",
+      "x": 800,
+      "y": 592,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "27fae96c-cb19-4d35-ad43-27c8430337ca",
+      "name": "Verificação Stock",
+      "type": "Action",
+      "description": "Verificação de Stock",
+      "x": 2800,
+      "y": 592,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "038bb563-1f08-4a7e-b178-c09d5dd6dcad",
+      "name": "Armazém",
+      "type": "AssignData",
+      "description": "",
+      "x": 2400,
+      "y": 592,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "7a50c7de-213f-4099-80ab-476307f80696",
+      "name": "Requerente",
+      "type": "AssignData",
+      "description": "",
+      "x": 6000,
+      "y": 1529,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "0d97e151-6f07-4094-8aa9-62d785be09c8",
+      "name": "Ceder Esclarecimento",
+      "type": "Action",
+      "description": "Ceder Esclarecimento",
+      "x": 6000,
+      "y": 1942,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "6780b27a-5804-41f8-8b1d-3957a81ae690",
+      "name": "Atribuir dados  ",
+      "type": "AssignData",
+      "description": "",
+      "x": 9200,
+      "y": 592,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "assign-task"
+    },
+    {
+      "id": "0f5181b1-5561-471d-a030-328b5b47e435",
+      "name": "Destino Material",
+      "type": "Action",
+      "description": "",
+      "x": 7200,
+      "y": 1462,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "cfe1113e-ef18-49fd-9c71-8172e96d2e8a",
+      "name": "Requerente  ",
+      "type": "AssignData",
+      "description": "",
+      "x": 7200,
+      "y": 2009,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "3b80fee0-48a6-4489-ba85-dd3f4322fb07",
+      "name": "Requerente ",
+      "type": "AssignData",
+      "description": "",
+      "x": 6800,
+      "y": 1462,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "f183ea53-100c-4484-b1c1-9a9d25d17580",
+      "name": "Aviso Reprovação",
+      "type": "Action",
+      "description": "",
+      "x": 6800,
+      "y": 1875,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "f3f2c1a8-63a2-4996-8096-6fd1585fb10e",
+      "name": "Armazem ",
+      "type": "AssignData",
+      "description": "",
+      "x": 7600,
+      "y": 1596,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "2b2ea1d2-e1b7-4e2a-ad59-67e39d88bddf",
+      "name": "Preparar Entrega",
+      "type": "Action",
+      "description": "",
+      "x": 8000,
+      "y": 1183,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "51be38db-2cc9-4d42-ab43-0e8cc4d85ae7",
+      "name": "Requerente   ",
+      "type": "AssignData",
+      "description": "",
+      "x": 8400,
+      "y": 703,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "96fff114-418c-4eb7-8b85-bbfe0a684972",
+      "name": "Confirmação Recebimento",
+      "type": "Action",
+      "description": "",
+      "x": 8800,
+      "y": 752,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "03ffc63b-121b-48de-bfbf-af964717437e",
+      "name": "Superior Hierarquico_copia",
+      "type": "AssignData",
+      "description": "",
+      "x": 4400,
+      "y": 1407,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "697a2a4b-774e-445e-8d5f-7978744e4a32",
+      "name": "Autorizar Compra",
+      "type": "Action",
+      "description": "Validar continuidade da compra diante do prazo e valor cotado",
+      "x": 4800,
+      "y": 994,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "e63a531c-fe74-414a-8ea3-54af8959e0d2",
+      "name": "Validação Director Compras",
+      "type": "Action",
+      "description": "",
+      "x": 2000,
+      "y": 179,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "1ef81d71-c2e5-47fc-a0c1-12018a791cfd",
+      "name": "Director Compras",
+      "type": "AssignData",
+      "description": "",
+      "x": 2000,
+      "y": 659,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "fee59d55-739e-4302-8826-067dda06f7f4",
+      "name": ">500K AO",
+      "type": "Condition",
+      "description": "",
+      "x": 1600,
+      "y": 592,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "conditions"
+    },
+    {
+      "id": "1750f4ab-9e66-41a8-a685-95224924b057",
+      "name": "Procurement_",
+      "type": "AssignData",
+      "description": "",
+      "x": 3200,
+      "y": 1206,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "ae2212d0-ed53-43b7-b093-996975874de6",
+      "name": "Compras-Cotação",
+      "type": "Action",
+      "description": "",
+      "x": 3600,
+      "y": 793,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "91caced3-dbe3-46d7-8946-350a8a152af6",
+      "name": "Requerente_",
+      "type": "AssignData",
+      "description": "",
+      "x": 4000,
+      "y": 1407,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "c3dcce40-2192-4706-a9c1-d9b0b27fb6fd",
+      "name": "Ceder Esclarecimento_",
+      "type": "Action",
+      "description": "Ceder Esclarecimento",
+      "x": 4000,
+      "y": 1820,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "2ccb26bb-4e93-42ac-a407-1d2fd09cd57b",
+      "name": "Workflow",
+      "type": "Start",
+      "description": "https://cjfdig-my.sharepoint.com/:u:/g/personal/cesar_fois_cjfdigital_com_br/IQBzfRC3eptMQKWaFdGPrjwDAepHUPcETyC5_4NkK2-hB94?e=giX7xf",
+      "x": 0,
+      "y": 80,
+      "width": 180,
+      "height": 80,
+      "color": "#3b49a2",
+      "icon": "trigger"
+    }
+  ],
+  "connections": [
+    {
+      "id": "connection_0",
+      "source": "8ee763c1-5cfc-4c92-94f0-96dab6cb3ae7",
+      "target": "fee59d55-739e-4302-8826-067dda06f7f4",
+      "outputId": "a79cc49e-d1c4-4f21-b58c-83f80dffba7d",
+      "label": "Validado"
+    },
+    {
+      "id": "connection_1",
+      "source": "3b80fee0-48a6-4489-ba85-dd3f4322fb07",
+      "target": "f183ea53-100c-4484-b1c1-9a9d25d17580",
+      "outputId": "39fc50f1-9da4-4dd6-80c1-a3f13d00a63a",
+      "label": "OK"
+    },
+    {
+      "id": "connection_2",
+      "source": "cfe1113e-ef18-49fd-9c71-8172e96d2e8a",
+      "target": "0f5181b1-5561-471d-a030-328b5b47e435",
+      "outputId": "d020aedb-e10c-4de3-bc5a-c1da18b37ea8",
+      "label": "OK"
+    },
+    {
+      "id": "connection_3",
+      "source": "cd003c8d-b8b8-4df6-b556-ee69921d285f",
+      "target": "837aae53-2f00-4b42-b15e-10a13bff54a9",
+      "outputId": "3762c578-584e-4d7f-9850-f0aee0e898b3",
+      "label": "OK"
+    },
+    {
+      "id": "connection_4",
+      "source": "a185d90b-66d5-4edd-ba06-32d527d5da8a",
+      "target": "2c1b88cb-f284-49c4-b078-59a4a5514038",
+      "outputId": "6e852068-7c45-4a43-b059-18133bed367c",
+      "label": "OK"
+    },
+    {
+      "id": "connection_5",
+      "source": "2c1b88cb-f284-49c4-b078-59a4a5514038",
+      "target": "3b80fee0-48a6-4489-ba85-dd3f4322fb07",
+      "outputId": "be62e34b-2f64-408a-a5a3-2698321bff3e",
+      "label": "Cancelado"
+    },
+    {
+      "id": "connection_6",
+      "source": "2b2ea1d2-e1b7-4e2a-ad59-67e39d88bddf",
+      "target": "6780b27a-5804-41f8-8b1d-3957a81ae690",
+      "outputId": "5127c838-c1ef-4196-8cb1-2a6aa615818f",
+      "label": "Armazenar"
+    },
+    {
+      "id": "connection_7",
+      "source": "0d97e151-6f07-4094-8aa9-62d785be09c8",
+      "target": "cd003c8d-b8b8-4df6-b556-ee69921d285f",
+      "outputId": "59f3662c-cc67-43a6-946d-a839989413f8",
+      "label": "Esclarecer"
+    },
+    {
+      "id": "connection_8",
+      "source": "f183ea53-100c-4484-b1c1-9a9d25d17580",
+      "target": "6780b27a-5804-41f8-8b1d-3957a81ae690",
+      "outputId": "0fd7710d-4255-4fae-90d6-8c3304fcb87d",
+      "label": "Conhecimento"
+    },
+    {
+      "id": "connection_9",
+      "source": "f3f2c1a8-63a2-4996-8096-6fd1585fb10e",
+      "target": "2b2ea1d2-e1b7-4e2a-ad59-67e39d88bddf",
+      "outputId": "c1beb2dc-0e41-4e2c-b1a6-88b632cafd1a",
+      "label": "OK"
+    },
+    {
+      "id": "connection_10",
+      "source": "d7ac1725-3058-4eb1-a59e-fce8164204b0",
+      "target": "8ee763c1-5cfc-4c92-94f0-96dab6cb3ae7",
+      "outputId": "dff3c24e-6bff-4d13-9d83-cb33c49571e7",
+      "label": "OK"
+    },
+    {
+      "id": "connection_11",
+      "source": "0f5181b1-5561-471d-a030-328b5b47e435",
+      "target": "f3f2c1a8-63a2-4996-8096-6fd1585fb10e",
+      "outputId": "271e57d3-2c7b-4050-a423-c1c6f41a9ae9",
+      "label": "Levantar Material"
+    },
+    {
+      "id": "connection_12",
+      "source": "038bb563-1f08-4a7e-b178-c09d5dd6dcad",
+      "target": "27fae96c-cb19-4d35-ad43-27c8430337ca",
+      "outputId": "aa2536da-90d4-4916-afcf-feb9d82154a6",
+      "label": "OK"
+    },
+    {
+      "id": "connection_13",
+      "source": "03ffc63b-121b-48de-bfbf-af964717437e",
+      "target": "697a2a4b-774e-445e-8d5f-7978744e4a32",
+      "outputId": "73e8f9ad-ca8e-4e95-8c35-0b486135489b",
+      "label": "OK"
+    },
+    {
+      "id": "connection_14",
+      "source": "7a50c7de-213f-4099-80ab-476307f80696",
+      "target": "0d97e151-6f07-4094-8aa9-62d785be09c8",
+      "outputId": "19cba0a4-eb3d-4505-b627-77815dc98377",
+      "label": "OK"
+    },
+    {
+      "id": "connection_15",
+      "source": "837aae53-2f00-4b42-b15e-10a13bff54a9",
+      "target": "a185d90b-66d5-4edd-ba06-32d527d5da8a",
+      "outputId": "bca9a0b8-0e8e-4821-8e72-b791c8db327c",
+      "label": "Encomenda"
+    },
+    {
+      "id": "connection_16",
+      "source": "2c1b88cb-f284-49c4-b078-59a4a5514038",
+      "target": "cfe1113e-ef18-49fd-9c71-8172e96d2e8a",
+      "outputId": "9ab21b80-fa29-4e1b-b646-f00fe3126a74",
+      "label": "Material Recebido"
+    },
+    {
+      "id": "connection_17",
+      "source": "837aae53-2f00-4b42-b15e-10a13bff54a9",
+      "target": "cd003c8d-b8b8-4df6-b556-ee69921d285f",
+      "outputId": "3a3a0a42-62ef-4d23-8d59-60b92986e8b2",
+      "label": "Aguarda Info Fornecedor"
+    },
+    {
+      "id": "connection_18",
+      "source": "837aae53-2f00-4b42-b15e-10a13bff54a9",
+      "target": "7a50c7de-213f-4099-80ab-476307f80696",
+      "outputId": "99513410-0503-4ac8-a674-205f4c6a0330",
+      "label": "Esclarecimento"
+    },
+    {
+      "id": "connection_19",
+      "source": "8ee763c1-5cfc-4c92-94f0-96dab6cb3ae7",
+      "target": "3b80fee0-48a6-4489-ba85-dd3f4322fb07",
+      "outputId": "68af124f-baf8-4d00-a619-d923ea168bc8",
+      "label": "Recusado"
+    },
+    {
+      "id": "connection_20",
+      "source": "837aae53-2f00-4b42-b15e-10a13bff54a9",
+      "target": "3b80fee0-48a6-4489-ba85-dd3f4322fb07",
+      "outputId": "b6e8337b-a801-4689-93b0-0248e323b89c",
+      "label": "Cancelado"
+    },
+    {
+      "id": "connection_21",
+      "source": "837aae53-2f00-4b42-b15e-10a13bff54a9",
+      "target": "a185d90b-66d5-4edd-ba06-32d527d5da8a",
+      "outputId": "185c0fc5-a9dc-4a01-afdb-16dac5cdf48c",
+      "label": "Encomenda Internacional"
+    },
+    {
+      "id": "connection_22",
+      "source": "27fae96c-cb19-4d35-ad43-27c8430337ca",
+      "target": "3b80fee0-48a6-4489-ba85-dd3f4322fb07",
+      "outputId": "e1f15564-51f2-4b00-9a89-d3287c417e40",
+      "label": "Cancelar Pedido"
+    },
+    {
+      "id": "connection_23",
+      "source": "a845f59a-be2d-4fdf-838a-81e8aa9dd135",
+      "target": "d7ac1725-3058-4eb1-a59e-fce8164204b0",
+      "outputId": "47494344-92bf-41e9-b6b9-419fbd74af2a",
+      "label": "OK"
+    },
+    {
+      "id": "connection_24",
+      "source": "0f5181b1-5561-471d-a030-328b5b47e435",
+      "target": "f3f2c1a8-63a2-4996-8096-6fd1585fb10e",
+      "outputId": "174a9eea-a571-444e-8d10-27c423e78f30",
+      "label": "Reportar Problema"
+    },
+    {
+      "id": "connection_25",
+      "source": "6780b27a-5804-41f8-8b1d-3957a81ae690",
+      "target": "d1a261e7-11da-4b95-9c1b-b42832342ec5",
+      "outputId": "589c8ed7-2952-4fec-9845-7e254958cc33",
+      "label": "OK"
+    },
+    {
+      "id": "connection_26",
+      "source": "27fae96c-cb19-4d35-ad43-27c8430337ca",
+      "target": "cfe1113e-ef18-49fd-9c71-8172e96d2e8a",
+      "outputId": "e8a0b564-a7f4-42ad-97b4-4ec240490ecc",
+      "label": "Entrega/Compra Parcial"
+    },
+    {
+      "id": "connection_27",
+      "source": "27fae96c-cb19-4d35-ad43-27c8430337ca",
+      "target": "cfe1113e-ef18-49fd-9c71-8172e96d2e8a",
+      "outputId": "3c2eca8a-2b7e-40f3-b837-c29bb67c1941",
+      "label": "Entrega Total "
+    },
+    {
+      "id": "connection_28",
+      "source": "0f5181b1-5561-471d-a030-328b5b47e435",
+      "target": "f3f2c1a8-63a2-4996-8096-6fd1585fb10e",
+      "outputId": "36fd4968-463d-46c0-8d4f-a69f369c4b62",
+      "label": "Manter em Stock"
+    },
+    {
+      "id": "connection_29",
+      "source": "cfe1113e-ef18-49fd-9c71-8172e96d2e8a",
+      "target": "0f5181b1-5561-471d-a030-328b5b47e435",
+      "outputId": "45e777dd-e513-48b4-8e9a-dfaaff1dc8a9",
+      "label": ""
+    },
+    {
+      "id": "connection_30",
+      "source": "51be38db-2cc9-4d42-ab43-0e8cc4d85ae7",
+      "target": "96fff114-418c-4eb7-8b85-bbfe0a684972",
+      "outputId": "c44067e6-be46-4722-a0e4-9683f9a0debc",
+      "label": "OK"
+    },
+    {
+      "id": "connection_31",
+      "source": "2b2ea1d2-e1b7-4e2a-ad59-67e39d88bddf",
+      "target": "51be38db-2cc9-4d42-ab43-0e8cc4d85ae7",
+      "outputId": "b7d4ca44-b64f-410c-8495-c907fab10201",
+      "label": "Preparar Entrega"
+    },
+    {
+      "id": "connection_32",
+      "source": "96fff114-418c-4eb7-8b85-bbfe0a684972",
+      "target": "6780b27a-5804-41f8-8b1d-3957a81ae690",
+      "outputId": "f247fc33-53ac-4107-acb2-8c3ab41df592",
+      "label": "Reportar Problema"
+    },
+    {
+      "id": "connection_33",
+      "source": "96fff114-418c-4eb7-8b85-bbfe0a684972",
+      "target": "6780b27a-5804-41f8-8b1d-3957a81ae690",
+      "outputId": "ad38c930-b3d9-4437-af43-e651c51f1486",
+      "label": "Confirmar Recebimento"
+    },
+    {
+      "id": "connection_34",
+      "source": "fee59d55-739e-4302-8826-067dda06f7f4",
+      "target": "038bb563-1f08-4a7e-b178-c09d5dd6dcad",
+      "outputId": "86fdc4ba-06f2-430e-b88b-0eb60f619870",
+      "label": "<500K"
+    },
+    {
+      "id": "connection_35",
+      "source": "1ef81d71-c2e5-47fc-a0c1-12018a791cfd",
+      "target": "e63a531c-fe74-414a-8ea3-54af8959e0d2",
+      "outputId": "53e88ece-0f23-4e53-840d-5d4b6a0cc0d3",
+      "label": "OK"
+    },
+    {
+      "id": "connection_36",
+      "source": "e63a531c-fe74-414a-8ea3-54af8959e0d2",
+      "target": "038bb563-1f08-4a7e-b178-c09d5dd6dcad",
+      "outputId": "d60528c9-31cc-4171-8f34-f443cbb531fc",
+      "label": "Validado"
+    },
+    {
+      "id": "connection_37",
+      "source": "e63a531c-fe74-414a-8ea3-54af8959e0d2",
+      "target": "3b80fee0-48a6-4489-ba85-dd3f4322fb07",
+      "outputId": "77923a00-881e-4c49-94c1-4ebc3959ec03",
+      "label": "Recusado"
+    },
+    {
+      "id": "connection_38",
+      "source": "fee59d55-739e-4302-8826-067dda06f7f4",
+      "target": "1ef81d71-c2e5-47fc-a0c1-12018a791cfd",
+      "outputId": "40c8cac7-2d89-474d-be91-d48bd29a4221",
+      "label": ">500K"
+    },
+    {
+      "id": "connection_39",
+      "source": "1750f4ab-9e66-41a8-a685-95224924b057",
+      "target": "ae2212d0-ed53-43b7-b093-996975874de6",
+      "outputId": "7af5cf02-4722-49c2-bc1b-c610fcc40443",
+      "label": "OK"
+    },
+    {
+      "id": "connection_40",
+      "source": "27fae96c-cb19-4d35-ad43-27c8430337ca",
+      "target": "1750f4ab-9e66-41a8-a685-95224924b057",
+      "outputId": "dce83ae5-4bad-4b98-b538-3f3271c5de57",
+      "label": "Compra Total"
+    },
+    {
+      "id": "connection_41",
+      "source": "91caced3-dbe3-46d7-8946-350a8a152af6",
+      "target": "c3dcce40-2192-4706-a9c1-d9b0b27fb6fd",
+      "outputId": "8801a29b-b316-426d-8f48-f7d95998c69f",
+      "label": "OK"
+    },
+    {
+      "id": "connection_42",
+      "source": "ae2212d0-ed53-43b7-b093-996975874de6",
+      "target": "1750f4ab-9e66-41a8-a685-95224924b057",
+      "outputId": "057f12d3-c5f0-486d-af85-c6d27d65ddb8",
+      "label": "Aguarda Info Fornecedor"
+    },
+    {
+      "id": "connection_43",
+      "source": "c3dcce40-2192-4706-a9c1-d9b0b27fb6fd",
+      "target": "1750f4ab-9e66-41a8-a685-95224924b057",
+      "outputId": "0b7e8046-72a1-4ed6-bb93-04e8261e6f16",
+      "label": "Esclarecer"
+    },
+    {
+      "id": "connection_44",
+      "source": "ae2212d0-ed53-43b7-b093-996975874de6",
+      "target": "3b80fee0-48a6-4489-ba85-dd3f4322fb07",
+      "outputId": "2ec00acf-4ac3-4b4c-bfa6-e5f9af1888a9",
+      "label": "Cancelado"
+    },
+    {
+      "id": "connection_45",
+      "source": "ae2212d0-ed53-43b7-b093-996975874de6",
+      "target": "91caced3-dbe3-46d7-8946-350a8a152af6",
+      "outputId": "ee8b7c8a-3e76-486a-b0bd-fc7dc52a71fb",
+      "label": "Esclarecimento"
+    },
+    {
+      "id": "connection_46",
+      "source": "ae2212d0-ed53-43b7-b093-996975874de6",
+      "target": "03ffc63b-121b-48de-bfbf-af964717437e",
+      "outputId": "1775f4eb-22ec-4197-ba1d-7d03d09c4aa8",
+      "label": "Cotação"
+    },
+    {
+      "id": "connection_47",
+      "source": "697a2a4b-774e-445e-8d5f-7978744e4a32",
+      "target": "cd003c8d-b8b8-4df6-b556-ee69921d285f",
+      "outputId": "49b01a46-9d03-403d-a67a-b9fb680d35fc",
+      "label": "Validado"
+    },
+    {
+      "id": "connection_48",
+      "source": "697a2a4b-774e-445e-8d5f-7978744e4a32",
+      "target": "3b80fee0-48a6-4489-ba85-dd3f4322fb07",
+      "outputId": "7d99b394-a04f-4023-9584-0b19af35b6d4",
+      "label": "Cancelar"
+    },
+    {
+      "id": "connection_49",
+      "source": "697a2a4b-774e-445e-8d5f-7978744e4a32",
+      "target": "1750f4ab-9e66-41a8-a685-95224924b057",
+      "outputId": "c3389949-42f3-4912-8fdd-d53859244aaa",
+      "label": "Retornar Compras"
+    },
+    {
+      "id": "connection_50",
+      "source": "2ccb26bb-4e93-42ac-a407-1d2fd09cd57b",
+      "target": "a845f59a-be2d-4fdf-838a-81e8aa9dd135",
+      "outputId": "ebe21e6d-8358-4713-9f13-88aed9c4bf73",
+      "label": "Else"
+    }
+  ]
+}

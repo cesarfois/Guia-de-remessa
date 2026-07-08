@@ -1,0 +1,638 @@
+{
+  "name": "WFP.340.07.1 - Pedido/Compra de Material (Antigo)",
+  "organizationId": "bcb91903-58eb-49c6-8572-be5e3bb9611e",
+  "activities": [
+    {
+      "id": "ab1374f4-42d3-4fe1-9853-0074f914f91d",
+      "name": "Final",
+      "type": "End",
+      "description": "",
+      "x": 4800,
+      "y": 2625,
+      "width": 180,
+      "height": 80,
+      "color": "#3b49a2",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "960c848c-a64e-44fc-a5e6-77d612690955",
+      "name": "Atribuir dados",
+      "type": "AssignData",
+      "description": "",
+      "x": 0,
+      "y": 493,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "assign-task"
+    },
+    {
+      "id": "b122f785-3ce6-405f-b55f-cd089a8e9cad",
+      "name": "Validação do Pedido",
+      "type": "Action",
+      "description": "Validação do Superior Hierárquico",
+      "x": 800,
+      "y": 1319,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "b57bcf45-eabf-468d-b4ac-cf4f271e4744",
+      "name": "Compra Local - Entregar Material",
+      "type": "Action",
+      "description": "Entrega de material",
+      "x": 2000,
+      "y": 2279,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "03aedc01-0233-4b10-8688-4dd8f0ed61f6",
+      "name": "Pedido Recusado",
+      "type": "Email",
+      "description": "",
+      "x": 2000,
+      "y": 1453,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "email"
+    },
+    {
+      "id": "58e7bef8-6afc-45da-8c81-45c3a7130df9",
+      "name": "Procurement Luanda",
+      "type": "AssignData",
+      "description": "",
+      "x": 2000,
+      "y": 2960,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "b0346c2e-d3db-4ec0-bd06-4a7dd813dbbe",
+      "name": "Procurement Importação",
+      "type": "AssignData",
+      "description": "",
+      "x": 2400,
+      "y": 3373,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "046cc7be-af17-41e1-96fa-07a6c436d5d6",
+      "name": "Armazem Luanda",
+      "type": "AssignData",
+      "description": "",
+      "x": 2800,
+      "y": 3373,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "3620d6cf-47c6-45f5-8cc0-316cd92553fb",
+      "name": "Material Recebido",
+      "type": "Action",
+      "description": "Recepção de material no Armazém.",
+      "x": 2800,
+      "y": 3786,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "405aa5cd-e51b-44fa-9f90-1319ac3095b3",
+      "name": "Importação - Compra de Material ",
+      "type": "Action",
+      "description": "Compra de Material ",
+      "x": 2800,
+      "y": 4266,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "ea0d96f6-76e5-4b3d-8b0a-f0f1daa85a9e",
+      "name": "Superior Hierarquico",
+      "type": "AssignData",
+      "description": "",
+      "x": 400,
+      "y": 906,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "c81024e5-11e9-49cd-95db-8d9efd8fb92a",
+      "name": "Verificação Stock",
+      "type": "Action",
+      "description": "Verificação de Stock",
+      "x": 1200,
+      "y": 839,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "084e4b22-3915-48b8-9bd1-4bf186fc30b7",
+      "name": "Armazém",
+      "type": "AssignData",
+      "description": "",
+      "x": 1200,
+      "y": 1453,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "b648f90b-61c8-4ee2-b064-edce277265e7",
+      "name": "Requerente",
+      "type": "AssignData",
+      "description": "",
+      "x": 1600,
+      "y": 1453,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "97c35d04-7b32-4eca-94e0-2619102fa808",
+      "name": "Ceder Esclarecimento",
+      "type": "Action",
+      "description": "Ceder Esclarecimento",
+      "x": 1600,
+      "y": 1866,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "eac73bd6-9cd3-4246-b1bc-e7baa1cc73a3",
+      "name": "Requerente ",
+      "type": "AssignData",
+      "description": "",
+      "x": 2000,
+      "y": 3373,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "e9184e46-d21f-49d0-a93b-21aa2022350e",
+      "name": "Ceder Esclarecimento ",
+      "type": "Action",
+      "description": "Ceder Esclarecimento",
+      "x": 2400,
+      "y": 3786,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "f6c65884-13ad-496e-a58c-c40dd49af848",
+      "name": "Pedido Recusado ",
+      "type": "Email",
+      "description": "",
+      "x": 3200,
+      "y": 3585,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "email"
+    },
+    {
+      "id": "7250fbea-f7da-4a7c-bf54-b0b374e4900c",
+      "name": "Pedido Recusado  ",
+      "type": "Email",
+      "description": "",
+      "x": 4400,
+      "y": 3038,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "email"
+    },
+    {
+      "id": "f13bc8e5-7b5e-4848-b761-ab357ea19f49",
+      "name": "Procurement Importação ",
+      "type": "AssignData",
+      "description": "",
+      "x": 3200,
+      "y": 3998,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "725a639d-033e-4b62-97ab-442dcccc56c9",
+      "name": "Material Recebido PT",
+      "type": "Action",
+      "description": "Recepção de material pelo Procurement Portugal.",
+      "x": 3200,
+      "y": 4411,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "085d7da2-db10-4e2f-9e22-f2a5662a0b07",
+      "name": "Armazem ",
+      "type": "AssignData",
+      "description": "",
+      "x": 3600,
+      "y": 3931,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "c5d0dd87-7724-4d16-b275-a29004d3b10c",
+      "name": "Material Recebido ",
+      "type": "Action",
+      "description": "Recepção de material no Armazém Luanda.",
+      "x": 4000,
+      "y": 3518,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "f4dbeb71-ebb3-45c6-a8e9-c373b92abf91",
+      "name": "Armazém Luanda",
+      "type": "AssignData",
+      "description": "",
+      "x": 2000,
+      "y": 1866,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "49cc0939-52cc-4378-b72d-c5c7d46a71b9",
+      "name": "Entregar Material  ",
+      "type": "Action",
+      "description": "Entrega de material",
+      "x": 2400,
+      "y": 2960,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "7d425dc5-23f0-46e7-a630-76e21ed9a50d",
+      "name": "Atribuir dados  ",
+      "type": "AssignData",
+      "description": "",
+      "x": 4800,
+      "y": 2971,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "assign-task"
+    },
+    {
+      "id": "141a5738-1523-48f5-8592-7bff25418f0b",
+      "name": "Pedido Recusado   ",
+      "type": "Email",
+      "description": "",
+      "x": 1600,
+      "y": 1040,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "email"
+    },
+    {
+      "id": "d989a075-3a5f-4a43-9701-f0ded2725f62",
+      "name": "Workflow",
+      "type": "Start",
+      "description": "https://processplanner.docuware.com/Home/ReadOnly?linkId=4ea7348d-d8e7-4f02-af1e-ebfa2a981cac         ",
+      "x": 0,
+      "y": 80,
+      "width": 180,
+      "height": 80,
+      "color": "#3b49a2",
+      "icon": "trigger"
+    }
+  ],
+  "connections": [
+    {
+      "id": "connection_0",
+      "source": "b122f785-3ce6-405f-b55f-cd089a8e9cad",
+      "target": "084e4b22-3915-48b8-9bd1-4bf186fc30b7",
+      "outputId": "a79cc49e-d1c4-4f21-b58c-83f80dffba7d",
+      "label": "Validado"
+    },
+    {
+      "id": "connection_1",
+      "source": "b122f785-3ce6-405f-b55f-cd089a8e9cad",
+      "target": "03aedc01-0233-4b10-8688-4dd8f0ed61f6",
+      "outputId": "68af124f-baf8-4d00-a619-d923ea168bc8",
+      "label": "Recusado"
+    },
+    {
+      "id": "connection_2",
+      "source": "f13bc8e5-7b5e-4848-b761-ab357ea19f49",
+      "target": "725a639d-033e-4b62-97ab-442dcccc56c9",
+      "outputId": "d07c6164-2d8c-4781-b008-f91efbf59db5",
+      "label": "OK"
+    },
+    {
+      "id": "connection_3",
+      "source": "3620d6cf-47c6-45f5-8cc0-316cd92553fb",
+      "target": "7d425dc5-23f0-46e7-a630-76e21ed9a50d",
+      "outputId": "9ab21b80-fa29-4e1b-b646-f00fe3126a74",
+      "label": "Material Recebido"
+    },
+    {
+      "id": "connection_4",
+      "source": "58e7bef8-6afc-45da-8c81-45c3a7130df9",
+      "target": "b57bcf45-eabf-468d-b4ac-cf4f271e4744",
+      "outputId": "0117916a-f3cf-4fd7-aee0-0d28880a30c2",
+      "label": "OK"
+    },
+    {
+      "id": "connection_5",
+      "source": "046cc7be-af17-41e1-96fa-07a6c436d5d6",
+      "target": "3620d6cf-47c6-45f5-8cc0-316cd92553fb",
+      "outputId": "bed988a4-18aa-4521-b85c-6e3c203362c0",
+      "label": "OK"
+    },
+    {
+      "id": "connection_6",
+      "source": "3620d6cf-47c6-45f5-8cc0-316cd92553fb",
+      "target": "f6c65884-13ad-496e-a58c-c40dd49af848",
+      "outputId": "be62e34b-2f64-408a-a5a3-2698321bff3e",
+      "label": "Cancelado"
+    },
+    {
+      "id": "connection_7",
+      "source": "f6c65884-13ad-496e-a58c-c40dd49af848",
+      "target": "7d425dc5-23f0-46e7-a630-76e21ed9a50d",
+      "outputId": "b6855026-b223-4488-94e2-e0332762023f",
+      "label": "OK"
+    },
+    {
+      "id": "connection_8",
+      "source": "b57bcf45-eabf-468d-b4ac-cf4f271e4744",
+      "target": "b0346c2e-d3db-4ec0-bd06-4a7dd813dbbe",
+      "outputId": "b9407ed7-12de-4cef-b855-f61398229a21",
+      "label": "Reencaminhar Importação"
+    },
+    {
+      "id": "connection_9",
+      "source": "b57bcf45-eabf-468d-b4ac-cf4f271e4744",
+      "target": "b648f90b-61c8-4ee2-b064-edce277265e7",
+      "outputId": "99513410-0503-4ac8-a674-205f4c6a0330",
+      "label": "Esclarecimento"
+    },
+    {
+      "id": "connection_10",
+      "source": "b57bcf45-eabf-468d-b4ac-cf4f271e4744",
+      "target": "f6c65884-13ad-496e-a58c-c40dd49af848",
+      "outputId": "b6e8337b-a801-4689-93b0-0248e323b89c",
+      "label": "Cancelado"
+    },
+    {
+      "id": "connection_11",
+      "source": "b0346c2e-d3db-4ec0-bd06-4a7dd813dbbe",
+      "target": "405aa5cd-e51b-44fa-9f90-1319ac3095b3",
+      "outputId": "67ae6f9e-541a-41bc-9197-d3cc070fd69c",
+      "label": "OK"
+    },
+    {
+      "id": "connection_12",
+      "source": "405aa5cd-e51b-44fa-9f90-1319ac3095b3",
+      "target": "eac73bd6-9cd3-4246-b1bc-e7baa1cc73a3",
+      "outputId": "5fe53e20-89df-4d9b-8fa5-eb3c8ee93f50",
+      "label": "Esclarecimento"
+    },
+    {
+      "id": "connection_13",
+      "source": "405aa5cd-e51b-44fa-9f90-1319ac3095b3",
+      "target": "58e7bef8-6afc-45da-8c81-45c3a7130df9",
+      "outputId": "4731dd1e-0936-4aba-8efd-29c2bcf56534",
+      "label": "Reencaminhar Luanda"
+    },
+    {
+      "id": "connection_14",
+      "source": "e9184e46-d21f-49d0-a93b-21aa2022350e",
+      "target": "b0346c2e-d3db-4ec0-bd06-4a7dd813dbbe",
+      "outputId": "8eda7d99-fbd3-4860-8f71-b00ca66f17aa",
+      "label": "Esclarecer"
+    },
+    {
+      "id": "connection_15",
+      "source": "405aa5cd-e51b-44fa-9f90-1319ac3095b3",
+      "target": "f13bc8e5-7b5e-4848-b761-ab357ea19f49",
+      "outputId": "9176a65e-a628-4be3-8f45-dec17d8d41c0",
+      "label": "Encomenda"
+    },
+    {
+      "id": "connection_16",
+      "source": "03aedc01-0233-4b10-8688-4dd8f0ed61f6",
+      "target": "7d425dc5-23f0-46e7-a630-76e21ed9a50d",
+      "outputId": "d11159d7-9a1b-4df6-8ab5-7f5489241760",
+      "label": "OK"
+    },
+    {
+      "id": "connection_17",
+      "source": "ea0d96f6-76e5-4b3d-8b0a-f0f1daa85a9e",
+      "target": "b122f785-3ce6-405f-b55f-cd089a8e9cad",
+      "outputId": "5119f5e7-61fd-4304-ad52-edcd9eb94d12",
+      "label": "OK"
+    },
+    {
+      "id": "connection_18",
+      "source": "c81024e5-11e9-49cd-95db-8d9efd8fb92a",
+      "target": "f4dbeb71-ebb3-45c6-a8e9-c373b92abf91",
+      "outputId": "88e06194-6185-40ac-8b59-c0ecb5c1faf0",
+      "label": "Entrega Luanda"
+    },
+    {
+      "id": "connection_19",
+      "source": "084e4b22-3915-48b8-9bd1-4bf186fc30b7",
+      "target": "c81024e5-11e9-49cd-95db-8d9efd8fb92a",
+      "outputId": "9ffb28af-10ef-44be-8010-76f10b367eff",
+      "label": "OK"
+    },
+    {
+      "id": "connection_20",
+      "source": "725a639d-033e-4b62-97ab-442dcccc56c9",
+      "target": "085d7da2-db10-4e2f-9e22-f2a5662a0b07",
+      "outputId": "65542036-4dda-48ec-a2dd-3bb3ad2cb9f9",
+      "label": "Recebido Portugal"
+    },
+    {
+      "id": "connection_21",
+      "source": "c81024e5-11e9-49cd-95db-8d9efd8fb92a",
+      "target": "58e7bef8-6afc-45da-8c81-45c3a7130df9",
+      "outputId": "f3a0e2ea-f142-44eb-974b-499834db9393",
+      "label": "Compra Angola"
+    },
+    {
+      "id": "connection_22",
+      "source": "b648f90b-61c8-4ee2-b064-edce277265e7",
+      "target": "97c35d04-7b32-4eca-94e0-2619102fa808",
+      "outputId": "80a37585-9bde-4146-b83c-a5b3ddb28bbc",
+      "label": "OK"
+    },
+    {
+      "id": "connection_23",
+      "source": "97c35d04-7b32-4eca-94e0-2619102fa808",
+      "target": "58e7bef8-6afc-45da-8c81-45c3a7130df9",
+      "outputId": "59f3662c-cc67-43a6-946d-a839989413f8",
+      "label": "Esclarecer"
+    },
+    {
+      "id": "connection_24",
+      "source": "b57bcf45-eabf-468d-b4ac-cf4f271e4744",
+      "target": "58e7bef8-6afc-45da-8c81-45c3a7130df9",
+      "outputId": "3a3a0a42-62ef-4d23-8d59-60b92986e8b2",
+      "label": "Aguarda Informação Fornecedor"
+    },
+    {
+      "id": "connection_25",
+      "source": "eac73bd6-9cd3-4246-b1bc-e7baa1cc73a3",
+      "target": "e9184e46-d21f-49d0-a93b-21aa2022350e",
+      "outputId": "966d43dc-725b-43c2-9f2e-b6945dc30f5f",
+      "label": "OK"
+    },
+    {
+      "id": "connection_26",
+      "source": "405aa5cd-e51b-44fa-9f90-1319ac3095b3",
+      "target": "b0346c2e-d3db-4ec0-bd06-4a7dd813dbbe",
+      "outputId": "0f792ed3-4b77-4165-b3d2-8c162ff4890b",
+      "label": "Aguarda Informação"
+    },
+    {
+      "id": "connection_27",
+      "source": "405aa5cd-e51b-44fa-9f90-1319ac3095b3",
+      "target": "7250fbea-f7da-4a7c-bf54-b0b374e4900c",
+      "outputId": "c6339172-6ffc-4eb0-a4b3-9bf03089d711",
+      "label": "Cancelado"
+    },
+    {
+      "id": "connection_28",
+      "source": "b57bcf45-eabf-468d-b4ac-cf4f271e4744",
+      "target": "046cc7be-af17-41e1-96fa-07a6c436d5d6",
+      "outputId": "bca9a0b8-0e8e-4821-8e72-b791c8db327c",
+      "label": "Encomenda"
+    },
+    {
+      "id": "connection_29",
+      "source": "49cc0939-52cc-4378-b72d-c5c7d46a71b9",
+      "target": "7d425dc5-23f0-46e7-a630-76e21ed9a50d",
+      "outputId": "667c6c2d-d8a9-403f-b840-ea1386da19e3",
+      "label": "Entrega de Material"
+    },
+    {
+      "id": "connection_30",
+      "source": "7250fbea-f7da-4a7c-bf54-b0b374e4900c",
+      "target": "7d425dc5-23f0-46e7-a630-76e21ed9a50d",
+      "outputId": "0dcd4187-8a90-401d-afce-7808901ebc8d",
+      "label": "OK"
+    },
+    {
+      "id": "connection_31",
+      "source": "725a639d-033e-4b62-97ab-442dcccc56c9",
+      "target": "7250fbea-f7da-4a7c-bf54-b0b374e4900c",
+      "outputId": "fb6d03ef-a65f-451c-bd40-0dafbf1e7155",
+      "label": "Cancelado"
+    },
+    {
+      "id": "connection_32",
+      "source": "085d7da2-db10-4e2f-9e22-f2a5662a0b07",
+      "target": "c5d0dd87-7724-4d16-b275-a29004d3b10c",
+      "outputId": "77995255-62c0-4b35-bfeb-e450e3364a0f",
+      "label": "OK"
+    },
+    {
+      "id": "connection_33",
+      "source": "c5d0dd87-7724-4d16-b275-a29004d3b10c",
+      "target": "7250fbea-f7da-4a7c-bf54-b0b374e4900c",
+      "outputId": "5a7b3fa4-a9e2-4623-af15-a0ed5dd53430",
+      "label": "Cancelado"
+    },
+    {
+      "id": "connection_34",
+      "source": "c5d0dd87-7724-4d16-b275-a29004d3b10c",
+      "target": "7d425dc5-23f0-46e7-a630-76e21ed9a50d",
+      "outputId": "0df645fa-b8e7-43b8-b3c3-3e6183699db6",
+      "label": "Material Recebido ANG"
+    },
+    {
+      "id": "connection_35",
+      "source": "960c848c-a64e-44fc-a5e6-77d612690955",
+      "target": "ea0d96f6-76e5-4b3d-8b0a-f0f1daa85a9e",
+      "outputId": "1e30d36a-b03a-448c-9746-56b9b8181624",
+      "label": "OK"
+    },
+    {
+      "id": "connection_36",
+      "source": "c81024e5-11e9-49cd-95db-8d9efd8fb92a",
+      "target": "b0346c2e-d3db-4ec0-bd06-4a7dd813dbbe",
+      "outputId": "cf112836-be38-4576-bd48-52c50b25ac32",
+      "label": "Compra Importação"
+    },
+    {
+      "id": "connection_37",
+      "source": "f4dbeb71-ebb3-45c6-a8e9-c373b92abf91",
+      "target": "49cc0939-52cc-4378-b72d-c5c7d46a71b9",
+      "outputId": "b5826b08-c82d-40c0-8e62-00fc4a692beb",
+      "label": "OK"
+    },
+    {
+      "id": "connection_38",
+      "source": "7d425dc5-23f0-46e7-a630-76e21ed9a50d",
+      "target": "ab1374f4-42d3-4fe1-9853-0074f914f91d",
+      "outputId": "97345e71-d531-49f0-a51a-9c30c46da5fa",
+      "label": "OK"
+    },
+    {
+      "id": "connection_39",
+      "source": "c81024e5-11e9-49cd-95db-8d9efd8fb92a",
+      "target": "141a5738-1523-48f5-8592-7bff25418f0b",
+      "outputId": "e1f15564-51f2-4b00-9a89-d3287c417e40",
+      "label": "Recusar Pedido"
+    },
+    {
+      "id": "connection_40",
+      "source": "141a5738-1523-48f5-8592-7bff25418f0b",
+      "target": "7d425dc5-23f0-46e7-a630-76e21ed9a50d",
+      "outputId": "8789147c-5ba2-48c3-97c3-eec39aa455cf",
+      "label": "OK"
+    },
+    {
+      "id": "connection_41",
+      "source": "d989a075-3a5f-4a43-9701-f0ded2725f62",
+      "target": "960c848c-a64e-44fc-a5e6-77d612690955",
+      "outputId": "ebe21e6d-8358-4713-9f13-88aed9c4bf73",
+      "label": "Else"
+    }
+  ]
+}

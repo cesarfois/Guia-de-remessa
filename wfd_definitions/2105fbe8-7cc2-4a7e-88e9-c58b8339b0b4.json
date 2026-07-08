@@ -1,0 +1,1664 @@
+{
+  "name": "WFP.270.01 - AMA - Pedido de Pagamento",
+  "organizationId": "bcb91903-58eb-49c6-8572-be5e3bb9611e",
+  "activities": [
+    {
+      "id": "f5271858-c9ba-44e6-85fe-716af5f30e39",
+      "name": "Fin",
+      "type": "End",
+      "description": "",
+      "x": 10800,
+      "y": 9460,
+      "width": 180,
+      "height": 80,
+      "color": "#3b49a2",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "ab718d05-d32e-4bd4-ae52-335071913a24",
+      "name": "Superior Hierarquico",
+      "type": "AssignData",
+      "description": "",
+      "x": 1200,
+      "y": 2026,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "4055f284-718d-4033-ae6d-01d3512f14b8",
+      "name": "Preparar Pagamento",
+      "type": "Action",
+      "description": "",
+      "x": 3600,
+      "y": 5877,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "890ccb78-6a53-42b7-8498-ab070095a9b3",
+      "name": "Pagamento",
+      "type": "Action",
+      "description": "",
+      "x": 5200,
+      "y": 7183,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "7182f968-038c-4dc9-a51e-719f96da579b",
+      "name": "Envio de comprovativo",
+      "type": "Action",
+      "description": "",
+      "x": 6800,
+      "y": 8009,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "f844790a-0293-4783-ad11-7270f1d4e160",
+      "name": "E-Mail Recusado",
+      "type": "Email",
+      "description": "",
+      "x": 5600,
+      "y": 6703,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "email"
+    },
+    {
+      "id": "c574208c-56b1-4b14-ba9e-0c8e5004ad77",
+      "name": "Dados Iniciais",
+      "type": "AssignData",
+      "description": "",
+      "x": 800,
+      "y": 1613,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "assign-task"
+    },
+    {
+      "id": "3b7d2771-49ce-4b58-a65f-92046cf3c6a7",
+      "name": "Adicionar Factura",
+      "type": "Action",
+      "description": "",
+      "x": 8400,
+      "y": 9594,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "ef9271d9-0d3c-4687-830b-2e024e82dd8e",
+      "name": "TimeoutDecisionMaker_0",
+      "type": "AssignData",
+      "description": "",
+      "x": 8400,
+      "y": 9248,
+      "width": 180,
+      "height": 80,
+      "color": "#92979b",
+      "icon": "assign-task"
+    },
+    {
+      "id": "c5b21a91-c4d3-4431-a714-deff71cef97e",
+      "name": "Validação SH",
+      "type": "Action",
+      "description": "",
+      "x": 1200,
+      "y": 2439,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "0085f529-3ad3-48cc-a476-d786a540d467",
+      "name": "Recusado SH",
+      "type": "Email",
+      "description": "",
+      "x": 1600,
+      "y": 1959,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "email"
+    },
+    {
+      "id": "126b8fa1-d52b-49b1-95f1-c7e08fbed5c2",
+      "name": "Forma Pagamento",
+      "type": "Condition",
+      "description": "",
+      "x": 2000,
+      "y": 3678,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "conditions"
+    },
+    {
+      "id": "28d1c342-5fc3-4b69-a574-ea44e4178b7a",
+      "name": "Dir Financeiro",
+      "type": "AssignData",
+      "description": "",
+      "x": 2400,
+      "y": 3265,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "df48305b-6fe2-4b14-bcf9-28329d1beec6",
+      "name": "FIN - Contas  a Pagar",
+      "type": "AssignData",
+      "description": "",
+      "x": 3200,
+      "y": 6290,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "04d42ca8-e1db-41fd-a918-20b1b0e6588d",
+      "name": "Validação Pagamento Internacional",
+      "type": "Action",
+      "description": "",
+      "x": 2400,
+      "y": 3678,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "d288f894-0a6b-4e00-9e7b-1d3a0096ccb5",
+      "name": "DAF ADM",
+      "type": "AssignData",
+      "description": "",
+      "x": 2800,
+      "y": 4158,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "dc7484ec-2594-4392-ba0e-f42225a16f79",
+      "name": "Preparar Pagamento Int",
+      "type": "Action",
+      "description": "",
+      "x": 3200,
+      "y": 4571,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "14070b20-798a-46f9-9c2c-d525151be149",
+      "name": "Pagamento Internacional",
+      "type": "Action",
+      "description": "",
+      "x": 3200,
+      "y": 5051,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "e7596f95-15e7-4939-a163-84183aff6d3e",
+      "name": "Dir Financeiro ",
+      "type": "AssignData",
+      "description": "",
+      "x": 4800,
+      "y": 6290,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "d83ae667-38ce-40c9-bc51-fdc5f4c0196c",
+      "name": "FIN - Contas  a Pagar Equipa ",
+      "type": "AssignData",
+      "description": "",
+      "x": 6400,
+      "y": 7529,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "9a7eb9d3-22f5-4dbd-821e-4ea4dcf71ef8",
+      "name": "Pré-Pagamento",
+      "type": "Condition",
+      "description": "",
+      "x": 7600,
+      "y": 8835,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "conditions"
+    },
+    {
+      "id": "181bd913-ad48-4b66-a750-0feecb405e9b",
+      "name": "Requerente",
+      "type": "AssignData",
+      "description": "",
+      "x": 8000,
+      "y": 8422,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "23e9e5b5-bd61-4458-b1c7-c1701bf436fd",
+      "name": "Validar Factura",
+      "type": "Action",
+      "description": "",
+      "x": 10000,
+      "y": 10353,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "169a8740-c824-4ef2-b4c6-40fd0fc8750d",
+      "name": "Recusado Pag Internacional",
+      "type": "Email",
+      "description": "",
+      "x": 2800,
+      "y": 3745,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "email"
+    },
+    {
+      "id": "21f90788-05f4-4cf6-977c-4c87b74e66df",
+      "name": "Forma Pagamento_copiar",
+      "type": "Condition",
+      "description": "",
+      "x": 4000,
+      "y": 5810,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "conditions"
+    },
+    {
+      "id": "d976d6ab-a9aa-43ae-91a5-f89fa5192726",
+      "name": "Contas a Pagar ",
+      "type": "AssignData",
+      "description": "",
+      "x": 4800,
+      "y": 5397,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "a040261c-5852-4781-b9de-485626a3a28c",
+      "name": "Pagamento caixa",
+      "type": "Action",
+      "description": "",
+      "x": 4800,
+      "y": 5810,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "1a63c801-c34e-4907-b743-7bf6d4291a3b",
+      "name": "Subisido",
+      "type": "Condition",
+      "description": "",
+      "x": 5600,
+      "y": 7529,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "conditions"
+    },
+    {
+      "id": "55fae2fa-d1a7-4958-9add-1ebf662ae2f5",
+      "name": "Devolução à Cliente",
+      "type": "Condition",
+      "description": "",
+      "x": 1600,
+      "y": 3198,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "conditions"
+    },
+    {
+      "id": "63555573-0a7f-484f-b685-4be0d9231caa",
+      "name": "Transferência Interbancária",
+      "type": "Condition",
+      "description": "",
+      "x": 5600,
+      "y": 7942,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "conditions"
+    },
+    {
+      "id": "1aac3e4a-e045-448d-abe2-1f6f26050d04",
+      "name": "Recusado Pag Internacional_copy",
+      "type": "Email",
+      "description": "",
+      "x": 3200,
+      "y": 4158,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "email"
+    },
+    {
+      "id": "fe9de6ce-f06f-4df1-9de5-c2d0e3cceb03",
+      "name": "Forma Pagamento_  ",
+      "type": "Condition",
+      "description": "",
+      "x": 2800,
+      "y": 4571,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "conditions"
+    },
+    {
+      "id": "65b6704f-464b-405e-a65d-b42c809d5365",
+      "name": "Pagamento caixa ",
+      "type": "AssignData",
+      "description": "",
+      "x": 3200,
+      "y": 5877,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "8c3527e1-a454-4271-8dcb-f6b24f23ed4f",
+      "name": "Imposto",
+      "type": "Condition",
+      "description": "",
+      "x": 6000,
+      "y": 7942,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "conditions"
+    },
+    {
+      "id": "de02be99-9aec-4bd0-92a5-c5eb0e618308",
+      "name": "Tesouraria",
+      "type": "AssignData",
+      "description": "",
+      "x": 6400,
+      "y": 8422,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "677c6873-0ed5-4c48-97b1-4f3402fd1f8e",
+      "name": "Ad_Comprovativo Pagamento",
+      "type": "Action",
+      "description": "",
+      "x": 6800,
+      "y": 8422,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "c43a37c9-2bd9-414a-8b0f-ee10ae46e52d",
+      "name": "Notificação Pagamento Cartão",
+      "type": "Email",
+      "description": "",
+      "x": 4400,
+      "y": 5810,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "email"
+    },
+    {
+      "id": "2656f069-7397-4951-874a-8bee23d29a26",
+      "name": "Notificação Pagamento Caixa ",
+      "type": "Email",
+      "description": "",
+      "x": 4000,
+      "y": 5397,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "email"
+    },
+    {
+      "id": "5bcbf847-7e60-4649-94d3-0b2b0e1457e0",
+      "name": "Forma Pagamento_copiar_copia",
+      "type": "Condition",
+      "description": "",
+      "x": 4000,
+      "y": 6223,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "conditions"
+    },
+    {
+      "id": "3f80801e-24d6-40a1-87dc-35eb4e6467d3",
+      "name": "Condição_Gestor Operações",
+      "type": "Condition",
+      "description": "",
+      "x": 1600,
+      "y": 2785,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "conditions"
+    },
+    {
+      "id": "c4d60db9-0aa5-4dcd-92eb-cd9ff60bd375",
+      "name": "WF Notificação Direção",
+      "type": "AssignData",
+      "description": "",
+      "x": 2000,
+      "y": 3265,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "assign-task"
+    },
+    {
+      "id": "77613baa-c63d-4783-99c0-2e94fc347d9f",
+      "name": "Pagamento RDF",
+      "type": "Condition",
+      "description": "",
+      "x": 800,
+      "y": 2026,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "conditions"
+    },
+    {
+      "id": "27c8a4e0-f178-479a-8e3b-89e5bc17b905",
+      "name": "Tipo de Moeda",
+      "type": "Condition",
+      "description": "",
+      "x": 2400,
+      "y": 4158,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "conditions"
+    },
+    {
+      "id": "e872ecc6-f3b0-4550-bbbb-e5dc4baca09f",
+      "name": "DAF_Adm",
+      "type": "AssignData",
+      "description": "",
+      "x": 3200,
+      "y": 5464,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "cefdc7ed-99d9-4432-b5d2-f0edf7628ef6",
+      "name": "Forma Pagamento_ ",
+      "type": "Condition",
+      "description": "",
+      "x": 8800,
+      "y": 9940,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "conditions"
+    },
+    {
+      "id": "3eacc7c3-80ab-42dd-b97e-7a336bd8b379",
+      "name": "Contas a Pagar",
+      "type": "AssignData",
+      "description": "",
+      "x": 9200,
+      "y": 10766,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "2434f162-ff8d-4cb6-9ddd-1d135a3edd36",
+      "name": "Data Time Fim",
+      "type": "AssignData",
+      "description": "",
+      "x": 10400,
+      "y": 9873,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "assign-task"
+    },
+    {
+      "id": "15d30d6c-fe9e-423f-9bc2-aea31135d45e",
+      "name": "Classificação Pré-Pagamento",
+      "type": "Condition",
+      "description": "",
+      "x": 8000,
+      "y": 8835,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "conditions"
+    },
+    {
+      "id": "45219286-aa2d-4da3-9ddd-d9a02fea29cb",
+      "name": "Adicionar Link",
+      "type": "Action",
+      "description": "",
+      "x": 8400,
+      "y": 8768,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "dbdb11e8-e86e-473a-b7c1-456e74ffe0ea",
+      "name": "TimeoutDecisionMaker_1",
+      "type": "AssignData",
+      "description": "",
+      "x": 8400,
+      "y": 8422,
+      "width": 180,
+      "height": 80,
+      "color": "#92979b",
+      "icon": "assign-task"
+    },
+    {
+      "id": "35a6a055-87d5-4a60-bfd0-5ef02be3a99b",
+      "name": "Classificação Pré-Pagamento_copia",
+      "type": "Condition",
+      "description": "",
+      "x": 9200,
+      "y": 10353,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "conditions"
+    },
+    {
+      "id": "c5b5b6d7-bdc8-4c08-b978-8fa0ce54730c",
+      "name": "Contas a Pagar1",
+      "type": "AssignData",
+      "description": "",
+      "x": 9600,
+      "y": 10766,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "a15f1065-1252-4623-8b68-0a49b9def8ca",
+      "name": "Contas a Pagar2",
+      "type": "AssignData",
+      "description": "",
+      "x": 9600,
+      "y": 10353,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "4d5c21db-d181-404c-818f-d69ec169b4f0",
+      "name": "Requerente ",
+      "type": "AssignData",
+      "description": "",
+      "x": 1600,
+      "y": 2372,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "ef9b7ab8-f302-4824-b333-4d541fff9159",
+      "name": "Retificar",
+      "type": "Action",
+      "description": "",
+      "x": 2000,
+      "y": 2785,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "739fefe2-3b1c-48aa-9a5e-06e58cbaeaa4",
+      "name": "Dados Iniciais_copia",
+      "type": "AssignData",
+      "description": "",
+      "x": 800,
+      "y": 2439,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "assign-task"
+    },
+    {
+      "id": "70bbb36c-cf68-42f6-89e7-2615cf66f9ba",
+      "name": "Condição_Pos pagamento",
+      "type": "Condition",
+      "description": "",
+      "x": 400,
+      "y": 906,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "conditions"
+    },
+    {
+      "id": "20397c39-1e36-4af9-a224-54896c6377e2",
+      "name": "Requerente  ",
+      "type": "AssignData",
+      "description": "",
+      "x": 7200,
+      "y": 8835,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "80535287-18f0-4f43-b87f-49a680e5f330",
+      "name": "Anexar Comprovativo - AGT/INSS",
+      "type": "Action",
+      "description": "",
+      "x": 7200,
+      "y": 9248,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "f603651a-3372-4cc7-847b-9877e0f0c093",
+      "name": "Subsídio de Deslocação",
+      "type": "Condition",
+      "description": "",
+      "x": 5600,
+      "y": 7116,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "conditions"
+    },
+    {
+      "id": "0ae69534-9ec4-4f0e-afc6-24dfa797a543",
+      "name": "HD Província",
+      "type": "AssignData",
+      "description": "",
+      "x": 6000,
+      "y": 7529,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "5b5822f5-845e-4d9f-ad07-9bf280939b3e",
+      "name": "Pagamento caixa_copia",
+      "type": "Action",
+      "description": "",
+      "x": 6400,
+      "y": 7942,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "3471b328-759c-4742-ba04-60201265ad54",
+      "name": "Urgente/Normal",
+      "type": "Condition",
+      "description": "",
+      "x": 400,
+      "y": 493,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "conditions"
+    },
+    {
+      "id": "6a750232-73e6-41d2-9b19-a447dbc72fe3",
+      "name": "SH Urgente",
+      "type": "AssignData",
+      "description": "",
+      "x": 800,
+      "y": 720,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "46dbe4c1-6269-4d15-8c3d-a43419deec6e",
+      "name": "Validacao SH",
+      "type": "Action",
+      "description": "",
+      "x": 800,
+      "y": 1133,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "7a79acf6-6aca-417b-90e5-4245322ca161",
+      "name": "Requerente   ",
+      "type": "AssignData",
+      "description": "",
+      "x": 7200,
+      "y": 8009,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "96f45161-1477-4584-ba5f-2d2191c8a546",
+      "name": "Envio Detalhe Pagamento",
+      "type": "Action",
+      "description": "",
+      "x": 7200,
+      "y": 8422,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "05638a78-1ca9-4d10-999c-e04629af6019",
+      "name": "Prioridade",
+      "type": "Condition",
+      "description": "",
+      "x": 4800,
+      "y": 6703,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "conditions"
+    },
+    {
+      "id": "29b6944b-1e4a-4a60-a52a-41c133ac80e9",
+      "name": "Pagamento Urgente",
+      "type": "Action",
+      "description": "",
+      "x": 5200,
+      "y": 6703,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "ec9f345e-a819-4f0c-bd64-18d79590e1a8",
+      "name": "Notificação",
+      "type": "Action",
+      "description": "",
+      "x": 8800,
+      "y": 9114,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "2c3cdc33-4904-42f6-bc12-075267c0d492",
+      "name": "DAF - Operador2",
+      "type": "AssignData",
+      "description": "",
+      "x": 8800,
+      "y": 9527,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "cd7a5e41-29fd-417c-827d-396c89b30b4f",
+      "name": "Notificação ",
+      "type": "Action",
+      "description": "",
+      "x": 8800,
+      "y": 10353,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "646fef5e-3822-4f50-b5f0-a9ecf0f5fe91",
+      "name": "DAF - Operador1",
+      "type": "AssignData",
+      "description": "",
+      "x": 8800,
+      "y": 10766,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "58227a42-9e3c-4aa3-9aee-b0531d6a70ec",
+      "name": "Tesouraria ",
+      "type": "AssignData",
+      "description": "",
+      "x": 4800,
+      "y": 7116,
+      "width": 180,
+      "height": 80,
+      "color": "#f6b71b",
+      "icon": "action-checkbox"
+    },
+    {
+      "id": "406280fa-7f0d-477e-8fd0-f5af5a20ee87",
+      "name": "Processus de travail",
+      "type": "Start",
+      "description": "https://processplanner.docuware.com/Home/ReadOnly?linkId=e2e58b95-55c0-42aa-8ee9-a86149d1dc96",
+      "x": 0,
+      "y": 80,
+      "width": 180,
+      "height": 80,
+      "color": "#3b49a2",
+      "icon": "trigger"
+    }
+  ],
+  "connections": [
+    {
+      "id": "connection_0",
+      "source": "9a7eb9d3-22f5-4dbd-821e-4ea4dcf71ef8",
+      "target": "2434f162-ff8d-4cb6-9ddd-1d135a3edd36",
+      "outputId": "0be3a3f1-f7b9-4ed1-8bbe-b6bd42389a7b",
+      "label": "Ou"
+    },
+    {
+      "id": "connection_1",
+      "source": "d83ae667-38ce-40c9-bc51-fdc5f4c0196c",
+      "target": "7182f968-038c-4dc9-a51e-719f96da579b",
+      "outputId": "29dda6a4-fbb9-416e-b1ee-657d4e812104",
+      "label": "OK"
+    },
+    {
+      "id": "connection_2",
+      "source": "58227a42-9e3c-4aa3-9aee-b0531d6a70ec",
+      "target": "05638a78-1ca9-4d10-999c-e04629af6019",
+      "outputId": "fe9b84a7-95d6-4eae-913d-14bed037d535",
+      "label": "OK"
+    },
+    {
+      "id": "connection_3",
+      "source": "181bd913-ad48-4b66-a750-0feecb405e9b",
+      "target": "15d30d6c-fe9e-423f-9bc2-aea31135d45e",
+      "outputId": "f4d428fe-15db-4298-8773-06dcdec09113",
+      "label": "OK"
+    },
+    {
+      "id": "connection_4",
+      "source": "df48305b-6fe2-4b14-bcf9-28329d1beec6",
+      "target": "4055f284-718d-4033-ae6d-01d3512f14b8",
+      "outputId": "f7cdc718-ca41-412e-a959-a014b5082d6a",
+      "label": "OK"
+    },
+    {
+      "id": "connection_5",
+      "source": "890ccb78-6a53-42b7-8498-ab070095a9b3",
+      "target": "27c8a4e0-f178-479a-8e3b-89e5bc17b905",
+      "outputId": "415a8a6a-18e7-4186-b64d-8c412376e302",
+      "label": "Pagamento recusado"
+    },
+    {
+      "id": "connection_6",
+      "source": "04d42ca8-e1db-41fd-a918-20b1b0e6588d",
+      "target": "169a8740-c824-4ef2-b4c6-40fd0fc8750d",
+      "outputId": "53752267-637d-49cf-a78f-62659b6b0b3a",
+      "label": "Recusado"
+    },
+    {
+      "id": "connection_7",
+      "source": "d288f894-0a6b-4e00-9e7b-1d3a0096ccb5",
+      "target": "dc7484ec-2594-4392-ba0e-f42225a16f79",
+      "outputId": "9a57a7de-a3da-4e7d-bca0-7948a69cd0de",
+      "label": "OK"
+    },
+    {
+      "id": "connection_8",
+      "source": "4055f284-718d-4033-ae6d-01d3512f14b8",
+      "target": "21f90788-05f4-4cf6-977c-4c87b74e66df",
+      "outputId": "ed0152dc-8e16-4791-9d37-633039aa4a91",
+      "label": "Pagamento Preparado"
+    },
+    {
+      "id": "connection_9",
+      "source": "28d1c342-5fc3-4b69-a574-ea44e4178b7a",
+      "target": "04d42ca8-e1db-41fd-a918-20b1b0e6588d",
+      "outputId": "5395be6a-6b53-468a-b63d-f92bc04fa8c6",
+      "label": "OK"
+    },
+    {
+      "id": "connection_10",
+      "source": "55fae2fa-d1a7-4958-9add-1ebf662ae2f5",
+      "target": "3f80801e-24d6-40a1-87dc-35eb4e6467d3",
+      "outputId": "9281934a-c965-4a4f-b119-e35695453222",
+      "label": "Ou"
+    },
+    {
+      "id": "connection_11",
+      "source": "ab718d05-d32e-4bd4-ae52-335071913a24",
+      "target": "c5b21a91-c4d3-4431-a714-deff71cef97e",
+      "outputId": "91a863ec-8e87-4086-a15b-bf855e562123",
+      "label": "OK"
+    },
+    {
+      "id": "connection_12",
+      "source": "dc7484ec-2594-4392-ba0e-f42225a16f79",
+      "target": "14070b20-798a-46f9-9c2c-d525151be149",
+      "outputId": "01d5d7de-90e6-4c5c-b213-63a096c79e36",
+      "label": "Pagamento preparado"
+    },
+    {
+      "id": "connection_13",
+      "source": "126b8fa1-d52b-49b1-95f1-c7e08fbed5c2",
+      "target": "28d1c342-5fc3-4b69-a574-ea44e4178b7a",
+      "outputId": "a14582e5-ab88-4d26-9bcd-29a1611dab49",
+      "label": "Internacional"
+    },
+    {
+      "id": "connection_14",
+      "source": "23e9e5b5-bd61-4458-b1c7-c1701bf436fd",
+      "target": "2434f162-ff8d-4cb6-9ddd-1d135a3edd36",
+      "outputId": "b16bdcbd-2b4b-4b04-971f-bfe6932db55f",
+      "label": "Conforme"
+    },
+    {
+      "id": "connection_15",
+      "source": "14070b20-798a-46f9-9c2c-d525151be149",
+      "target": "d83ae667-38ce-40c9-bc51-fdc5f4c0196c",
+      "outputId": "d6122fd7-c3e1-4ebe-acc8-dd862298fa24",
+      "label": "Pagamento feito"
+    },
+    {
+      "id": "connection_16",
+      "source": "c5b21a91-c4d3-4431-a714-deff71cef97e",
+      "target": "4d5c21db-d181-404c-818f-d69ec169b4f0",
+      "outputId": "7db809d1-e133-4437-a629-b5dc3c6f2531",
+      "label": "Recusado"
+    },
+    {
+      "id": "connection_17",
+      "source": "23e9e5b5-bd61-4458-b1c7-c1701bf436fd",
+      "target": "181bd913-ad48-4b66-a750-0feecb405e9b",
+      "outputId": "55aacdd8-534e-4820-92bf-2b45d5159c10",
+      "label": "Não Conforme"
+    },
+    {
+      "id": "connection_18",
+      "source": "c5b21a91-c4d3-4431-a714-deff71cef97e",
+      "target": "55fae2fa-d1a7-4958-9add-1ebf662ae2f5",
+      "outputId": "642937c2-1f99-41be-a8c3-93b3c7488058",
+      "label": "Validado"
+    },
+    {
+      "id": "connection_19",
+      "source": "04d42ca8-e1db-41fd-a918-20b1b0e6588d",
+      "target": "d288f894-0a6b-4e00-9e7b-1d3a0096ccb5",
+      "outputId": "95f7bf01-150e-4fbd-96b5-838b30f14653",
+      "label": "Aprovado"
+    },
+    {
+      "id": "connection_20",
+      "source": "9a7eb9d3-22f5-4dbd-821e-4ea4dcf71ef8",
+      "target": "181bd913-ad48-4b66-a750-0feecb405e9b",
+      "outputId": "d69cd2c8-2afc-4adc-ac6c-e7a5b84c948d",
+      "label": "Prepagamento"
+    },
+    {
+      "id": "connection_21",
+      "source": "8c3527e1-a454-4271-8dcb-f6b24f23ed4f",
+      "target": "d83ae667-38ce-40c9-bc51-fdc5f4c0196c",
+      "outputId": "40c55257-142b-4ff1-9b97-04f01c1d9edc",
+      "label": "Ou"
+    },
+    {
+      "id": "connection_22",
+      "source": "de02be99-9aec-4bd0-92a5-c5eb0e618308",
+      "target": "677c6873-0ed5-4c48-97b1-4f3402fd1f8e",
+      "outputId": "c1a545be-08e3-4601-b22b-3d5afb73a1e5",
+      "label": "OK"
+    },
+    {
+      "id": "connection_23",
+      "source": "0085f529-3ad3-48cc-a476-d786a540d467",
+      "target": "ef9b7ab8-f302-4824-b333-4d541fff9159",
+      "outputId": "20dda383-8ac5-41fb-9e78-0f7f3da9a7d2",
+      "label": "OK"
+    },
+    {
+      "id": "connection_24",
+      "source": "169a8740-c824-4ef2-b4c6-40fd0fc8750d",
+      "target": "2434f162-ff8d-4cb6-9ddd-1d135a3edd36",
+      "outputId": "231e55ba-b99d-4b5c-af1e-bd0635087433",
+      "label": "OK"
+    },
+    {
+      "id": "connection_25",
+      "source": "f844790a-0293-4783-ad11-7270f1d4e160",
+      "target": "2434f162-ff8d-4cb6-9ddd-1d135a3edd36",
+      "outputId": "9c59113e-76b6-49e3-9b77-1cc4e3142537",
+      "label": "OK"
+    },
+    {
+      "id": "connection_26",
+      "source": "126b8fa1-d52b-49b1-95f1-c7e08fbed5c2",
+      "target": "27c8a4e0-f178-479a-8e3b-89e5bc17b905",
+      "outputId": "5a41464e-48cc-4f77-97c0-c776f8cbd1fa",
+      "label": "Ou"
+    },
+    {
+      "id": "connection_27",
+      "source": "21f90788-05f4-4cf6-977c-4c87b74e66df",
+      "target": "2656f069-7397-4951-874a-8bee23d29a26",
+      "outputId": "182d7f49-5306-489f-8d08-0e52a7e6bb4a",
+      "label": "Caixa"
+    },
+    {
+      "id": "connection_28",
+      "source": "21f90788-05f4-4cf6-977c-4c87b74e66df",
+      "target": "5bcbf847-7e60-4649-94d3-0b2b0e1457e0",
+      "outputId": "52dcba3f-ea0e-4b6b-82ee-9c12262bfaf5",
+      "label": "Tranferencia Bancaria"
+    },
+    {
+      "id": "connection_29",
+      "source": "d976d6ab-a9aa-43ae-91a5-f89fa5192726",
+      "target": "a040261c-5852-4781-b9de-485626a3a28c",
+      "outputId": "eba8bb15-3b8d-4b9b-91a7-2710149baa26",
+      "label": "OK"
+    },
+    {
+      "id": "connection_30",
+      "source": "a040261c-5852-4781-b9de-485626a3a28c",
+      "target": "f844790a-0293-4783-ad11-7270f1d4e160",
+      "outputId": "119445e7-a56c-4b75-9dcd-20a54713cab6",
+      "label": "Pagamento recusado (Caixa)"
+    },
+    {
+      "id": "connection_31",
+      "source": "1a63c801-c34e-4907-b743-7bf6d4291a3b",
+      "target": "f603651a-3372-4cc7-847b-9877e0f0c093",
+      "outputId": "a101ed90-fb6e-48f9-ae5e-bfdca2f76291",
+      "label": "Ou"
+    },
+    {
+      "id": "connection_32",
+      "source": "1a63c801-c34e-4907-b743-7bf6d4291a3b",
+      "target": "2434f162-ff8d-4cb6-9ddd-1d135a3edd36",
+      "outputId": "07af4ff2-c215-48a7-aaef-0fd222d2f5c4",
+      "label": "Subsidio"
+    },
+    {
+      "id": "connection_33",
+      "source": "20397c39-1e36-4af9-a224-54896c6377e2",
+      "target": "80535287-18f0-4f43-b87f-49a680e5f330",
+      "outputId": "03bff298-ae8e-4dbe-acb6-4c43ab647c68",
+      "label": "OK"
+    },
+    {
+      "id": "connection_34",
+      "source": "4055f284-718d-4033-ae6d-01d3512f14b8",
+      "target": "f844790a-0293-4783-ad11-7270f1d4e160",
+      "outputId": "e3f10206-6954-4423-9587-819b586c338c",
+      "label": "Pagamento Recusado"
+    },
+    {
+      "id": "connection_35",
+      "source": "5bcbf847-7e60-4649-94d3-0b2b0e1457e0",
+      "target": "c43a37c9-2bd9-414a-8b0f-ee10ae46e52d",
+      "outputId": "b4829ebf-6002-4840-bfb8-301f3a815f0e",
+      "label": "Cartão Multicaixa"
+    },
+    {
+      "id": "connection_36",
+      "source": "890ccb78-6a53-42b7-8498-ab070095a9b3",
+      "target": "63555573-0a7f-484f-b685-4be0d9231caa",
+      "outputId": "f1b20014-41a4-4d1d-aaa2-3c544a28987c",
+      "label": "Pagamento feito"
+    },
+    {
+      "id": "connection_37",
+      "source": "677c6873-0ed5-4c48-97b1-4f3402fd1f8e",
+      "target": "20397c39-1e36-4af9-a224-54896c6377e2",
+      "outputId": "eae8e67c-3590-4c2e-8636-2ed82212c075",
+      "label": "Adicionar Comprovativvo"
+    },
+    {
+      "id": "connection_38",
+      "source": "7182f968-038c-4dc9-a51e-719f96da579b",
+      "target": "7a79acf6-6aca-417b-90e5-4245322ca161",
+      "outputId": "787b37be-3cb2-4ef4-a1da-0ed99869be88",
+      "label": "Comprovativo"
+    },
+    {
+      "id": "connection_39",
+      "source": "a040261c-5852-4781-b9de-485626a3a28c",
+      "target": "1a63c801-c34e-4907-b743-7bf6d4291a3b",
+      "outputId": "311a8a54-4033-47a8-97d0-38be5b773807",
+      "label": "Pagamento feito (Caixa)"
+    },
+    {
+      "id": "connection_40",
+      "source": "c574208c-56b1-4b14-ba9e-0c8e5004ad77",
+      "target": "77613baa-c63d-4783-99c0-2e94fc347d9f",
+      "outputId": "645c9935-4c54-4dfa-94eb-6c6b572a2dcd",
+      "label": "OK"
+    },
+    {
+      "id": "connection_41",
+      "source": "55fae2fa-d1a7-4958-9add-1ebf662ae2f5",
+      "target": "27c8a4e0-f178-479a-8e3b-89e5bc17b905",
+      "outputId": "1561c51a-7ade-40c5-a7fa-0cc2d247dc58",
+      "label": "Então"
+    },
+    {
+      "id": "connection_42",
+      "source": "63555573-0a7f-484f-b685-4be0d9231caa",
+      "target": "2434f162-ff8d-4cb6-9ddd-1d135a3edd36",
+      "outputId": "7bcef247-0d0d-4ae0-8794-22420eb6cad5",
+      "label": "Transferência Interbancária"
+    },
+    {
+      "id": "connection_43",
+      "source": "63555573-0a7f-484f-b685-4be0d9231caa",
+      "target": "8c3527e1-a454-4271-8dcb-f6b24f23ed4f",
+      "outputId": "cdfade4b-eda6-49d8-8ecb-4d650acc125f",
+      "label": "Ou"
+    },
+    {
+      "id": "connection_44",
+      "source": "8c3527e1-a454-4271-8dcb-f6b24f23ed4f",
+      "target": "de02be99-9aec-4bd0-92a5-c5eb0e618308",
+      "outputId": "d76cd857-14fe-4863-8bb2-07a84db45a19",
+      "label": "Imposto"
+    },
+    {
+      "id": "connection_45",
+      "source": "3b7d2771-49ce-4b58-a65f-92046cf3c6a7",
+      "target": "cefdc7ed-99d9-4432-b5d2-f0edf7628ef6",
+      "outputId": "3a08cbd0-6639-4ebd-a477-741225c8d29f",
+      "label": "Adicionar Factura"
+    },
+    {
+      "id": "connection_46",
+      "source": "dc7484ec-2594-4392-ba0e-f42225a16f79",
+      "target": "1aac3e4a-e045-448d-abe2-1f6f26050d04",
+      "outputId": "9d2ed236-d306-4ab6-b1ab-e0839c694d24",
+      "label": "Pagamento Recusado"
+    },
+    {
+      "id": "connection_47",
+      "source": "1aac3e4a-e045-448d-abe2-1f6f26050d04",
+      "target": "2434f162-ff8d-4cb6-9ddd-1d135a3edd36",
+      "outputId": "8daf8c11-ced7-497b-8d80-6df206796ac2",
+      "label": "OK"
+    },
+    {
+      "id": "connection_48",
+      "source": "fe9de6ce-f06f-4df1-9de5-c2d0e3cceb03",
+      "target": "65b6704f-464b-405e-a65d-b42c809d5365",
+      "outputId": "3dbabbda-9faa-459c-94e0-0281fd5b0082",
+      "label": "Caixa"
+    },
+    {
+      "id": "connection_49",
+      "source": "fe9de6ce-f06f-4df1-9de5-c2d0e3cceb03",
+      "target": "df48305b-6fe2-4b14-bcf9-28329d1beec6",
+      "outputId": "45298fa0-efe3-4fd7-9398-d4a68621f2eb",
+      "label": "Ou"
+    },
+    {
+      "id": "connection_50",
+      "source": "65b6704f-464b-405e-a65d-b42c809d5365",
+      "target": "4055f284-718d-4033-ae6d-01d3512f14b8",
+      "outputId": "b2df0ae7-66d5-4c77-a40e-d78b578d25f4",
+      "label": "OK"
+    },
+    {
+      "id": "connection_51",
+      "source": "c43a37c9-2bd9-414a-8b0f-ee10ae46e52d",
+      "target": "58227a42-9e3c-4aa3-9aee-b0531d6a70ec",
+      "outputId": "0645a26b-14d6-4b06-a4d3-9cb5366d009a",
+      "label": "OK"
+    },
+    {
+      "id": "connection_52",
+      "source": "2656f069-7397-4951-874a-8bee23d29a26",
+      "target": "d976d6ab-a9aa-43ae-91a5-f89fa5192726",
+      "outputId": "835760be-8d74-4b75-b677-e86ea8b3a015",
+      "label": "OK"
+    },
+    {
+      "id": "connection_53",
+      "source": "5bcbf847-7e60-4649-94d3-0b2b0e1457e0",
+      "target": "e7596f95-15e7-4939-a163-84183aff6d3e",
+      "outputId": "85d212d7-596b-4c7e-9839-71c4178f27db",
+      "label": "Outros"
+    },
+    {
+      "id": "connection_54",
+      "source": "3f80801e-24d6-40a1-87dc-35eb4e6467d3",
+      "target": "c4d60db9-0aa5-4dcd-92eb-cd9ff60bd375",
+      "outputId": "55410e1b-b66f-4568-bdc3-00bc1482884e",
+      "label": "Então"
+    },
+    {
+      "id": "connection_55",
+      "source": "c4d60db9-0aa5-4dcd-92eb-cd9ff60bd375",
+      "target": "126b8fa1-d52b-49b1-95f1-c7e08fbed5c2",
+      "outputId": "8a622414-a646-4dd5-b38a-3c4686f1940e",
+      "label": "OK"
+    },
+    {
+      "id": "connection_56",
+      "source": "3f80801e-24d6-40a1-87dc-35eb4e6467d3",
+      "target": "126b8fa1-d52b-49b1-95f1-c7e08fbed5c2",
+      "outputId": "236478f7-1802-470f-81f8-ddd370bbbc71",
+      "label": "Senão"
+    },
+    {
+      "id": "connection_57",
+      "source": "77613baa-c63d-4783-99c0-2e94fc347d9f",
+      "target": "27c8a4e0-f178-479a-8e3b-89e5bc17b905",
+      "outputId": "a247dd9b-b273-4275-8358-d402e01d2630",
+      "label": "RDF"
+    },
+    {
+      "id": "connection_58",
+      "source": "6a750232-73e6-41d2-9b19-a447dbc72fe3",
+      "target": "46dbe4c1-6269-4d15-8c3d-a43419deec6e",
+      "outputId": "1037ef4c-76fe-4fda-95f3-6d35483da131",
+      "label": "OK"
+    },
+    {
+      "id": "connection_59",
+      "source": "27c8a4e0-f178-479a-8e3b-89e5bc17b905",
+      "target": "e872ecc6-f3b0-4550-bbbb-e5dc4baca09f",
+      "outputId": "e7e9f16b-26ec-4592-8fec-6077689a3bb5",
+      "label": "Outra Moeda"
+    },
+    {
+      "id": "connection_60",
+      "source": "27c8a4e0-f178-479a-8e3b-89e5bc17b905",
+      "target": "fe9de6ce-f06f-4df1-9de5-c2d0e3cceb03",
+      "outputId": "d9f60f31-a5dd-481c-88d5-b3a9b99f535b",
+      "label": "Moeda AKZ"
+    },
+    {
+      "id": "connection_61",
+      "source": "e872ecc6-f3b0-4550-bbbb-e5dc4baca09f",
+      "target": "4055f284-718d-4033-ae6d-01d3512f14b8",
+      "outputId": "355d2835-398a-45f4-afc2-83441ef58fb3",
+      "label": "OK"
+    },
+    {
+      "id": "connection_62",
+      "source": "35a6a055-87d5-4a60-bfd0-5ef02be3a99b",
+      "target": "c5b5b6d7-bdc8-4c08-b978-8fa0ce54730c",
+      "outputId": "3d2f0b4f-16be-4076-ad68-8429cc697336",
+      "label": "Outros bens e serviços"
+    },
+    {
+      "id": "connection_63",
+      "source": "3eacc7c3-80ab-42dd-b97e-7a336bd8b379",
+      "target": "23e9e5b5-bd61-4458-b1c7-c1701bf436fd",
+      "outputId": "c24fb8ae-7e9b-4c3e-bc39-fbadbe5387d5",
+      "label": "OK"
+    },
+    {
+      "id": "connection_64",
+      "source": "cefdc7ed-99d9-4432-b5d2-f0edf7628ef6",
+      "target": "3eacc7c3-80ab-42dd-b97e-7a336bd8b379",
+      "outputId": "a39d0cd2-76f8-48c9-96b0-4ee843b1c0df",
+      "label": "Caixa / Cartão Multicaixa"
+    },
+    {
+      "id": "connection_65",
+      "source": "cefdc7ed-99d9-4432-b5d2-f0edf7628ef6",
+      "target": "35a6a055-87d5-4a60-bfd0-5ef02be3a99b",
+      "outputId": "1b49b32d-b10e-4cad-9167-18a09b45a010",
+      "label": "Tranferencia Bancaria"
+    },
+    {
+      "id": "connection_66",
+      "source": "ef9271d9-0d3c-4687-830b-2e024e82dd8e",
+      "target": "646fef5e-3822-4f50-b5f0-a9ecf0f5fe91",
+      "outputId": "0e82fa55-c0dc-4724-945b-a7673bd30416",
+      "label": "Default"
+    },
+    {
+      "id": "connection_67",
+      "source": "3b7d2771-49ce-4b58-a65f-92046cf3c6a7",
+      "target": "ef9271d9-0d3c-4687-830b-2e024e82dd8e",
+      "outputId": "488cf6e5-e279-4a53-99f5-9b1a0ba8c15b",
+      "label": ""
+    },
+    {
+      "id": "connection_68",
+      "source": "2434f162-ff8d-4cb6-9ddd-1d135a3edd36",
+      "target": "f5271858-c9ba-44e6-85fe-716af5f30e39",
+      "outputId": "13abb36b-3407-4af2-b9f6-c665e9a48722",
+      "label": "OK"
+    },
+    {
+      "id": "connection_69",
+      "source": "15d30d6c-fe9e-423f-9bc2-aea31135d45e",
+      "target": "3b7d2771-49ce-4b58-a65f-92046cf3c6a7",
+      "outputId": "e56bcdcc-6fea-4d09-9aab-1fc78e864b97",
+      "label": "Outros bens e serviços"
+    },
+    {
+      "id": "connection_70",
+      "source": "15d30d6c-fe9e-423f-9bc2-aea31135d45e",
+      "target": "45219286-aa2d-4da3-9ddd-d9a02fea29cb",
+      "outputId": "2dc92626-9ff1-437c-b7bd-0566c7e1f9a7",
+      "label": "Mercadoria"
+    },
+    {
+      "id": "connection_71",
+      "source": "dbdb11e8-e86e-473a-b7c1-456e74ffe0ea",
+      "target": "2c3cdc33-4904-42f6-bc12-075267c0d492",
+      "outputId": "804e3ed5-4dfe-4f3e-8860-ee4edf27dfe1",
+      "label": "Default"
+    },
+    {
+      "id": "connection_72",
+      "source": "45219286-aa2d-4da3-9ddd-d9a02fea29cb",
+      "target": "dbdb11e8-e86e-473a-b7c1-456e74ffe0ea",
+      "outputId": "84073174-a022-4c42-b069-13f2b535dd62",
+      "label": ""
+    },
+    {
+      "id": "connection_73",
+      "source": "45219286-aa2d-4da3-9ddd-d9a02fea29cb",
+      "target": "181bd913-ad48-4b66-a750-0feecb405e9b",
+      "outputId": "96ceb5b0-9181-443b-9ec2-abd3cf5f94eb",
+      "label": "Aguarda Informação"
+    },
+    {
+      "id": "connection_74",
+      "source": "35a6a055-87d5-4a60-bfd0-5ef02be3a99b",
+      "target": "a15f1065-1252-4623-8b68-0a49b9def8ca",
+      "outputId": "4d7f32ee-c199-4e6a-8c18-fcfa48adf0a9",
+      "label": "Mercadoria"
+    },
+    {
+      "id": "connection_75",
+      "source": "c5b5b6d7-bdc8-4c08-b978-8fa0ce54730c",
+      "target": "23e9e5b5-bd61-4458-b1c7-c1701bf436fd",
+      "outputId": "64e3b85c-060e-4e94-b4e7-807348c1ce1b",
+      "label": "OK"
+    },
+    {
+      "id": "connection_76",
+      "source": "a15f1065-1252-4623-8b68-0a49b9def8ca",
+      "target": "23e9e5b5-bd61-4458-b1c7-c1701bf436fd",
+      "outputId": "3d8d90ca-2aeb-4237-90ca-89448f9830b0",
+      "label": "OK"
+    },
+    {
+      "id": "connection_77",
+      "source": "4d5c21db-d181-404c-818f-d69ec169b4f0",
+      "target": "0085f529-3ad3-48cc-a476-d786a540d467",
+      "outputId": "670a8610-7f4e-41e4-bdfc-0c4b78481eb2",
+      "label": "OK"
+    },
+    {
+      "id": "connection_78",
+      "source": "ef9b7ab8-f302-4824-b333-4d541fff9159",
+      "target": "2434f162-ff8d-4cb6-9ddd-1d135a3edd36",
+      "outputId": "39889f84-5d39-4f76-ae1e-512dba3d5c60",
+      "label": "Fechar"
+    },
+    {
+      "id": "connection_79",
+      "source": "ef9b7ab8-f302-4824-b333-4d541fff9159",
+      "target": "ab718d05-d32e-4bd4-ae52-335071913a24",
+      "outputId": "92e1e25d-8464-4f5b-805c-7b063f4bc8e7",
+      "label": "Retificar"
+    },
+    {
+      "id": "connection_80",
+      "source": "70bbb36c-cf68-42f6-89e7-2615cf66f9ba",
+      "target": "c574208c-56b1-4b14-ba9e-0c8e5004ad77",
+      "outputId": "337d9b36-73d0-4dbb-89dd-cbb2e148eb0e",
+      "label": "Senão"
+    },
+    {
+      "id": "connection_81",
+      "source": "739fefe2-3b1c-48aa-9a5e-06e58cbaeaa4",
+      "target": "77613baa-c63d-4783-99c0-2e94fc347d9f",
+      "outputId": "00fcb08c-c3b8-4b3b-a999-9d272ce3179c",
+      "label": "OK"
+    },
+    {
+      "id": "connection_82",
+      "source": "70bbb36c-cf68-42f6-89e7-2615cf66f9ba",
+      "target": "739fefe2-3b1c-48aa-9a5e-06e58cbaeaa4",
+      "outputId": "a4f2789c-8c26-442e-ab8a-56542c6e8711",
+      "label": "Então"
+    },
+    {
+      "id": "connection_83",
+      "source": "80535287-18f0-4f43-b87f-49a680e5f330",
+      "target": "2434f162-ff8d-4cb6-9ddd-1d135a3edd36",
+      "outputId": "2e28bfa8-6852-4e07-8e5f-d4979f21386d",
+      "label": "Anexar Comprovativo - AGT/INSS"
+    },
+    {
+      "id": "connection_84",
+      "source": "f603651a-3372-4cc7-847b-9877e0f0c093",
+      "target": "d83ae667-38ce-40c9-bc51-fdc5f4c0196c",
+      "outputId": "8a2c314e-4781-4548-a89b-f08463143197",
+      "label": "Ou"
+    },
+    {
+      "id": "connection_85",
+      "source": "f603651a-3372-4cc7-847b-9877e0f0c093",
+      "target": "0ae69534-9ec4-4f0e-afc6-24dfa797a543",
+      "outputId": "98553c63-11b2-4933-a0f5-d658f4842eea",
+      "label": "Subsídio de Deslocação"
+    },
+    {
+      "id": "connection_86",
+      "source": "0ae69534-9ec4-4f0e-afc6-24dfa797a543",
+      "target": "5b5822f5-845e-4d9f-ad07-9bf280939b3e",
+      "outputId": "aa36ee0e-dad0-4311-9612-4df2a50f313c",
+      "label": "OK"
+    },
+    {
+      "id": "connection_87",
+      "source": "5b5822f5-845e-4d9f-ad07-9bf280939b3e",
+      "target": "2434f162-ff8d-4cb6-9ddd-1d135a3edd36",
+      "outputId": "be1248bb-4d88-48a5-8d32-8632084527a3",
+      "label": "Pagamento feito (Caixa)"
+    },
+    {
+      "id": "connection_88",
+      "source": "5b5822f5-845e-4d9f-ad07-9bf280939b3e",
+      "target": "2434f162-ff8d-4cb6-9ddd-1d135a3edd36",
+      "outputId": "83f30464-63fa-45db-bf2c-b6c4101e78e7",
+      "label": "Pagamento recusado (Caixa)"
+    },
+    {
+      "id": "connection_89",
+      "source": "3471b328-759c-4742-ba04-60201265ad54",
+      "target": "ab718d05-d32e-4bd4-ae52-335071913a24",
+      "outputId": "218f2b90-71a7-416b-ae06-9e00f2ad0ed5",
+      "label": "Senão"
+    },
+    {
+      "id": "connection_90",
+      "source": "46dbe4c1-6269-4d15-8c3d-a43419deec6e",
+      "target": "55fae2fa-d1a7-4958-9add-1ebf662ae2f5",
+      "outputId": "ceb54b39-1324-4a64-8dc7-e0ec21d5a1b1",
+      "label": "Urgente"
+    },
+    {
+      "id": "connection_91",
+      "source": "46dbe4c1-6269-4d15-8c3d-a43419deec6e",
+      "target": "4d5c21db-d181-404c-818f-d69ec169b4f0",
+      "outputId": "e37ee0a4-d98b-45cf-b9b0-f69fdd51d506",
+      "label": "Recusado"
+    },
+    {
+      "id": "connection_92",
+      "source": "3471b328-759c-4742-ba04-60201265ad54",
+      "target": "6a750232-73e6-41d2-9b19-a447dbc72fe3",
+      "outputId": "109be9a8-f195-4005-a64d-661c3bda0c05",
+      "label": "Então"
+    },
+    {
+      "id": "connection_93",
+      "source": "77613baa-c63d-4783-99c0-2e94fc347d9f",
+      "target": "3471b328-759c-4742-ba04-60201265ad54",
+      "outputId": "a13ca051-700f-4b4d-bb08-4b5c13e2d32e",
+      "label": "Ou"
+    },
+    {
+      "id": "connection_94",
+      "source": "7a79acf6-6aca-417b-90e5-4245322ca161",
+      "target": "96f45161-1477-4584-ba5f-2d2191c8a546",
+      "outputId": "8012c1e9-01f3-42b5-b73c-cf648608a992",
+      "label": "OK"
+    },
+    {
+      "id": "connection_95",
+      "source": "96f45161-1477-4584-ba5f-2d2191c8a546",
+      "target": "9a7eb9d3-22f5-4dbd-821e-4ea4dcf71ef8",
+      "outputId": "f5c8001d-9a6d-4986-99d9-31b02ec138e6",
+      "label": "Detalhe de Pagamento"
+    },
+    {
+      "id": "connection_96",
+      "source": "29b6944b-1e4a-4a60-a52a-41c133ac80e9",
+      "target": "63555573-0a7f-484f-b685-4be0d9231caa",
+      "outputId": "ce371a99-a6cb-49e8-8f63-a1e9dcf5561b",
+      "label": "Pagamento feito"
+    },
+    {
+      "id": "connection_97",
+      "source": "29b6944b-1e4a-4a60-a52a-41c133ac80e9",
+      "target": "27c8a4e0-f178-479a-8e3b-89e5bc17b905",
+      "outputId": "60f1e6bd-e271-46f9-8673-152f1d7420c5",
+      "label": "Pagamento recusado"
+    },
+    {
+      "id": "connection_98",
+      "source": "05638a78-1ca9-4d10-999c-e04629af6019",
+      "target": "890ccb78-6a53-42b7-8498-ab070095a9b3",
+      "outputId": "01df9cee-a8ec-403c-9121-956fd18c37dd",
+      "label": "Senão"
+    },
+    {
+      "id": "connection_99",
+      "source": "05638a78-1ca9-4d10-999c-e04629af6019",
+      "target": "29b6944b-1e4a-4a60-a52a-41c133ac80e9",
+      "outputId": "b75f0dd6-1b12-445b-8e65-9bd0e77a18e7",
+      "label": "Então"
+    },
+    {
+      "id": "connection_100",
+      "source": "2c3cdc33-4904-42f6-bc12-075267c0d492",
+      "target": "ec9f345e-a819-4f0c-bd64-18d79590e1a8",
+      "outputId": "18fc47bc-f693-4096-b42b-fb3b5c1b6f6a",
+      "label": "OK"
+    },
+    {
+      "id": "connection_101",
+      "source": "45219286-aa2d-4da3-9ddd-d9a02fea29cb",
+      "target": "cefdc7ed-99d9-4432-b5d2-f0edf7628ef6",
+      "outputId": "278837d0-b9cb-4e56-8df4-a7fe696f8bbf",
+      "label": "Adicionar Link"
+    },
+    {
+      "id": "connection_102",
+      "source": "ec9f345e-a819-4f0c-bd64-18d79590e1a8",
+      "target": "181bd913-ad48-4b66-a750-0feecb405e9b",
+      "outputId": "6d34618f-8fb2-4639-82ce-fb5c15105ccc",
+      "label": "Notificar Requerente"
+    },
+    {
+      "id": "connection_103",
+      "source": "3b7d2771-49ce-4b58-a65f-92046cf3c6a7",
+      "target": "181bd913-ad48-4b66-a750-0feecb405e9b",
+      "outputId": "830db6f1-c0b0-4948-a1f3-012b6fdda982",
+      "label": "Aguarda Informação"
+    },
+    {
+      "id": "connection_104",
+      "source": "cd7a5e41-29fd-417c-827d-396c89b30b4f",
+      "target": "181bd913-ad48-4b66-a750-0feecb405e9b",
+      "outputId": "37e14246-07ce-467c-ba4c-1b0b36c2cf7d",
+      "label": "Notificar Requerente"
+    },
+    {
+      "id": "connection_105",
+      "source": "646fef5e-3822-4f50-b5f0-a9ecf0f5fe91",
+      "target": "cd7a5e41-29fd-417c-827d-396c89b30b4f",
+      "outputId": "ee71c7c4-32c0-4c7d-b524-4a88483fed02",
+      "label": "OK"
+    },
+    {
+      "id": "connection_106",
+      "source": "e7596f95-15e7-4939-a163-84183aff6d3e",
+      "target": "05638a78-1ca9-4d10-999c-e04629af6019",
+      "outputId": "4ab1b483-d792-4161-9f08-d9e9ef7a0e6c",
+      "label": "OK"
+    },
+    {
+      "id": "connection_107",
+      "source": "406280fa-7f0d-477e-8fd0-f5af5a20ee87",
+      "target": "70bbb36c-cf68-42f6-89e7-2615cf66f9ba",
+      "outputId": "269647c7-c383-4977-b093-9dc9794fccc1",
+      "label": "Else"
+    }
+  ]
+}
