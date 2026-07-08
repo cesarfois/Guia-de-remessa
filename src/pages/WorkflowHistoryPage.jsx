@@ -848,7 +848,7 @@ const WorkflowHistoryPage = () => {
         return stepsWithAggregates;
     }, [selectedDoc, documentProgress, documents]);
 
-    // Background queue to fetch progress for all documents dynamically
+    // Background queue to fetch progress for all documents dynamically using Server-side Batch Fetching
     useEffect(() => {
         if (documents.length === 0) {
             setDocumentProgress({});
@@ -859,312 +859,311 @@ const WorkflowHistoryPage = () => {
         
         const fetchProgressForDocs = async () => {
             const docsToFetch = [...documents];
-            // Ensure global cache object exists
             window._historyCache = window._historyCache || {};
 
-            // Concurrency limit: 8 parallel workers
-            const CONCURRENCY_LIMIT = 8;
-            let index = 0;
+            const calculateProgress = async (doc, instances) => {
+                let percent = 0;
+                let remaining = 0;
+                let statusText = 'Pendente';
+                let activeTaskName = '';
+                let isFinished = false;
+                let isRejected = false;
+                let entryDate = null;
+                let completedAt = null;
+                let responsible = '-';
+                let timeStoppedMs = 0;
+                let nextStep = '-';
+                let merged = null;
+                let analyzedHistory = [];
 
-            const worker = async () => {
-                while (index < docsToFetch.length) {
-                    if (!active) break;
-                    // Get next doc to process
-                    const doc = docsToFetch[index++];
-                    if (!doc) continue;
+                if (instances && instances.length > 0) {
+                    const sorted = [...instances].sort((a, b) => {
+                        return (b.Version || 0) - (a.Version || 0);
+                    });
+                    
+                    const instance = sorted[0];
+                    const rawHistory = instance.HistorySteps || [];
+                    analyzedHistory = WorkflowHistoryAnalyzer.analyze(rawHistory);
 
-                    try {
-                        if (documentProgress[doc.Id]) continue;
-
-                        const cacheKey = `wf_history_${selectedCabinet}_${doc.Id}`;
-                        let instances = null;
-
-                        try {
-                            const cacheKey = `wf_history_${selectedCabinet}_${doc.Id}`;
-                            const cached = localStorage.getItem(cacheKey);
-                            if (cached) {
-                                const parsed = JSON.parse(cached);
-                                const isExpired = parsed.expiresAt && Date.now() > parsed.expiresAt;
-                                if (!isExpired) {
-                                    instances = parsed.instances;
-                                }
-                            }
-                        } catch (e) {
-                            console.error('Failed to read from localStorage', e);
-                        }
-
-                        if (!instances) {
-                            instances = window._historyCache[cacheKey];
-                        }
-
-                        if (!instances) {
-                            instances = await workflowAnalyticsService.getHistoryByDocId(doc.Id, selectedCabinet);
-                            window._historyCache[cacheKey] = instances;
-                        }
-                        
-                        if (!active) return;
-
-                        let percent = 0;
-                        let remaining = 0;
-                        let statusText = 'Pendente';
-                        let activeTaskName = '';
-                        let isFinished = false;
-                        let isRejected = false;
-                        let entryDate = null;
-                        let completedAt = null;
-                        let responsible = '-';
-                        let timeStoppedMs = 0;
-                        let nextStep = '-';
-                        let merged = null;
-                        let analyzedHistory = [];
-
-                        if (instances && instances.length > 0) {
-                            const sorted = [...instances].sort((a, b) => {
-                                return (b.Version || 0) - (a.Version || 0);
-                            });
-                            
-                            const instance = sorted[0];
-                            const rawHistory = instance.HistorySteps || [];
-                            analyzedHistory = WorkflowHistoryAnalyzer.analyze(rawHistory);
-
-                            let parsedDef = wfdDefinitions[instance.WorkflowId];
-                            if (!parsedDef) {
-                                window._wfdPromises = window._wfdPromises || {};
-                                if (!window._wfdPromises[instance.WorkflowId]) {
-                                    window._wfdPromises[instance.WorkflowId] = (async () => {
-                                        let def = await workflowAnalyticsService.getWfdDefinition(instance.WorkflowId, instance.WorkflowName || instance.Name);
-                                        if (!def) {
-                                            const savedWfdStr = localStorage.getItem(`wfd_def_${instance.WorkflowId}`);
-                                            if (savedWfdStr) {
-                                                try {
-                                                    def = JSON.parse(savedWfdStr);
-                                                } catch (err) {
-                                                    console.error('[WorkflowHistory] Failed to parse stored WFD:', err);
-                                                }
-                                            }
-                                        }
-                                        return def;
-                                    })();
-                                }
-                                parsedDef = await window._wfdPromises[instance.WorkflowId];
-                            }
-
-                            if (!parsedDef) {
-                                parsedDef = generateFallbackGraph(analyzedHistory);
-                            }
-
-                            const graph = WorkflowGraphBuilder.build(parsedDef.activities, parsedDef.connections);
-                            merged = WorkflowTimelineEngine.merge(graph, analyzedHistory);
-
-                            const nodes = merged.nodes || [];
-                            const edges = merged.edges || [];
-                            
-                            const isEndNode = (n) => {
-                                 if (!n) return false;
-                                 const type = (n.type || '').toLowerCase();
-                                 const name = (n.name || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
-                                 const hasOutgoing = edges.some(e => e.source === n.id);
-                                 
-                                 if (!hasOutgoing) return true;
-                                 if (type.includes('end') || type.includes('fim')) return true;
-                                 
-                                 return name === 'end' || 
-                                        name.startsWith('end ') || 
-                                        name.endsWith(' end') || 
-                                        name.includes(' end ') ||
-                                        name.startsWith('fim') ||
-                                        name.includes(' fim') ||
-                                        name.includes('concluid') || 
-                                        name.includes('termin') || 
-                                        name.includes('conclusao') ||
-                                        name.includes('cancelad') ||
-                                        name.includes('reprovad');
-                             };
-                            
-                            const endNode = nodes.find(isEndNode);
-                            isFinished = endNode && endNode.status === 'completed';
-
-                            // Detect rejection/cancellation
-                            if (isFinished) {
-                                const rejKw = ['recusad', 'cancelad', 'reprovad', 'rejeit', 'refused', 'reject'];
-                                const normalize = (s) => (s || '').toLowerCase()
-                                    .normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
-                                isRejected = analyzedHistory.some(step => {
-                                    const dec = normalize(step.decision || '');
-                                    return rejKw.some(kw => dec.includes(kw));
-                                });
-                            }
-
-                            const parseDWDate = (dateStr) => {
-                                if (!dateStr) return null;
-                                if (typeof dateStr === 'string' && dateStr.startsWith('/Date(')) {
-                                    const match = dateStr.match(/-?\d+/);
-                                    if (match) {
-                                        const ts = parseInt(match[0]);
-                                        return ts > 0 ? new Date(ts) : null;
-                                    }
-                                }
-                                const d = new Date(dateStr);
-                                return isNaN(d.getTime()) ? null : d;
-                            };
-
-                            entryDate = instance ? (instance.StartedAt ? parseDWDate(instance.StartedAt) : (analyzedHistory[0]?.startedAt || null)) : null;
-                            completedAt = isFinished && endNode ? (endNode.executions[0]?.completedAt || endNode.completedAt || null) : null;
-
-                            const activeNode = nodes.find(n => n.status === 'active');
-                            if (activeNode) {
-                                if (activeNode.activeUsers && activeNode.activeUsers.length > 0) {
-                                    responsible = activeNode.activeUsers.join(', ');
-                                } else if (activeNode.executions && activeNode.executions.length > 0) {
-                                    responsible = activeNode.executions[activeNode.executions.length - 1].user || 'Sistema';
-                                }
-                            }
-
-                            if (!isFinished && activeNode) {
-                                const activeStep = analyzedHistory.find(step => step.isActive || (!step.decision && step.name === activeNode.name));
-                                const activeStart = activeStep ? activeStep.startedAt : (activeNode.executions[0]?.startedAt || null);
-                                if (activeStart) {
-                                    timeStoppedMs = Math.max(0, new Date().getTime() - new Date(activeStart).getTime());
-                                }
-                            }
-
-                            const getNextStepName = (nodes, edges, activeNode) => {
-                                if (!activeNode) return '-';
-                                const outgoing = edges.filter(e => e.source === activeNode.id);
-                                if (outgoing.length === 0) return 'Fim';
-                                const targetNames = outgoing.map(edge => {
-                                    const targetNode = nodes.find(n => n.id === edge.target);
-                                    const label = edge.label ? ` (${edge.label})` : '';
-                                    return targetNode ? `${targetNode.name}${label}` : '';
-                                }).filter(Boolean);
-                                return targetNames.join(' / ') || 'Fim';
-                            };
-                            nextStep = getNextStepName(nodes, edges, activeNode);
-
-                            if (isFinished) {
-                                percent = 100;
-                                remaining = 0;
-                                statusText = 'Concluído';
-                            } else {
-                                if (activeNode) {
-                                    activeTaskName = activeNode.name;
-                                    remaining = getRemainingTaskCount(nodes, edges, activeNode.id) || 1;
-                                    
-                                    const completed = nodes.filter(n => n.status === 'completed' && isTaskType(n.type)).length;
-                                    const total = completed + remaining;
-                                    percent = total > 0 ? Math.round((completed / total) * 100) : 0;
-                                    
-                                    if (percent >= 100) percent = 99;
-                                    statusText = `Em Andamento (${percent}%)`;
-                                } else {
-                                     const startNode = nodes.find(n => {
-                                         const type = (n.type || '').toLowerCase();
-                                         const name = (n.name || '').toLowerCase();
-                                         return type.includes('start') || name.includes('start') || name.includes('inicio') || name.includes('início');
-                                     });
-                                    if (startNode) {
-                                        remaining = getRemainingTaskCount(nodes, edges, startNode.id);
-                                        percent = 0;
-                                        statusText = 'Pendente';
-                                    } else {
-                                        percent = 0;
-                                        statusText = 'Em Processamento';
-                                    }
-                                }
-                            }
-                            if (instances) {
-                                try {
-                                    const expiresAt = isFinished ? null : Date.now() + 5 * 60 * 1000;
-                                    const payload = JSON.stringify({
-                                        instances,
-                                        expiresAt,
-                                        isFinished
-                                    });
-                                    try {
-                                        localStorage.setItem(cacheKey, payload);
-                                    } catch (err) {
-                                        if (err.name === 'QuotaExceededError' || err.code === 22) {
-                                            console.warn('[Cache] LocalStorage full. Evicting old workflow history items...');
-                                            const keys = [];
-                                            for (let idx = 0; idx < localStorage.length; idx++) {
-                                                const k = localStorage.key(idx);
-                                                if (k && k.startsWith('wf_history_')) {
-                                                    keys.push(k);
-                                                }
-                                            }
-                                            keys.forEach(k => localStorage.removeItem(k));
-                                            localStorage.setItem(cacheKey, payload);
-                                        } else {
-                                            throw err;
+                    let parsedDef = wfdDefinitions[instance.WorkflowId];
+                    if (!parsedDef) {
+                        window._wfdPromises = window._wfdPromises || {};
+                        if (!window._wfdPromises[instance.WorkflowId]) {
+                            window._wfdPromises[instance.WorkflowId] = (async () => {
+                                let def = await workflowAnalyticsService.getWfdDefinition(instance.WorkflowId, instance.WorkflowName || instance.Name);
+                                if (!def) {
+                                    const savedWfdStr = localStorage.getItem(`wfd_def_${instance.WorkflowId}`);
+                                    if (savedWfdStr) {
+                                        try {
+                                            def = JSON.parse(savedWfdStr);
+                                        } catch (err) {
+                                            console.error('[WorkflowHistory] Failed to parse stored WFD:', err);
                                         }
                                     }
-                                } catch (e) {
-                                    console.warn('Failed to write to localStorage', e);
                                 }
+                                return def;
+                            })();
+                        }
+                        parsedDef = await window._wfdPromises[instance.WorkflowId];
+                    }
+
+                    if (!parsedDef) {
+                        parsedDef = generateFallbackGraph(analyzedHistory);
+                    }
+
+                    const graph = WorkflowGraphBuilder.build(parsedDef.activities, parsedDef.connections);
+                    merged = WorkflowTimelineEngine.merge(graph, analyzedHistory);
+
+                    const nodes = merged.nodes || [];
+                    const edges = merged.edges || [];
+                    
+                    const isEndNode = (n) => {
+                         if (!n) return false;
+                         const type = (n.type || '').toLowerCase();
+                         const name = (n.name || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+                         const hasOutgoing = edges.some(e => e.source === n.id);
+                         
+                         if (!hasOutgoing) return true;
+                         if (type.includes('end') || type.includes('fim')) return true;
+                         
+                         return name === 'end' || 
+                                name.startsWith('end ') || 
+                                name.endsWith(' end') || 
+                                name.includes(' end ') ||
+                                name.startsWith('fim') ||
+                                name.includes(' fim') ||
+                                name.includes('concluid') || 
+                                name.includes('termin') || 
+                                name.includes('conclusao') ||
+                                name.includes('cancelad') ||
+                                name.includes('reprovad');
+                     };
+                    
+                    const endNode = nodes.find(isEndNode);
+                    isFinished = endNode && endNode.status === 'completed';
+
+                    // Detect rejection/cancellation
+                    if (isFinished) {
+                        const rejKw = ['recusad', 'cancelad', 'reprovad', 'rejeit', 'refused', 'reject'];
+                        const normalize = (s) => (s || '').toLowerCase()
+                            .normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+                        isRejected = analyzedHistory.some(step => {
+                            const dec = normalize(step.decision || '');
+                            return rejKw.some(kw => dec.includes(kw));
+                        });
+                    }
+
+                    const parseDWDate = (dateStr) => {
+                        if (!dateStr) return null;
+                        if (typeof dateStr === 'string' && dateStr.startsWith('/Date(')) {
+                            const match = dateStr.match(/-?\d+/);
+                            if (match) {
+                                const ts = parseInt(match[0]);
+                                return ts > 0 ? new Date(ts) : null;
                             }
                         }
+                        const d = new Date(dateStr);
+                        return isNaN(d.getTime()) ? null : d;
+                    };
 
-                        if (active) {
-                            setDocumentProgress(prev => ({
-                                ...prev,
-                                [doc.Id]: {
-                                    percent,
-                                    remaining,
-                                    statusText,
-                                    activeTaskName,
-                                    isFinished,
-                                    isRejected,
-                                    loading: false,
-                                    entryDate,
-                                    completedAt,
-                                    responsible,
-                                    timeStoppedMs,
-                                    nextStep,
-                                    mergedGraph: merged,
-                                    analyzedHistory,
-                                    instances
-                                }
-                            }));
+                    entryDate = instance ? (instance.StartedAt ? parseDWDate(instance.StartedAt) : (analyzedHistory[0]?.startedAt || null)) : null;
+                    completedAt = isFinished && endNode ? (endNode.executions[0]?.completedAt || endNode.completedAt || null) : null;
 
-                            // If this document is completed, persist its history details in cache
-                            if (isFinished && instances && instances.length > 0) {
-                                workflowAnalyticsService.persistHistoryCache(doc.Id, instances);
-                            }
-                        }
-                    } catch (err) {
-                        console.error(`Failed to calculate progress for doc ${doc.Id}:`, err);
-                        if (active) {
-                            setDocumentProgress(prev => ({
-                                ...prev,
-                                [doc.Id]: {
-                                    percent: 0,
-                                    remaining: 0,
-                                    statusText: 'Erro',
-                                    activeTaskName: '',
-                                    isFinished: false,
-                                    loading: false,
-                                    entryDate: null,
-                                    completedAt: null,
-                                    responsible: '-',
-                                    timeStoppedMs: 0,
-                                    nextStep: '-',
-                                    mergedGraph: null,
-                                    analyzedHistory: [],
-                                    instances: []
-                                }
-                            }));
+                    const activeNode = nodes.find(n => n.status === 'active');
+                    if (activeNode) {
+                        if (activeNode.activeUsers && activeNode.activeUsers.length > 0) {
+                            responsible = activeNode.activeUsers.join(', ');
+                        } else if (activeNode.executions && activeNode.executions.length > 0) {
+                            responsible = activeNode.executions[activeNode.executions.length - 1].user || 'Sistema';
                         }
                     }
+
+                    if (!isFinished && activeNode) {
+                        const activeStep = analyzedHistory.find(step => step.isActive || (!step.decision && step.name === activeNode.name));
+                        const activeStart = activeStep ? activeStep.startedAt : (activeNode.executions[0]?.startedAt || null);
+                        if (activeStart) {
+                            timeStoppedMs = Math.max(0, new Date().getTime() - new Date(activeStart).getTime());
+                        }
+                    }
+
+                    const getNextStepName = (nodes, edges, activeNode) => {
+                        if (!activeNode) return '-';
+                        const outgoing = edges.filter(e => e.source === activeNode.id);
+                        if (outgoing.length === 0) return 'Fim';
+                        const targetNames = outgoing.map(edge => {
+                            const targetNode = nodes.find(n => n.id === edge.target);
+                            const label = edge.label ? ` (${edge.label})` : '';
+                            return targetNode ? `${targetNode.name}${label}` : '';
+                        }).filter(Boolean);
+                        return targetNames.join(' / ') || 'Fim';
+                    };
+                    nextStep = getNextStepName(nodes, edges, activeNode);
+
+                    if (isFinished) {
+                        percent = 100;
+                        remaining = 0;
+                        statusText = 'Concluído';
+                    } else {
+                        if (activeNode) {
+                            activeTaskName = activeNode.name;
+                            remaining = getRemainingTaskCount(nodes, edges, activeNode.id) || 1;
+                            
+                            const completed = nodes.filter(n => n.status === 'completed' && isTaskType(n.type)).length;
+                            const total = completed + remaining;
+                            percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+                            
+                            if (percent >= 100) percent = 99;
+                            statusText = `Em Andamento (${percent}%)`;
+                        } else {
+                             const startNode = nodes.find(n => {
+                                 const type = (n.type || '').toLowerCase();
+                                 const name = (n.name || '').toLowerCase();
+                                 return type.includes('start') || name.includes('start') || name.includes('inicio') || name.includes('início');
+                             });
+                            if (startNode) {
+                                remaining = getRemainingTaskCount(nodes, edges, startNode.id);
+                                percent = 0;
+                                statusText = 'Pendente';
+                            } else {
+                                percent = 0;
+                                statusText = 'Em Processamento';
+                            }
+                        }
+                    }
+                    
+                    // Write/update cache in localStorage
+                    try {
+                        const cacheKey = `wf_history_${selectedCabinet}_${doc.Id}`;
+                        const expiresAt = isFinished ? null : Date.now() + 5 * 60 * 1000;
+                        const payload = JSON.stringify({
+                            instances,
+                            expiresAt,
+                            isFinished
+                        });
+                        try {
+                            localStorage.setItem(cacheKey, payload);
+                        } catch (err) {
+                            if (err.name === 'QuotaExceededError' || err.code === 22) {
+                                console.warn('[Cache] LocalStorage full. Evicting old workflow history items...');
+                                const keys = [];
+                                for (let idx = 0; idx < localStorage.length; idx++) {
+                                    const k = localStorage.key(idx);
+                                    if (k && k.startsWith('wf_history_')) {
+                                        keys.push(k);
+                                    }
+                                }
+                                keys.forEach(k => localStorage.removeItem(k));
+                                localStorage.setItem(cacheKey, payload);
+                            } else {
+                                throw err;
+                            }
+                        }
+                    } catch (e) {
+                        console.warn('Failed to write to localStorage', e);
+                    }
+
+                    // If this document is completed, persist its history details in cache
+                    if (isFinished && instances && instances.length > 0) {
+                        workflowAnalyticsService.persistHistoryCache(doc.Id, instances);
+                    }
                 }
+
+                return {
+                    percent,
+                    remaining,
+                    statusText,
+                    activeTaskName,
+                    isFinished,
+                    isRejected,
+                    loading: false,
+                    entryDate,
+                    completedAt,
+                    responsible,
+                    timeStoppedMs,
+                    nextStep,
+                    mergedGraph: merged,
+                    analyzedHistory,
+                    instances
+                };
             };
 
-            // Start up to CONCURRENCY_LIMIT parallel worker threads
-            const workers = [];
-            const activeWorkersCount = Math.min(CONCURRENCY_LIMIT, docsToFetch.length);
-            for (let w = 0; w < activeWorkersCount; w++) {
-                workers.push(worker());
+            const missedDocs = [];
+            const cachedProgressToSet = {};
+
+            // 1. Process cached histories immediately
+            for (const doc of docsToFetch) {
+                if (documentProgress[doc.Id]) continue;
+
+                const cacheKey = `wf_history_${selectedCabinet}_${doc.Id}`;
+                let instances = null;
+
+                try {
+                    const cached = localStorage.getItem(cacheKey);
+                    if (cached) {
+                        const parsed = JSON.parse(cached);
+                        const isExpired = parsed.expiresAt && Date.now() > parsed.expiresAt;
+                        if (!isExpired) {
+                            instances = parsed.instances;
+                        }
+                    }
+                } catch (e) {
+                    console.error('Failed to read from localStorage', e);
+                }
+
+                if (!instances) {
+                    instances = window._historyCache[cacheKey];
+                }
+
+                if (instances) {
+                    const progress = await calculateProgress(doc, instances);
+                    if (progress) {
+                        cachedProgressToSet[doc.Id] = progress;
+                    }
+                } else {
+                    missedDocs.push(doc);
+                }
             }
-            await Promise.all(workers);
+
+            // Set cached progress in a single render update
+            if (active && Object.keys(cachedProgressToSet).length > 0) {
+                setDocumentProgress(prev => ({ ...prev, ...cachedProgressToSet }));
+            }
+
+            if (missedDocs.length === 0) return;
+
+            // 2. Fetch cache misses using Server-side Batch Fetching
+            const missedDocIds = missedDocs.map(d => d.Id);
+            try {
+                // Fetch in batch sizes of 50 to ensure optimal chunk sizes
+                const BATCH_SIZE = 50;
+                for (let i = 0; i < missedDocIds.length; i += BATCH_SIZE) {
+                    if (!active) break;
+                    const chunkIds = missedDocIds.slice(i, i + BATCH_SIZE);
+                    const batchResult = await workflowAnalyticsService.getBatchHistory(chunkIds, selectedCabinet);
+                    
+                    if (!active) break;
+
+                    const batchProgressToSet = {};
+                    for (const docId of chunkIds) {
+                        const doc = missedDocs.find(d => d.Id === docId);
+                        if (!doc) continue;
+
+                        const instances = batchResult[docId] || [];
+                        window._historyCache[`wf_history_${selectedCabinet}_${docId}`] = instances;
+
+                        const progress = await calculateProgress(doc, instances);
+                        if (progress) {
+                            batchProgressToSet[docId] = progress;
+                        }
+                    }
+
+                    if (active && Object.keys(batchProgressToSet).length > 0) {
+                        setDocumentProgress(prev => ({ ...prev, ...batchProgressToSet }));
+                    }
+                }
+            } catch (err) {
+                console.error('[BatchHistory] Failed to load batch progress:', err);
+            }
         };
 
         fetchProgressForDocs();

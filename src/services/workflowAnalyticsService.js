@@ -282,6 +282,40 @@ export const workflowAnalyticsService = {
     },
 
     /**
+     * Get Workflow History for multiple documents in a single Batch request
+     * @param {Array} docIds
+     * @param {string} cabinetId
+     * @returns {Promise<Object>} Mapped docId -> instances
+     */
+    getBatchHistory: async (docIds, cabinetId) => {
+        try {
+            if (!docIds || docIds.length === 0) return {};
+            if (!cabinetId) {
+                console.warn('[WorkflowAnalytics] CabinetID missing, cannot fetch batch history.');
+                return {};
+            }
+
+            console.log(`[WorkflowAnalytics] Fetching batch history for ${docIds.length} documents...`);
+            const response = await analyticsApi.post(`${import.meta.env.BASE_URL || '/'}api/workflow/batch-history`, {
+                fileCabinetId: cabinetId,
+                docIds
+            }, { baseURL: '/' });
+
+            const histories = response.data.histories || {};
+
+            // Cache in memory initially
+            Object.entries(histories).forEach(([docId, instances]) => {
+                memoryCache.set(docId, instances);
+            });
+
+            return histories;
+        } catch (error) {
+            console.error('[WorkflowAnalytics] Batch History fetch failed:', error);
+            return {};
+        }
+    },
+
+    /**
      * Persist historical data in memory and localStorage for finished workflows
      */
     persistHistoryCache: (docId, instances) => {

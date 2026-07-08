@@ -850,6 +850,147 @@ app.delete('/api/wfd/:workflowId', async (req, res) => {
     }
 });
 
+// POST /api/workflow/batch-history
+app.post('/api/workflow/batch-history', express.json({ limit: '5mb' }), async (req, res) => {
+    const targetUrl = req.headers['x-target-url'];
+    const authHeader = req.headers['authorization'];
+    
+    if (!targetUrl || !authHeader) {
+        return res.status(401).json({ error: 'Missing targetUrl or authorization headers' });
+    }
+
+    const { fileCabinetId, docIds } = req.body;
+    if (!fileCabinetId || !Array.isArray(docIds)) {
+        return res.status(400).json({ error: 'Missing fileCabinetId or docIds array' });
+    }
+
+    console.log(`[BatchHistory] Processing batch history request for ${docIds.length} documents...`);
+
+    // Helper to prune steps (same logic as frontend to save bandwidth/localStorage space)
+    const pruneSteps = (steps) => {
+        if (!steps || !Array.isArray(steps)) return [];
+        return steps.map(step => {
+            const prunedInfo = {};
+            if (step.Info && step.Info.Item) {
+                const item = step.Info.Item;
+                prunedInfo.Item = {
+                    DecisionName: item.DecisionName,
+                    DecisionDate: item.DecisionDate,
+                    UserName: item.UserName,
+                    AssignedUsers: item.AssignedUsers,
+                    '$type': item['$type']
+                };
+            }
+            return {
+                ActivityName: step.ActivityName,
+                Name: step.Name,
+                ActivityType: step.ActivityType,
+                StepType: step.StepType,
+                StepDate: step.StepDate,
+                TimeStamp: step.TimeStamp,
+                DecisionLabel: step.DecisionLabel,
+                User: step.User,
+                UserName: step.UserName,
+                StepNumber: step.StepNumber,
+                Info: prunedInfo
+            };
+        });
+    };
+
+    // Helper to prune instances
+    const pruneInstances = (instances) => {
+        if (!instances || !Array.isArray(instances)) return [];
+        return instances.map(inst => ({
+            Id: inst.Id,
+            WorkflowId: inst.WorkflowId,
+            Name: inst.Name,
+            Version: inst.Version,
+            StartedAt: inst.StartedAt,
+            HistorySteps: pruneSteps(inst.HistorySteps)
+        }));
+    };
+
+    // Fetch history for a single document
+    const fetchDocHistory = async (docId) => {
+        try {
+            const docHistoryUrl = `${targetUrl}/DocuWare/Platform/Workflow/Instances/DocumentHistory`;
+            const docHistoryResp = await axios.get(docHistoryUrl, {
+                headers: {
+                    'Authorization': authHeader,
+                    'Accept': 'application/json'
+                },
+                params: {
+                    fileCabinetId,
+                    documentId: docId
+                },
+                timeout: 15000
+            }).catch(err => {
+                if (err.response && err.response.status === 404) {
+                    return { data: { InstanceHistory: [] } };
+                }
+                throw err;
+            });
+
+            const instances = docHistoryResp.data.InstanceHistory || docHistoryResp.data || [];
+            if (!Array.isArray(instances) || instances.length === 0) {
+                return [];
+            }
+
+            // Fetch details (HistorySteps) for each instance in parallel
+            const detailPromises = instances.map(async (inst) => {
+                try {
+                    const selfLink = (inst.Links || []).find(l => l.Rel === 'self' || l.rel === 'self');
+                    let historyUrl = selfLink && selfLink.href 
+                        ? `${targetUrl}${selfLink.href.startsWith('/') ? '' : '/'}${selfLink.href}`
+                        : `${targetUrl}/DocuWare/Platform/Workflow/Workflows/${inst.WorkflowId}/Instances/${inst.Id}/History`;
+                    
+                    const detailResp = await axios.get(historyUrl, {
+                        headers: {
+                            'Authorization': authHeader,
+                            'Accept': 'application/json'
+                        },
+                        timeout: 15000
+                    });
+
+                    const steps = detailResp.data.HistorySteps || detailResp.data || [];
+                    return {
+                        ...inst,
+                        HistorySteps: steps
+                    };
+                } catch (err) {
+                    console.warn(`[BatchHistory] Failed to fetch details for inst ${inst.Id} of doc ${docId}:`, err.message);
+                    return { ...inst, HistorySteps: [] };
+                }
+            });
+
+            const instancesWithSteps = await Promise.all(detailPromises);
+            return pruneInstances(instancesWithSteps);
+        } catch (err) {
+            console.error(`[BatchHistory] Error fetching history for doc ${docId}:`, err.message);
+            return [];
+        }
+    };
+
+    // Concurrency pool: Process in chunks of 15 to prevent overloading DocuWare
+    const CHUNK_SIZE = 15;
+    const results = {};
+
+    try {
+        for (let i = 0; i < docIds.length; i += CHUNK_SIZE) {
+            const chunk = docIds.slice(i, i + CHUNK_SIZE);
+            const chunkPromises = chunk.map(async (docId) => {
+                const history = await fetchDocHistory(docId);
+                results[docId] = history;
+            });
+            await Promise.all(chunkPromises);
+        }
+        res.json({ status: 'ok', histories: results });
+    } catch (err) {
+        console.error('[BatchHistory] Batch processing failed:', err.message);
+        res.status(500).json({ error: err.message });
+    }
+});
+
 // ----------------------------------------------------------------------------
 // 4. Server Start (Conditional)
 // ----------------------------------------------------------------------------
