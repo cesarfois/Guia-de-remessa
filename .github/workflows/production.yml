@@ -85,4 +85,6 @@ jobs:
             
             # Build e restart dos containers via docker-compose
             docker compose down || true
+            docker rm -f dashboard-guia-remessa || true
+            docker rm -f dashboard-guiaderemessa || true
             docker compose up -d --build

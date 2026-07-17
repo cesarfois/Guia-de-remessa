@@ -1,5 +1,5 @@
 services:
-  guia-remessa:
+  guiaderemessa:
     build:
       context: .
       args:
@@ -12,7 +12,7 @@ services:
         - DOCUWARE_USERNAME=${DOCUWARE_USERNAME}
         - DOCUWARE_PASSWORD=${DOCUWARE_PASSWORD_DOCKER}
         - DOCUWARE_ORG_ID=${DOCUWARE_ORG_ID}
-    container_name: dashboard-guia-remessa
+    container_name: dashboard-guiaderemessa
     ports:
       - "3009:3001"
     volumes:
@@ -31,10 +31,10 @@ services:
       - DOCUWARE_PASSWORD=${DOCUWARE_PASSWORD_DOCKER}
       - DOCUWARE_ORG_ID=${DOCUWARE_ORG_ID}
     networks:
-      - guia-remessa-network
+      - guiaderemessa-network
     restart: unless-stopped
 
 networks:
-  guia-remessa-network:
-    name: guia-remessa-network
+  guiaderemessa-network:
+    name: guiaderemessa-network
 
