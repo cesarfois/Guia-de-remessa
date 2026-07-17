@@ -67,6 +67,9 @@ jobs:
             # Garantir que o diretório pai existe
             mkdir -p /app
             
+            # Remover pasta antiga não utilizada
+            rm -rf /app/guia-remessa
+            
             # Se a pasta não existir ou não for um repositório git, clona
             if [ ! -d "/app/guiaderemessa/.git" ]; then
               echo "Pasta não existe ou não é um repositório Git. Clonando..."
