@@ -42,7 +42,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/auth/callback" element={<CallbackPage />} />
             <Route
-              path="/guia-remessa"
+              path="/guiaderemessa"
               element={
                 <ProtectedRoute>
                   <DashboardLayout>
@@ -57,8 +57,8 @@ function App() {
               path="/workflow-diagram"
               element={<WorkflowDiagramPage />}
             />
-            <Route path="/" element={<Navigate to="/guia-remessa" />} />
-            <Route path="*" element={<Navigate to="/guia-remessa" replace />} />
+            <Route path="/" element={<Navigate to="/guiaderemessa" />} />
+            <Route path="*" element={<Navigate to="/guiaderemessa" replace />} />
           </Routes>
         </Router>
       </AuthProvider>

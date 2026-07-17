@@ -68,13 +68,13 @@ jobs:
             mkdir -p /app
             
             # Se a pasta não existir ou não for um repositório git, clona
-            if [ ! -d "/app/guia-remessa/.git" ]; then
+            if [ ! -d "/app/guiaderemessa/.git" ]; then
               echo "Pasta não existe ou não é um repositório Git. Clonando..."
-              rm -rf /app/guia-remessa
-              git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/cesarfois/Guia-de-remessa.git /app/guia-remessa
+              rm -rf /app/guiaderemessa
+              git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/cesarfois/Guia-de-remessa.git /app/guiaderemessa
             fi
             
-            cd /app/guia-remessa
+            cd /app/guiaderemessa
             
             # Atualizar URL com token temporário para permitir o fetch
             git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/cesarfois/Guia-de-remessa.git
