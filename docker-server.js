@@ -21,6 +21,7 @@ const distPath = path.join(__dirname, 'dist');
 // Static File Serving
 // ----------------------------------------------------------------------------
 
+app.use('/guiaderemessa', express.static(distPath));
 app.use(express.static(distPath));
 
 // SPA fallback: serve index.html for client-side routes
