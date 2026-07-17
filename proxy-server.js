@@ -8,6 +8,18 @@ import { fileURLToPath } from 'url';
 
 // Initialize Express App
 const app = express();
+
+// Strip /guiaderemessa prefix from incoming requests (handles proxy variations and direct port access)
+app.use((req, res, next) => {
+  if (req.url.startsWith('/guiaderemessa')) {
+    req.url = req.url.substring('/guiaderemessa'.length);
+    if (!req.url || !req.url.startsWith('/')) {
+      req.url = '/' + req.url;
+    }
+  }
+  next();
+});
+
 const PORT = 3001;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const EXPORTS_DIR = path.join(__dirname, 'exports');
