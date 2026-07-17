@@ -11,10 +11,10 @@ const Header = () => {
                 </div>
                 <div>
                     <h1 className="text-3xl font-bold text-gray-900 leading-tight">
-                        Painel Pedido de Pagamento
+                        Guias de Remessa
                     </h1>
                     <p className="text-sm text-gray-500 mt-0.5">
-                        Visão consolidada dos pedidos de pagamento
+                        Monitoramento das Guias de Remessa
                     </p>
                 </div>
             </div>

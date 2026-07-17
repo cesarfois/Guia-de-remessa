@@ -11,7 +11,7 @@ const LoginPage = () => {
 
     useEffect(() => {
         if (user) {
-            navigate('/pedido-de-pagamento');
+            navigate('/guia-remessa');
             return;
         }
 
@@ -19,7 +19,7 @@ const LoginPage = () => {
             try {
                 await authService.loginWithServiceAccount();
                 reloadUser();
-                navigate('/pedido-de-pagamento');
+                navigate('/guia-remessa');
             } catch (err) {
                 console.error('Auto-login error:', err);
                 setError(err.response?.data?.error || err.message || 'Falha ao conectar automaticamente via Conta de Serviço.');

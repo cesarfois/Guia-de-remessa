@@ -9,5 +9,5 @@ export const getProxyBaseUrl = () => {
     if (isDev) return '';
     const isNetlify = window.location.hostname.includes('.netlify.app') || window.location.hostname.includes('.netlify.com');
     if (isNetlify) return window.location.origin + '/.netlify/functions/api';
-    return window.location.origin + '/pedido-de-pagamento';
+    return window.location.origin + '/guia-remessa';
 };

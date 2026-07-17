@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  base: '/pedido-de-pagamento/',
+  base: '/guia-remessa/',
   plugins: [react()],
   server: {
     host: true,

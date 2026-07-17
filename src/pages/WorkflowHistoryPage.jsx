@@ -314,14 +314,14 @@ const WorkflowHistoryPage = () => {
     // Basic States
     const latestSearchIdRef = useRef(0);
     const [cabinets, setCabinets] = useState([]);
-    const [selectedCabinet, setSelectedCabinet] = useState('02a63cd1-672e-4c56-ad4b-bf2a7395cfd3');
+    const [selectedCabinet, setSelectedCabinet] = useState('56c20dfc-a25b-4ed7-890a-15de4b3853d7');
     const [cabinetFields, setCabinetFields] = useState([]);
     const [cabinetCount, setCabinetCount] = useState(0);
     const [orgId, setOrgId] = useState('');
     
     // Cabinet/Document Type Selection States
     const [typeSuggestions, setTypeSuggestions] = useState([]);
-    const [selectedDocType, setSelectedDocType] = useState('Pedido de pagamento');
+    const [selectedDocType, setSelectedDocType] = useState('Guia de Remessa');
     
     // Date filter range state (default to 30 days ago to today)
     const getTodayString = () => new Date().toISOString().split('T')[0];
@@ -435,16 +435,18 @@ const WorkflowHistoryPage = () => {
                 const oid = await docuwareService.getOrganization();
                 if (oid) setOrgId(oid);
 
-                // Force cabinet to "22 - Pedido de Pagamento" UUID
+                // Force cabinet to "34 Armazém - Procurement" UUID
                 const targetCab = cabList.find(c => 
-                    (c.Name || '').includes('22') || 
-                    (c.Name || '').toLowerCase().includes('pagamento') ||
-                    (c.Name || '').toLowerCase().includes('payment')
+                    (c.Name || '').includes('34') || 
+                    (c.Name || '').toLowerCase().includes('procurement') ||
+                    (c.Name || '').toLowerCase().includes('procure') ||
+                    (c.Name || '').toLowerCase().includes('armazem') ||
+                    (c.Name || '').toLowerCase().includes('armazém')
                 );
-                const targetCabinetId = targetCab ? targetCab.Id : '02a63cd1-672e-4c56-ad4b-bf2a7395cfd3';
+                const targetCabinetId = targetCab ? targetCab.Id : '56c20dfc-a25b-4ed7-890a-15de4b3853d7';
                 setSelectedCabinet(targetCabinetId);
 
-                if ((urlFc === '22' || urlFc === targetCabinetId) && urlDid) {
+                if ((urlFc === '34' || urlFc === targetCabinetId) && urlDid) {
                     setSearchLoading(true);
                     setSearched(true);
                     setError(null);
@@ -518,9 +520,9 @@ const WorkflowHistoryPage = () => {
                 setDetectedDateField(detectedDateField);
                 setSuggestions({}); // Reset suggestions
 
-                // Keep selectedDocType fixed to "Pedido de pagamento"
-                setSelectedDocType('Pedido de pagamento');
-                setTypeSuggestions(['Pedido de pagamento']);
+                // Keep selectedDocType fixed to "Guia de Remessa"
+                setSelectedDocType('Guia de Remessa');
+                setTypeSuggestions(['Guia de Remessa']);
             } catch (err) {
                 console.error("Failed to load cabinet metadata", err);
             }
