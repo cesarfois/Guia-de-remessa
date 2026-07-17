@@ -13,6 +13,17 @@ import { fileURLToPath } from 'url';
 // proxy-server.js won't auto-start since it's being imported, not run directly
 import app from './proxy-server.js';
 
+// Strip /guiaderemessa prefix from incoming requests (handles proxy variations and direct port access)
+app.use((req, res, next) => {
+  if (req.url.startsWith('/guiaderemessa')) {
+    req.url = req.url.substring('/guiaderemessa'.length);
+    if (!req.url || !req.url.startsWith('/')) {
+      req.url = '/' + req.url;
+    }
+  }
+  next();
+});
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = process.env.PORT || 5173;
 const distPath = path.join(__dirname, 'dist');
@@ -21,7 +32,6 @@ const distPath = path.join(__dirname, 'dist');
 // Static File Serving
 // ----------------------------------------------------------------------------
 
-app.use('/guiaderemessa', express.static(distPath));
 app.use(express.static(distPath));
 
 // SPA fallback: serve index.html for client-side routes
