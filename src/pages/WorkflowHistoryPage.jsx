@@ -2925,59 +2925,85 @@ const WorkflowHistoryPage = () => {
 
             {/* Sub-tabs bar rendered only in Analise mode */}
             {viewMode === 'analise' && (
-                <div className="flex justify-end bg-white p-4 border border-slate-200 rounded-2xl shadow-sm">
-                    <div className="tabs tabs-boxed bg-slate-100 p-1.5 rounded-xl flex flex-wrap gap-1">
+                <div className="flex justify-start">
+                    <div className="bg-slate-200/60 p-1 rounded-full border border-slate-200 flex flex-wrap gap-1 shadow-sm select-none">
                         <button 
                             onClick={() => setAnaliseTab('controle')}
-                            className={`tab tab-sm font-semibold rounded-lg transition-all duration-150 px-4 py-2 ${analiseTab === 'controle' ? 'tab-active bg-white text-indigo-600 font-bold shadow-sm' : 'text-slate-500 hover:text-slate-800'}`}
+                            className={`px-5 py-2 text-xs font-bold rounded-full transition-all duration-150 flex items-center gap-1.5 ${
+                                analiseTab === 'controle' 
+                                    ? 'bg-[#4f46e5] text-white shadow-md' 
+                                    : 'text-slate-600 hover:bg-slate-100 hover:text-slate-800'
+                            }`}
                         >
-                            Controle de GRs
+                            <FaList className="text-[10px]" />
+                            <span>Controle de GRs</span>
                         </button>
                         <button 
                             onClick={() => setAnaliseTab('armazem')}
-                            className={`tab tab-sm font-semibold rounded-lg transition-all duration-150 px-4 py-2 ${analiseTab === 'armazem' ? 'tab-active bg-white text-indigo-600 font-bold shadow-sm' : 'text-slate-500 hover:text-slate-800'}`}
+                            className={`px-5 py-2 text-xs font-bold rounded-full transition-all duration-150 flex items-center gap-1.5 ${
+                                analiseTab === 'armazem' 
+                                    ? 'bg-[#4f46e5] text-white shadow-md' 
+                                    : 'text-slate-600 hover:bg-slate-100 hover:text-slate-800'
+                            }`}
                         >
-                            Armazém e Entregas
+                            <FaBoxes className="text-[10px]" />
+                            <span>Armazém e Entregas</span>
                         </button>
                         <button 
                             onClick={() => setAnaliseTab('faturacao')}
-                            className={`tab tab-sm font-semibold rounded-lg transition-all duration-150 px-4 py-2 ${analiseTab === 'faturacao' ? 'tab-active bg-white text-indigo-600 font-bold shadow-sm' : 'text-slate-500 hover:text-slate-800'}`}
+                            className={`px-5 py-2 text-xs font-bold rounded-full transition-all duration-150 flex items-center gap-1.5 ${
+                                analiseTab === 'faturacao' 
+                                    ? 'bg-[#4f46e5] text-white shadow-md' 
+                                    : 'text-slate-600 hover:bg-slate-100 hover:text-slate-800'
+                            }`}
                         >
-                            Faturação
+                            <FaBoxes className="text-[10px]" />
+                            <span>Faturação</span>
                         </button>
                         <button 
                             onClick={() => setAnaliseTab('sequencia')}
-                            className={`tab tab-sm font-semibold rounded-lg transition-all duration-150 px-4 py-2 ${analiseTab === 'sequencia' ? 'tab-active bg-white text-indigo-600 font-bold shadow-sm' : 'text-slate-500 hover:text-slate-800'}`}
+                            className={`px-5 py-2 text-xs font-bold rounded-full transition-all duration-150 flex items-center gap-1.5 ${
+                                analiseTab === 'sequencia' 
+                                    ? 'bg-[#4f46e5] text-white shadow-md' 
+                                    : 'text-slate-600 hover:bg-slate-100 hover:text-slate-800'
+                            }`}
                         >
-                            Sequência de GRs
+                            <FaBoxes className="text-[10px]" />
+                            <span>Sequência de GRs</span>
                         </button>
                     </div>
                 </div>
             )}
 
-            {/* Premium Filter Panel - Simplificado em linha unica */}
-            <div className="card bg-white border border-slate-200 border-l-[6px] border-l-[#4f46e5] shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl">
-                <div className="card-body p-6">
-                    <form onSubmit={handleSearchDocuments} className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            {/* Filtros Globais de Análise Card */}
+            <div className="card bg-white border border-slate-200 border-l-[6px] border-l-[#4f46e5] shadow-[0_8px_30px_rgb(0,0,0,0.02)] rounded-2xl">
+                <div className="card-body p-5">
+                    <div className="flex items-center justify-between mb-4 border-b border-slate-100 pb-2">
+                        <div className="flex items-center gap-2 text-slate-800 font-bold text-sm">
+                            <FaFilter className="text-slate-500 text-xs" />
+                            <span>Filtros Globais de Análise</span>
+                        </div>
+                    </div>
+                    <form onSubmit={handleSearchDocuments} className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                         {/* Date Range Inputs Row */}
-                        <div className="flex flex-wrap items-center gap-6 flex-1">
+                        <div className="flex flex-wrap items-center gap-6">
                             {/* Data Inicial */}
-                            <div className="flex items-center gap-2">
-                                <span className="text-sm font-semibold text-slate-600 whitespace-nowrap">Data Inicial:</span>
+                            <div className="flex flex-col gap-1.5">
+                                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Data Inicial</span>
                                 <input
                                     type="date"
-                                    className="input input-bordered input-md text-sm border-slate-300 bg-white text-slate-700 rounded-lg focus:ring-2 focus:ring-[#4f46e5] focus:border-transparent px-3 py-2 w-[180px]"
+                                    className="input input-bordered input-sm text-xs border-slate-300 bg-white text-slate-700 rounded-lg focus:ring-1 focus:ring-[#4f46e5] focus:border-transparent px-3 py-1.5 w-[160px]"
                                     value={dateRange[0] || ''}
                                     onChange={(e) => setDateRange([e.target.value, dateRange[1] || ''])}
                                 />
                             </div>
 
                             {/* Data Final */}
-                            <div className="flex items-center gap-2">
-                                <span className="text-sm font-semibold text-slate-600 whitespace-nowrap">Data Final:</span>
+                            <div className="flex flex-col gap-1.5">
+                                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Data Final</span>
                                 <input
                                     type="date"
-                                    className="input input-bordered input-md text-sm border-slate-300 bg-white text-slate-700 rounded-lg focus:ring-2 focus:ring-[#4f46e5] focus:border-transparent px-3 py-2 w-[180px]"
+                                    className="input input-bordered input-sm text-xs border-slate-300 bg-white text-slate-700 rounded-lg focus:ring-1 focus:ring-[#4f46e5] focus:border-transparent px-3 py-1.5 w-[160px]"
                                     value={dateRange[1] || ''}
                                     onChange={(e) => setDateRange([dateRange[0] || '', e.target.value])}
                                 />
@@ -2985,14 +3011,14 @@ const WorkflowHistoryPage = () => {
                         </div>
 
                         {/* Right Column: Search Button */}
-                        <div className="flex items-center sm:self-center">
+                        <div className="flex items-center self-end">
                             <button
                                 type="submit"
-                                className={`btn bg-[#4f46e5] hover:bg-[#4338ca] text-white border-0 px-6 gap-2 font-semibold shadow-md rounded-xl h-11 flex items-center justify-center ${searchLoading ? 'loading' : ''}`}
+                                className={`btn btn-sm bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 text-xs font-semibold px-4 gap-1.5 shadow-sm rounded-lg h-9 flex items-center justify-center ${searchLoading ? 'loading' : ''}`}
                                 disabled={searchLoading}
                             >
-                                {!searchLoading && <FaSearch className="text-sm" />}
-                                <span className="text-sm">Pesquisar</span>
+                                {!searchLoading && <FaSyncAlt className="text-xs text-slate-400" />}
+                                <span>Pesquisar</span>
                             </button>
                         </div>
                     </form>

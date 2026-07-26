@@ -249,7 +249,7 @@ export const AnaliseModule = ({
                 <div className="bg-white border border-slate-200 rounded-b-xl shadow-sm overflow-hidden border-t-0">
                     <table className="table table-compact w-full">
                         <thead>
-                            <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 text-[10px] uppercase font-semibold">
+                            <tr className="bg-[#e0f2fe] text-slate-700 border-b border-blue-100 text-[10px] uppercase font-bold">
                                 <th onClick={() => handleAnaliseSort('docNum')} className="cursor-pointer py-3 hover:text-indigo-600 select-none">GR {analiseSortField === 'docNum' ? (analiseSortDirection === 'asc' ? '↑' : '↓') : '↕'}</th>
                                 <th onClick={() => handleAnaliseSort('serie')} className="cursor-pointer py-3 hover:text-indigo-600 select-none">Série</th>
                                 <th onClick={() => handleAnaliseSort('dataGR')} className="cursor-pointer py-3 hover:text-indigo-600 select-none">Data da GR</th>
@@ -455,7 +455,7 @@ export const AnaliseModule = ({
                 <div className="bg-white border border-slate-200 rounded-b-xl shadow-sm overflow-hidden border-t-0">
                     <table className="table table-compact w-full">
                         <thead>
-                            <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 text-[10px] uppercase font-semibold">
+                            <tr className="bg-[#e0f2fe] text-slate-700 border-b border-blue-100 text-[10px] uppercase font-bold">
                                 <th onClick={() => handleAnaliseSort('docNum')} className="cursor-pointer py-3 hover:text-indigo-600 select-none">GR {analiseSortField === 'docNum' ? (analiseSortDirection === 'asc' ? '↑' : '↓') : '↕'}</th>
                                 <th onClick={() => handleAnaliseSort('serie')} className="cursor-pointer py-3 hover:text-indigo-600 select-none">Série</th>
                                 <th onClick={() => handleAnaliseSort('cliente')} className="cursor-pointer py-3 hover:text-indigo-600 select-none">Cliente</th>
@@ -654,7 +654,7 @@ export const AnaliseModule = ({
                 <div className="bg-white border border-slate-200 rounded-b-xl shadow-sm overflow-hidden border-t-0">
                     <table className="table table-compact w-full">
                         <thead>
-                            <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 text-[10px] uppercase font-semibold">
+                            <tr className="bg-[#e0f2fe] text-slate-700 border-b border-blue-100 text-[10px] uppercase font-bold">
                                 <th onClick={() => handleAnaliseSort('docNum')} className="cursor-pointer py-3 hover:text-indigo-600 select-none">GR {analiseSortField === 'docNum' ? (analiseSortDirection === 'asc' ? '↑' : '↓') : '↕'}</th>
                                 <th onClick={() => handleAnaliseSort('serie')} className="cursor-pointer py-3 hover:text-indigo-600 select-none">Série</th>
                                 <th onClick={() => handleAnaliseSort('cliente')} className="cursor-pointer py-3 hover:text-indigo-600 select-none">Cliente</th>
@@ -905,7 +905,7 @@ export const AnaliseModule = ({
                 <div className="bg-white border border-slate-200 rounded-b-xl shadow-sm overflow-hidden border-t-0">
                     <table className="table table-compact w-full">
                         <thead>
-                            <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 text-[10px] uppercase font-semibold">
+                            <tr className="bg-[#e0f2fe] text-slate-700 border-b border-blue-100 text-[10px] uppercase font-bold">
                                 <th className="py-3 select-none">Série</th>
                                 <th className="py-3 select-none">Período</th>
                                 <th className="py-3 select-none">Número esperado</th>
