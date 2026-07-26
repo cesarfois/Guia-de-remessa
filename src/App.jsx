@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
 import { queryClient, persister } from './services/queryClient';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { ViewModeProvider } from './context/ViewModeContext';
 import LoginPage from './pages/LoginPage';
 import WorkflowHistoryPage from './pages/WorkflowHistoryPage';
 import WorkflowDiagramPage from './pages/WorkflowDiagramPage';
@@ -37,30 +38,32 @@ function App() {
   return (
     <PersistQueryClientProvider client={queryClient} persistOptions={{ persister }}>
       <AuthProvider>
-        <Router>
-          <Routes>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/auth/callback" element={<CallbackPage />} />
-            <Route
-              path="/guiaderemessa"
-              element={
-                <ProtectedRoute>
-                  <DashboardLayout>
-                    <WorkflowHistoryPage />
-                  </DashboardLayout>
-                </ProtectedRoute>
-              }
-            />
+        <ViewModeProvider>
+          <Router>
+            <Routes>
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/auth/callback" element={<CallbackPage />} />
+              <Route
+                path="/guiaderemessa"
+                element={
+                  <ProtectedRoute>
+                    <DashboardLayout>
+                      <WorkflowHistoryPage />
+                    </DashboardLayout>
+                  </ProtectedRoute>
+                }
+              />
 
-            {/* Standalone diagram view – no sidebar/layout, only the diagram */}
-            <Route
-              path="/workflow-diagram"
-              element={<WorkflowDiagramPage />}
-            />
-            <Route path="/" element={<Navigate to="/guiaderemessa" />} />
-            <Route path="*" element={<Navigate to="/guiaderemessa" replace />} />
-          </Routes>
-        </Router>
+              {/* Standalone diagram view – no sidebar/layout, only the diagram */}
+              <Route
+                path="/workflow-diagram"
+                element={<WorkflowDiagramPage />}
+              />
+              <Route path="/" element={<Navigate to="/guiaderemessa" />} />
+              <Route path="*" element={<Navigate to="/guiaderemessa" replace />} />
+            </Routes>
+          </Router>
+        </ViewModeProvider>
       </AuthProvider>
     </PersistQueryClientProvider>
   );

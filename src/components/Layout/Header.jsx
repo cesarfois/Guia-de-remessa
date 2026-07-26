@@ -1,6 +1,8 @@
 import { FaBoxes, FaSyncAlt, FaArrowLeft } from 'react-icons/fa';
+import { useViewMode } from '../../context/ViewModeContext';
 
 const Header = () => {
+    const { viewMode, setViewMode } = useViewMode();
 
     return (
         <header className="bg-white shadow-sm border-b border-gray-100 px-8 py-5 flex items-center justify-between">
@@ -10,9 +12,33 @@ const Header = () => {
                     <FaBoxes className="text-2xl" />
                 </div>
                 <div>
-                    <h1 className="text-3xl font-bold text-gray-900 leading-tight">
-                        Guias de Remessa
-                    </h1>
+                    <div className="flex items-center gap-4">
+                        <h1 className="text-3xl font-bold text-gray-900 leading-tight">
+                            Guias de Remessa
+                        </h1>
+                        <div className="flex bg-slate-100 p-0.5 rounded-lg border border-slate-200">
+                            <button
+                                onClick={() => setViewMode('operacional')}
+                                className={`px-3 py-1 text-xs font-bold rounded-md transition-all duration-150 ${
+                                    viewMode === 'operacional'
+                                        ? 'bg-white text-indigo-600 shadow-sm'
+                                        : 'text-slate-500 hover:text-slate-700'
+                                }`}
+                            >
+                                Visão Operacional
+                            </button>
+                            <button
+                                onClick={() => setViewMode('analise')}
+                                className={`px-3 py-1 text-xs font-bold rounded-md transition-all duration-150 ${
+                                    viewMode === 'analise'
+                                        ? 'bg-indigo-600 text-white shadow-sm'
+                                        : 'text-slate-500 hover:text-slate-700'
+                                }`}
+                            >
+                                Análises
+                            </button>
+                        </div>
+                    </div>
                     <p className="text-sm text-gray-500 mt-0.5">
                         Monitoramento das Guias de Remessa
                     </p>

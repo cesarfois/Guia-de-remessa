@@ -31,6 +31,7 @@ import { WorkflowTimelineEngine } from '../services/workflow/WorkflowTimelineEng
 import { TimelineViewer } from '../components/Workflow/TimelineViewer';
 import ColumnFilter from '../components/Documents/ColumnFilter';
 import { AnaliseModule } from './WorkflowHistoryPage_analiseRenderers';
+import { useViewMode } from '../context/ViewModeContext';
 
 const isTaskType = (typeStr) => {
     if (!typeStr) return false;
@@ -324,9 +325,8 @@ const WorkflowHistoryPage = () => {
     const [typeSuggestions, setTypeSuggestions] = useState([]);
     const [selectedDocType, setSelectedDocType] = useState('Guia de Remessa');
 
-    // View mode navigation states
-    const [viewMode, setViewMode] = useState('operacional'); // 'operacional' | 'analise'
-    const [analiseTab, setAnaliseTab] = useState('controle'); // 'controle' | 'armazem' | 'faturacao' | 'sequencia'
+    // View mode navigation states from global context
+    const { viewMode, setViewMode, analiseTab, setAnaliseTab } = useViewMode();
 
     // Gap classifications state persisted in localStorage
     const [gapClassifications, setGapClassifications] = useState(() => {
@@ -2923,32 +2923,9 @@ const WorkflowHistoryPage = () => {
                 </div>
             )}
 
-            {/* Main View Mode Selector Tab Bar */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white p-4 border border-slate-200 rounded-2xl shadow-sm">
-                <div className="flex gap-2">
-                    <button 
-                        onClick={() => setViewMode('operacional')}
-                        className={`btn btn-md font-bold px-6 rounded-xl transition-all duration-200 ${
-                            viewMode === 'operacional' 
-                                ? 'bg-[#4f46e5] text-white border-0 shadow-md' 
-                                : 'bg-slate-50 border border-slate-200 text-slate-600 hover:bg-slate-100'
-                        }`}
-                    >
-                        Visão Operacional
-                    </button>
-                    <button 
-                        onClick={() => setViewMode('analise')}
-                        className={`btn btn-md font-bold px-6 rounded-xl transition-all duration-200 ${
-                            viewMode === 'analise' 
-                                ? 'bg-[#4f46e5] text-white border-0 shadow-md' 
-                                : 'bg-slate-50 border border-slate-200 text-slate-600 hover:bg-slate-100'
-                        }`}
-                    >
-                        Análises
-                    </button>
-                </div>
-                
-                {viewMode === 'analise' && (
+            {/* Sub-tabs bar rendered only in Analise mode */}
+            {viewMode === 'analise' && (
+                <div className="flex justify-end bg-white p-4 border border-slate-200 rounded-2xl shadow-sm">
                     <div className="tabs tabs-boxed bg-slate-100 p-1.5 rounded-xl flex flex-wrap gap-1">
                         <button 
                             onClick={() => setAnaliseTab('controle')}
@@ -2975,8 +2952,8 @@ const WorkflowHistoryPage = () => {
                             Sequência de GRs
                         </button>
                     </div>
-                )}
-            </div>
+                </div>
+            )}
 
             {/* Premium Filter Panel - Simplificado em linha unica */}
             <div className="card bg-white border border-slate-200 border-l-[6px] border-l-[#4f46e5] shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl">
