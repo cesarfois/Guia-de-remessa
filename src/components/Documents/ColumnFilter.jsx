@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 
-const ColumnFilter = ({ column, uniqueValues, selectedValues, onToggleValue, onSelectAll, onClear }) => {
+const ColumnFilter = ({ column, uniqueValues, selectedValues, onToggleValue, onSelectAll, onClear, align = 'right' }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
@@ -50,7 +50,7 @@ const ColumnFilter = ({ column, uniqueValues, selectedValues, onToggleValue, onS
             </button>
 
             {isOpen && (
-                <div className="absolute right-0 mt-2 w-72 bg-white rounded-2xl shadow-2xl border border-gray-100 z-50 overflow-hidden text-left animate-in fade-in slide-in-from-top-1 duration-100">
+                <div className={`absolute ${align === 'left' ? 'left-0' : 'right-0'} mt-2 w-72 bg-white rounded-2xl shadow-2xl border border-gray-100 z-50 overflow-hidden text-left animate-in fade-in slide-in-from-top-1 duration-100`}>
                     {/* Header */}
                     <div className="flex items-center justify-between px-4 py-3 bg-gray-50/50">
                         <span className="font-semibold text-gray-700 text-sm">
