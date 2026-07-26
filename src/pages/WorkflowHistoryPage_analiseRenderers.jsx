@@ -735,13 +735,13 @@ export const AnaliseModule = ({
         });
 
         const totalVg = analyticalRows.filter(row => row.serie === 'V' || row.serie === 'G').length;
-        const faturadas = filtered.filter(r => r.billingDecision === 'Faturada').length;
-        const naoFaturadas = filtered.filter(r => r.billingDecision === 'Não faturada').length;
-        const aguardandoDecisao = filtered.filter(r => r.billingDecision === 'Aguardando decisão').length;
-        const comFatura = filtered.filter(r => r.invoiceNum).length;
-        const semFatura = filtered.filter(r => !r.invoiceNum).length;
-        const inconsistências = filtered.filter(r => r.billingDecision === 'Inconsistente').length;
-        const faturadasNaoContabilizadas = filtered.filter(r => r.billingDecision === 'Faturada' && !r.isContabilizada).length;
+        const faturadas = analyticalRows.filter(row => (row.serie === 'V' || row.serie === 'G') && row.billingDecision === 'Faturada').length;
+        const naoFaturadas = analyticalRows.filter(row => (row.serie === 'V' || row.serie === 'G') && row.billingDecision === 'Não faturada').length;
+        const aguardandoDecisao = analyticalRows.filter(row => (row.serie === 'V' || row.serie === 'G') && row.billingDecision === 'Aguardando decisão').length;
+        const comFatura = analyticalRows.filter(row => (row.serie === 'V' || row.serie === 'G') && row.invoiceNum !== '').length;
+        const semFatura = analyticalRows.filter(row => (row.serie === 'V' || row.serie === 'G') && row.invoiceNum === '').length;
+        const inconsistências = analyticalRows.filter(row => (row.serie === 'V' || row.serie === 'G') && row.billingDecision === 'Inconsistente').length;
+        const faturadasNaoContabilizadas = analyticalRows.filter(row => (row.serie === 'V' || row.serie === 'G') && row.billingDecision === 'Faturada' && !row.isContabilizada).length;
 
         const totalPages = Math.ceil(filtered.length / analisePageSize) || 1;
         const startIdx = (analisePage - 1) * analisePageSize;
@@ -775,11 +775,11 @@ export const AnaliseModule = ({
                         <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Aguardando Decisão</div>
                         <div className="text-2xl font-black text-slate-600 mt-1 font-mono">{aguardandoDecisao}</div>
                     </div>
-                    <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
+                    <div onClick={() => toggleKpiFilter('faturada', 'ComFatura')} className={`bg-white border rounded-xl p-4 shadow-sm cursor-pointer hover:shadow-md transition-all duration-200 border-l-[6px] ${kpiFilters.faturada === 'ComFatura' ? 'border-emerald-500 bg-emerald-50/10' : 'border-slate-200'}`}>
                         <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Com Nº Fatura</div>
                         <div className="text-2xl font-black text-emerald-600 mt-1 font-mono">{comFatura}</div>
                     </div>
-                    <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
+                    <div onClick={() => toggleKpiFilter('faturada', 'SemFatura')} className={`bg-white border rounded-xl p-4 shadow-sm cursor-pointer hover:shadow-md transition-all duration-200 border-l-[6px] ${kpiFilters.faturada === 'SemFatura' ? 'border-amber-500 bg-amber-50/10' : 'border-slate-200'}`}>
                         <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Sem Nº Fatura</div>
                         <div className="text-2xl font-black text-amber-600 mt-1 font-mono">{semFatura}</div>
                     </div>
@@ -787,7 +787,7 @@ export const AnaliseModule = ({
                         <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Faturadas Sem Nº</div>
                         <div className="text-2xl font-black text-red-600 mt-1 font-mono">{inconsistências}</div>
                     </div>
-                    <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
+                    <div onClick={() => toggleKpiFilter('faturada', 'NaoContabilizadas')} className={`bg-white border rounded-xl p-4 shadow-sm cursor-pointer hover:shadow-md transition-all duration-200 border-l-[6px] ${kpiFilters.faturada === 'NaoContabilizadas' ? 'border-purple-500 bg-purple-50/10' : 'border-slate-200'}`}>
                         <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Faturadas Não Contab.</div>
                         <div className="text-2xl font-black text-purple-600 mt-1 font-mono">{faturadasNaoContabilizadas}</div>
                     </div>
