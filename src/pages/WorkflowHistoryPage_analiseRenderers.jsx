@@ -709,7 +709,7 @@ export const AnaliseModule = ({
 
     // --- FATURAÇÃO SUB-VIEW ---
     const renderFaturacao = () => {
-        const baseRows = useMemo(() => analyticalRows.filter(row => row.serie === 'V' || row.serie === 'G'), [analyticalRows]);
+        const baseRows = analyticalRows.filter(row => row.serie === 'V' || row.serie === 'G');
 
         const casts = {
             isAssinada: (r) => r.isAssinada ? 'Sim' : 'Não'
