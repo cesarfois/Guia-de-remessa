@@ -911,7 +911,7 @@ const WorkflowHistoryPage = () => {
             const entregaType = getDocFieldValue(doc, 'ESTATUTO_ENTREGA') || getDocFieldValue(doc, 'Estatuto Entrega') || '';
             
             // 10. Faturação Decision
-            const invoiceNum = getDocFieldValue(doc, 'NO_FACTURA_ERP') || getDocFieldValue(doc, 'Nº Factura ERP') || '';
+            const invoiceNum = getDocFieldValue(doc, 'NO_REGISTO_PRIMAVERA') || getDocFieldValue(doc, 'Nº Registo Primavera') || getDocFieldValue(doc, 'NO_FACTURA_ERP') || getDocFieldValue(doc, 'Nº Factura ERP') || '';
             const estatutoVal = String(getDocFieldValue(doc, 'ESTATUTO') || '').toLowerCase();
             
             let billingDecision = 'Aguardando decisão';
@@ -2955,6 +2955,17 @@ const WorkflowHistoryPage = () => {
                 <div className="flex justify-start">
                     <div className="bg-slate-200/60 p-1 rounded-full border border-slate-200 flex flex-wrap gap-1 shadow-sm select-none">
                         <button 
+                            onClick={() => setAnaliseTab('faturacao')}
+                            className={`px-5 py-2 text-xs font-bold rounded-full transition-all duration-150 flex items-center gap-1.5 ${
+                                analiseTab === 'faturacao' 
+                                    ? 'bg-[#4f46e5] text-white shadow-md' 
+                                    : 'text-slate-600 hover:bg-slate-100 hover:text-slate-800'
+                            }`}
+                        >
+                            <FaBoxes className="text-[10px]" />
+                            <span>Faturação</span>
+                        </button>
+                        <button 
                             onClick={() => setAnaliseTab('controle')}
                             className={`px-5 py-2 text-xs font-bold rounded-full transition-all duration-150 flex items-center gap-1.5 ${
                                 analiseTab === 'controle' 
@@ -2975,17 +2986,6 @@ const WorkflowHistoryPage = () => {
                         >
                             <FaBoxes className="text-[10px]" />
                             <span>Armazém e Entregas</span>
-                        </button>
-                        <button 
-                            onClick={() => setAnaliseTab('faturacao')}
-                            className={`px-5 py-2 text-xs font-bold rounded-full transition-all duration-150 flex items-center gap-1.5 ${
-                                analiseTab === 'faturacao' 
-                                    ? 'bg-[#4f46e5] text-white shadow-md' 
-                                    : 'text-slate-600 hover:bg-slate-100 hover:text-slate-800'
-                            }`}
-                        >
-                            <FaBoxes className="text-[10px]" />
-                            <span>Faturação</span>
                         </button>
                         <button 
                             onClick={() => setAnaliseTab('sequencia')}

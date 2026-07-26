@@ -4,7 +4,7 @@ const ViewModeContext = createContext();
 
 export const ViewModeProvider = ({ children }) => {
     const [viewMode, setViewMode] = useState('operacional'); // 'operacional' | 'analise'
-    const [analiseTab, setAnaliseTab] = useState('controle'); // 'controle' | 'armazem' | 'faturacao' | 'sequencia'
+    const [analiseTab, setAnaliseTab] = useState('faturacao'); // 'faturacao' | 'controle' | 'armazem' | 'sequencia'
 
     return (
         <ViewModeContext.Provider value={{ viewMode, setViewMode, analiseTab, setAnaliseTab }}>
