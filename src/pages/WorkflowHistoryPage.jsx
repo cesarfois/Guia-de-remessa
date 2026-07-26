@@ -18,7 +18,8 @@ import {
     FaInfoCircle,
     FaFilter,
     FaCalendarAlt,
-    FaExpand
+    FaExpand,
+    FaSyncAlt
 } from 'react-icons/fa';
 import { workflowAnalyticsService } from '../services/workflowAnalyticsService';
 import { docuwareService } from '../services/docuwareService';
