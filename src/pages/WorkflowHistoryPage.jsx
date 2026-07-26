@@ -870,7 +870,7 @@ const WorkflowHistoryPage = () => {
             const dataArmazenamento = formatDocuWareDate(rawDataArmazenamento);
             
             // 4. Cliente
-            const cliente = getDocFieldValue(doc, 'CLIENTE') || getDocFieldValue(doc, 'Cliente') || '';
+            const cliente = getDocFieldValue(doc, 'NOME_FISCAL') || getDocFieldValue(doc, 'Nome Fiscal') || getDocFieldValue(doc, 'CLIENTE') || getDocFieldValue(doc, 'Cliente') || '';
             
             // 5. Projecto / Referência
             const projecto = getDocFieldValue(doc, 'PROJECTO') || getDocFieldValue(doc, 'Projecto') || getDocFieldValue(doc, 'NO_PEDIDO___REFERENCIA') || getDocFieldValue(doc, 'Nº Pedido / Referência') || '';
