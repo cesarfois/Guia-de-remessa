@@ -280,7 +280,7 @@ export const AnaliseModule = ({
                             onChange={e => { setGlobalSearch(e.target.value); setAnalisePage(1); }} 
                         />
                         <button 
-                            onClick={() => exportAnaliseTableToCsv('Controle_GRs', ['GR', 'Série', 'Data da GR', 'Cliente', 'Assinada', 'Entrega', 'Tipo de fluxo', 'Situação do workflow', 'Decisão de faturação', 'Nº da fatura'], ['docNum', 'serie', 'dataGR', 'cliente', 'isAssinada', 'entregaType', 'workflowType', 'workflowStatus', 'billingDecision', 'invoiceNum'], filtered)} 
+                            onClick={() => exportAnaliseTableToCsv('Controle_GRs', ['GR', 'Série', 'Data da GR', 'Cliente', 'Assinada', 'Entrega', 'Tipo de fluxo', 'Situação do workflow', 'Decisão de faturação', 'Nº da fatura', 'Comentários'], ['docNum', 'serie', 'dataGR', 'cliente', 'isAssinada', 'entregaType', 'workflowType', 'workflowStatus', 'billingDecision', 'invoiceNum', 'comentarios'], filtered)} 
                             className="btn btn-sm border-emerald-600 text-emerald-600 bg-white hover:bg-emerald-50 hover:border-emerald-700 border-2 gap-2 rounded-full font-bold h-9 px-4 text-xs shrink-0"
                             disabled={filtered.length === 0}
                         >
@@ -375,13 +375,19 @@ export const AnaliseModule = ({
                                         <ColumnFilter column={{ name: 'invoiceNum', label: 'Nº Fatura' }} uniqueValues={getUniqueValues('invoiceNum')} selectedValues={colFilters['invoiceNum'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} />
                                     </div>
                                 </th>
+                                <th className="py-3">
+                                    <div className="flex items-center justify-between gap-1 select-none">
+                                        <span onClick={() => handleAnaliseSort('comentarios')} className="cursor-pointer hover:text-indigo-600">Comentários</span>
+                                        <ColumnFilter column={{ name: 'comentarios', label: 'Comentários' }} uniqueValues={getUniqueValues('comentarios')} selectedValues={colFilters['comentarios'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} />
+                                    </div>
+                                </th>
                                 <th className="text-center py-3 select-none">Ações</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-100">
                             {paginatedData.length === 0 ? (
                                 <tr>
-                                    <td colSpan="11" className="text-center py-12 text-slate-400 italic">Nenhum processo encontrado.</td>
+                                    <td colSpan="12" className="text-center py-12 text-slate-400 italic">Nenhum processo encontrado.</td>
                                 </tr>
                             ) : paginatedData.map(row => (
                                 <tr key={row.id} className="hover:bg-slate-50/50">
@@ -408,6 +414,7 @@ export const AnaliseModule = ({
                                         </span>
                                     </td>
                                     <td className="text-[11px] font-semibold text-indigo-600 font-mono">{row.invoiceNum || '—'}</td>
+                                    <td className="text-xs text-slate-500 max-w-[150px] truncate" title={row.comentarios}>{row.comentarios || '—'}</td>
                                     <td className="text-center">
                                         <div className="flex justify-center gap-1.5">
                                             <a href={row.docLink} target="_blank" rel="noopener noreferrer" className="btn btn-ghost btn-xs text-indigo-600 hover:bg-indigo-50" title="Ver Documento"><FaExternalLinkAlt /></a>
@@ -551,7 +558,7 @@ export const AnaliseModule = ({
                             onChange={e => { setGlobalSearch(e.target.value); setAnalisePage(1); }} 
                         />
                         <button 
-                            onClick={() => exportAnaliseTableToCsv('Armazem_Entregas', ['GR', 'Série', 'Data da GR', 'Cliente', 'Técnico', 'Armazenada em', 'Assinada', 'Tipo de entrega', 'Etapa atual', 'Tempo aguardando'], ['docNum', 'serie', 'dataGR', 'cliente', 'tecnico', 'dataArmazenamento', 'isAssinada', 'entregaType', 'etapaAtual', 'tempoParado'], filtered.map(f => ({ ...f, tecnico: casts.tecnico(f) })))} 
+                            onClick={() => exportAnaliseTableToCsv('Armazem_Entregas', ['GR', 'Série', 'Data da GR', 'Cliente', 'Técnico', 'Armazenada em', 'Assinada', 'Tipo de entrega', 'Etapa atual', 'Tempo aguardando', 'Comentários'], ['docNum', 'serie', 'dataGR', 'cliente', 'tecnico', 'dataArmazenamento', 'isAssinada', 'entregaType', 'etapaAtual', 'tempoParado', 'comentarios'], filtered.map(f => ({ ...f, tecnico: casts.tecnico(f) })))} 
                             className="btn btn-sm border-emerald-600 text-emerald-600 bg-white hover:bg-emerald-50 hover:border-emerald-700 border-2 gap-2 rounded-full font-bold h-9 px-4 text-xs shrink-0"
                             disabled={filtered.length === 0}
                         >
@@ -641,13 +648,19 @@ export const AnaliseModule = ({
                                     </div>
                                 </th>
                                 <th onClick={() => handleAnaliseSort('tempoParado')} className="cursor-pointer py-3 hover:text-indigo-600 select-none">Tempo Aguardando</th>
+                                <th className="py-3">
+                                    <div className="flex items-center justify-between gap-1 select-none">
+                                        <span onClick={() => handleAnaliseSort('comentarios')} className="cursor-pointer hover:text-indigo-600">Comentários</span>
+                                        <ColumnFilter column={{ name: 'comentarios', label: 'Comentários' }} uniqueValues={getUniqueValues('comentarios')} selectedValues={colFilters['comentarios'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} />
+                                    </div>
+                                </th>
                                 <th className="text-center py-3 select-none">Ações</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-100">
                             {paginatedData.length === 0 ? (
                                 <tr>
-                                    <td colSpan="11" className="text-center py-12 text-slate-400 italic">Nenhum processo operacional encontrado.</td>
+                                    <td colSpan="12" className="text-center py-12 text-slate-400 italic">Nenhum processo operacional encontrado.</td>
                                 </tr>
                             ) : paginatedData.map(row => {
                                 const tecnico = casts.tecnico(row);
@@ -804,7 +817,7 @@ export const AnaliseModule = ({
                             onChange={e => { setGlobalSearch(e.target.value); setAnalisePage(1); }} 
                         />
                         <button 
-                            onClick={() => exportAnaliseTableToCsv('Faturacao_GRs_V_G', ['GR', 'Série', 'Data da GR', 'Cliente', 'Projecto', 'Assinada', 'Entrega', 'Decisão da faturação', 'Nº da fatura', 'Workflow', 'Etapa atual'], ['docNum', 'serie', 'dataGR', 'cliente', 'projecto', 'isAssinada', 'entregaType', 'billingDecision', 'invoiceNum', 'workflowType', 'etapaAtual'], filtered)} 
+                            onClick={() => exportAnaliseTableToCsv('Faturacao_GRs_V_G', ['GR', 'Série', 'Data da GR', 'Cliente', 'Projecto', 'Assinada', 'Entrega', 'Decisão da faturação', 'Nº da fatura', 'Workflow', 'Etapa atual', 'Comentários'], ['docNum', 'serie', 'dataGR', 'cliente', 'projecto', 'isAssinada', 'entregaType', 'billingDecision', 'invoiceNum', 'workflowType', 'etapaAtual', 'comentarios'], filtered)} 
                             className="btn btn-sm border-emerald-600 text-emerald-600 bg-white hover:bg-emerald-50 hover:border-emerald-700 border-2 gap-2 rounded-full font-bold h-9 px-4 text-xs shrink-0"
                             disabled={filtered.length === 0}
                         >
@@ -905,13 +918,19 @@ export const AnaliseModule = ({
                                         <ColumnFilter column={{ name: 'etapaAtual', label: 'Etapa' }} uniqueValues={getUniqueValues('etapaAtual')} selectedValues={colFilters['etapaAtual'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} />
                                     </div>
                                 </th>
+                                <th className="py-3">
+                                    <div className="flex items-center justify-between gap-1 select-none">
+                                        <span onClick={() => handleAnaliseSort('comentarios')} className="cursor-pointer hover:text-indigo-600">Comentários</span>
+                                        <ColumnFilter column={{ name: 'comentarios', label: 'Comentários' }} uniqueValues={getUniqueValues('comentarios')} selectedValues={colFilters['comentarios'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} />
+                                    </div>
+                                </th>
                                 <th className="text-center py-3 select-none">Ações</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-100">
                             {paginatedData.length === 0 ? (
                                 <tr>
-                                    <td colSpan="12" className="text-center py-12 text-slate-400 italic">Nenhum processo de faturação encontrado.</td>
+                                    <td colSpan="13" className="text-center py-12 text-slate-400 italic">Nenhum processo de faturação encontrado.</td>
                                 </tr>
                             ) : paginatedData.map(row => {
                                 const utilizadorFat = getDocFieldValue(row.doc, 'UTILIZADOR_FATURACAO') || getDocFieldValue(row.doc, 'Utilizador Faturação') || '';
@@ -946,6 +965,7 @@ export const AnaliseModule = ({
                                                 {utilizadorFat && <span className="text-[9px] text-slate-400 font-mono truncate max-w-[100px]">{utilizadorFat.split('@')[0]}</span>}
                                             </span>
                                         </td>
+                                        <td className="text-xs text-slate-500 max-w-[150px] truncate" title={row.comentarios}>{row.comentarios || '—'}</td>
                                         <td className="text-center">
                                             <div className="flex justify-center gap-1.5">
                                                 <a href={row.docLink} target="_blank" rel="noopener noreferrer" className="btn btn-ghost btn-xs text-indigo-600 hover:bg-indigo-50" title="Ver Documento"><FaExternalLinkAlt /></a>

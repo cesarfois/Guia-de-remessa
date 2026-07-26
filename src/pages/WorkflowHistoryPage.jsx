@@ -930,6 +930,9 @@ const WorkflowHistoryPage = () => {
             const diarioNum = getDocFieldValue(doc, 'NO_DIARIO_ERP') || getDocFieldValue(doc, 'Nº Diário ERP') || getDocFieldValue(doc, 'NO_DIARIO_CONTABILISTICO') || getDocFieldValue(doc, 'Nº Diário Contabilístico') || '';
             const isContabilizada = diarioNum !== '' || estatutoVal === 'registado';
             
+            // 12. Comentários
+            const comentarios = getDocFieldValue(doc, 'COMENTARIOS') || getDocFieldValue(doc, 'Comentários') || getDocFieldValue(doc, 'Comentarios') || getDocFieldValue(doc, 'COMENTARIOS_II') || getDocFieldValue(doc, 'COMENTARIOS_III') || '';
+            
             return {
                 id: doc.Id,
                 docNum,
@@ -946,6 +949,7 @@ const WorkflowHistoryPage = () => {
                 invoiceNum,
                 diarioNum,
                 isContabilizada,
+                comentarios,
                 etapaAtual: prog.activeTaskName || '-',
                 responsavel: prog.responsible || '-',
                 tempoParado: prog.timeStoppedMs || 0,
