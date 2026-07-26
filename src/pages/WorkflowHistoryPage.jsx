@@ -1491,8 +1491,8 @@ const WorkflowHistoryPage = () => {
     };
 
     // Handle Search for Cabinet Documents
-    const handleSearchDocuments = async (e) => {
-        if (e) e.preventDefault();
+    const handleSearchDocuments = async (e, customDateRange) => {
+        if (e && typeof e.preventDefault === 'function') e.preventDefault();
         if (!selectedCabinet) return;
 
         const searchId = ++latestSearchIdRef.current;
@@ -1505,6 +1505,8 @@ const WorkflowHistoryPage = () => {
         setHistoryInstances(null);
         setDocumentProgress({});
         setQuickFilter('all');
+
+        const activeRange = customDateRange || dateRange;
 
         try {
             const queryFilters = [];
@@ -1521,7 +1523,7 @@ const WorkflowHistoryPage = () => {
             if (detectedDateField) {
                 queryFilters.push({
                     fieldName: detectedDateField.DBFieldName || detectedDateField.FieldName,
-                    value: [dateRange[0] || '1900-01-01', dateRange[1] || '2099-12-31']
+                    value: [activeRange[0] || '1900-01-01', activeRange[1] || '2099-12-31']
                 });
             }
 
@@ -3016,42 +3018,76 @@ const WorkflowHistoryPage = () => {
                             <span>Filtros Globais de Análise</span>
                         </div>
                     </div>
-                    <form onSubmit={handleSearchDocuments} className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-                        {/* Date Range Inputs Row */}
-                        <div className="flex flex-wrap items-center gap-6">
-                            {/* Data Inicial */}
-                            <div className="flex flex-col gap-1.5">
-                                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Data Inicial</span>
-                                <input
-                                    type="date"
-                                    className="input input-bordered input-sm text-xs border-slate-300 bg-white text-slate-700 rounded-lg focus:ring-1 focus:ring-[#4f46e5] focus:border-transparent px-3 py-1.5 w-[160px]"
-                                    value={dateRange[0] || ''}
-                                    onChange={(e) => setDateRange([e.target.value, dateRange[1] || ''])}
-                                />
+                    <form onSubmit={handleSearchDocuments} className="flex flex-col gap-4">
+                        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                            {/* Date Range Inputs Row */}
+                            <div className="flex flex-wrap items-center gap-6">
+                                {/* Data Inicial */}
+                                <div className="flex flex-col gap-1.5">
+                                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Data Inicial</span>
+                                    <input
+                                        type="date"
+                                        className="input input-bordered input-sm text-xs border-slate-300 bg-white text-slate-700 rounded-lg focus:ring-1 focus:ring-[#4f46e5] focus:border-transparent px-3 py-1.5 w-[160px]"
+                                        value={dateRange[0] || ''}
+                                        onChange={(e) => setDateRange([e.target.value, dateRange[1] || ''])}
+                                    />
+                                </div>
+
+                                {/* Data Final */}
+                                <div className="flex flex-col gap-1.5">
+                                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Data Final</span>
+                                    <input
+                                        type="date"
+                                        className="input input-bordered input-sm text-xs border-slate-300 bg-white text-slate-700 rounded-lg focus:ring-1 focus:ring-[#4f46e5] focus:border-transparent px-3 py-1.5 w-[160px]"
+                                        value={dateRange[1] || ''}
+                                        onChange={(e) => setDateRange([dateRange[0] || '', e.target.value])}
+                                    />
+                                </div>
                             </div>
 
-                            {/* Data Final */}
-                            <div className="flex flex-col gap-1.5">
-                                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Data Final</span>
-                                <input
-                                    type="date"
-                                    className="input input-bordered input-sm text-xs border-slate-300 bg-white text-slate-700 rounded-lg focus:ring-1 focus:ring-[#4f46e5] focus:border-transparent px-3 py-1.5 w-[160px]"
-                                    value={dateRange[1] || ''}
-                                    onChange={(e) => setDateRange([dateRange[0] || '', e.target.value])}
-                                />
+                            {/* Right Column: Search Button */}
+                            <div className="flex items-center self-end">
+                                <button
+                                    type="submit"
+                                    className={`btn btn-sm bg-[#4f46e5] hover:bg-indigo-700 border-0 text-white text-xs font-semibold px-4 gap-1.5 shadow-sm rounded-lg h-9 flex items-center justify-center ${searchLoading ? 'loading' : ''}`}
+                                    disabled={searchLoading}
+                                >
+                                    {!searchLoading && <FaSyncAlt className="text-xs text-indigo-200" />}
+                                    <span>Pesquisar</span>
+                                </button>
                             </div>
                         </div>
 
-                        {/* Right Column: Search Button */}
-                        <div className="flex items-center self-end">
-                            <button
-                                type="submit"
-                                className={`btn btn-sm bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 text-xs font-semibold px-4 gap-1.5 shadow-sm rounded-lg h-9 flex items-center justify-center ${searchLoading ? 'loading' : ''}`}
-                                disabled={searchLoading}
-                            >
-                                {!searchLoading && <FaSyncAlt className="text-xs text-slate-400" />}
-                                <span>Pesquisar</span>
-                            </button>
+                        {/* Monthly shortcuts row */}
+                        <div className="border-t border-slate-100 pt-3">
+                            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Atalhos de Fechamento Mensal:</div>
+                            <div className="flex flex-wrap gap-2">
+                                {['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'].map((mName, idx) => {
+                                    const currentYear = dateRange[0] ? new Date(dateRange[0]).getFullYear() : new Date().getFullYear();
+                                    const startStr = `${currentYear}-${String(idx + 1).padStart(2, '0')}-01`;
+                                    const lastDay = new Date(currentYear, idx + 1, 0).getDate();
+                                    const endStr = `${currentYear}-${String(idx + 1).padStart(2, '0')}-${String(lastDay).padStart(2, '0')}`;
+                                    const isActive = dateRange[0] === startStr && dateRange[1] === endStr;
+
+                                    return (
+                                        <button
+                                            key={mName}
+                                            type="button"
+                                            onClick={() => {
+                                                setDateRange([startStr, endStr]);
+                                                handleSearchDocuments(null, [startStr, endStr]);
+                                            }}
+                                            className={`px-3.5 py-1.5 text-xs font-bold rounded-full border transition-all duration-150 ${
+                                                isActive
+                                                    ? 'bg-[#4f46e5] text-white border-[#4f46e5] shadow-sm'
+                                                    : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border-slate-200'
+                                            }`}
+                                        >
+                                            {mName}
+                                        </button>
+                                    );
+                                })}
+                            </div>
                         </div>
                     </form>
                 </div>
