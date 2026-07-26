@@ -804,7 +804,7 @@ export const AnaliseModule = ({
                             onChange={e => { setGlobalSearch(e.target.value); setAnalisePage(1); }} 
                         />
                         <button 
-                            onClick={() => exportAnaliseTableToCsv('Faturacao_GRs_V_G', ['GR', 'Série', 'Data da GR', 'Cliente', 'Nº Pedido/Referência', 'Assinada', 'Entrega', 'Decisão da faturação', 'Nº da fatura', 'Workflow', 'Etapa atual'], ['docNum', 'serie', 'dataGR', 'cliente', 'projecto', 'isAssinada', 'entregaType', 'billingDecision', 'invoiceNum', 'workflowType', 'etapaAtual'], filtered)} 
+                            onClick={() => exportAnaliseTableToCsv('Faturacao_GRs_V_G', ['GR', 'Série', 'Data da GR', 'Cliente', 'Projecto', 'Assinada', 'Entrega', 'Decisão da faturação', 'Nº da fatura', 'Workflow', 'Etapa atual'], ['docNum', 'serie', 'dataGR', 'cliente', 'projecto', 'isAssinada', 'entregaType', 'billingDecision', 'invoiceNum', 'workflowType', 'etapaAtual'], filtered)} 
                             className="btn btn-sm border-emerald-600 text-emerald-600 bg-white hover:bg-emerald-50 hover:border-emerald-700 border-2 gap-2 rounded-full font-bold h-9 px-4 text-xs shrink-0"
                             disabled={filtered.length === 0}
                         >
@@ -865,8 +865,8 @@ export const AnaliseModule = ({
                                 </th>
                                 <th className="py-3">
                                     <div className="flex items-center justify-between gap-1 select-none">
-                                        <span onClick={() => handleAnaliseSort('projecto')} className="cursor-pointer hover:text-indigo-600">Nº Pedido/Referência</span>
-                                        <ColumnFilter column={{ name: 'projecto', label: 'Pedido' }} uniqueValues={getUniqueValues('projecto')} selectedValues={colFilters['projecto'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} />
+                                        <span onClick={() => handleAnaliseSort('projecto')} className="cursor-pointer hover:text-indigo-600">Projecto</span>
+                                        <ColumnFilter column={{ name: 'projecto', label: 'Projecto' }} uniqueValues={getUniqueValues('projecto')} selectedValues={colFilters['projecto'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} />
                                     </div>
                                 </th>
                                 <th className="py-3">
