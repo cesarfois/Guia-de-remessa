@@ -829,6 +829,29 @@ const WorkflowHistoryPage = () => {
         return null;
     };
 
+    const formatDocuWareDate = (rawVal) => {
+        if (!rawVal) return '';
+        if (typeof rawVal === 'string' && rawVal.includes('/Date(')) {
+            const ms = parseInt(rawVal.replace(/\/Date\((\d+)\)\//, '$1'), 10);
+            if (!isNaN(ms)) {
+                const d = new Date(ms);
+                const day = String(d.getDate()).padStart(2, '0');
+                const month = String(d.getMonth() + 1).padStart(2, '0');
+                const year = d.getFullYear();
+                return `${day}/${month}/${year}`;
+            }
+        }
+        const parsedMs = Date.parse(rawVal);
+        if (!isNaN(parsedMs)) {
+            const d = new Date(parsedMs);
+            const day = String(d.getDate()).padStart(2, '0');
+            const month = String(d.getMonth() + 1).padStart(2, '0');
+            const year = d.getFullYear();
+            return `${day}/${month}/${year}`;
+        }
+        return rawVal;
+    };
+
     const analyticalRows = useMemo(() => {
         return documents.map(doc => {
             const prog = documentProgress[doc.Id] || {};
@@ -839,10 +862,12 @@ const WorkflowHistoryPage = () => {
             const serie = parsedNum ? parsedNum.serie : '';
             
             // 2. Data da GR
-            const dataGR = getDocFieldValue(doc, 'DATA') || getDocFieldValue(doc, 'Data') || '';
+            const rawDataGR = getDocFieldValue(doc, 'DATA') || getDocFieldValue(doc, 'Data') || '';
+            const dataGR = formatDocuWareDate(rawDataGR);
             
             // 3. Data de Armazenamento
-            const dataArmazenamento = getDocFieldValue(doc, 'ARMAZENADO_EM__') || getDocFieldValue(doc, 'Armazenado em:') || '';
+            const rawDataArmazenamento = getDocFieldValue(doc, 'ARMAZENADO_EM__') || getDocFieldValue(doc, 'Armazenado em:') || '';
+            const dataArmazenamento = formatDocuWareDate(rawDataArmazenamento);
             
             // 4. Cliente
             const cliente = getDocFieldValue(doc, 'CLIENTE') || getDocFieldValue(doc, 'Cliente') || '';
