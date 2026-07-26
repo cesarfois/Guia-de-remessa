@@ -551,7 +551,7 @@ export const AnaliseModule = ({
                             onChange={e => { setGlobalSearch(e.target.value); setAnalisePage(1); }} 
                         />
                         <button 
-                            onClick={() => exportAnaliseTableToCsv('Armazem_Entregas', ['GR', 'Série', 'Cliente', 'Técnico', 'Armazenada em', 'Assinada', 'Tipo de entrega', 'Etapa atual', 'Tempo aguardando'], ['docNum', 'serie', 'cliente', 'tecnico', 'dataArmazenamento', 'isAssinada', 'entregaType', 'etapaAtual', 'tempoParado'], filtered.map(f => ({ ...f, tecnico: casts.tecnico(f) })))} 
+                            onClick={() => exportAnaliseTableToCsv('Armazem_Entregas', ['GR', 'Série', 'Data da GR', 'Cliente', 'Técnico', 'Armazenada em', 'Assinada', 'Tipo de entrega', 'Etapa atual', 'Tempo aguardando'], ['docNum', 'serie', 'dataGR', 'cliente', 'tecnico', 'dataArmazenamento', 'isAssinada', 'entregaType', 'etapaAtual', 'tempoParado'], filtered.map(f => ({ ...f, tecnico: casts.tecnico(f) })))} 
                             className="btn btn-sm border-emerald-600 text-emerald-600 bg-white hover:bg-emerald-50 hover:border-emerald-700 border-2 gap-2 rounded-full font-bold h-9 px-4 text-xs shrink-0"
                             disabled={filtered.length === 0}
                         >
@@ -600,6 +600,12 @@ export const AnaliseModule = ({
                                 </th>
                                 <th className="py-3">
                                     <div className="flex items-center justify-between gap-1 select-none">
+                                        <span onClick={() => handleAnaliseSort('dataGR')} className="cursor-pointer hover:text-indigo-600">Data da GR</span>
+                                        <ColumnFilter column={{ name: 'dataGR', label: 'Data GR' }} uniqueValues={getUniqueValues('dataGR')} selectedValues={colFilters['dataGR'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} align="left" />
+                                    </div>
+                                </th>
+                                <th className="py-3">
+                                    <div className="flex items-center justify-between gap-1 select-none">
                                         <span onClick={() => handleAnaliseSort('cliente')} className="cursor-pointer hover:text-indigo-600">Cliente</span>
                                         <ColumnFilter column={{ name: 'cliente', label: 'Cliente' }} uniqueValues={getUniqueValues('cliente')} selectedValues={colFilters['cliente'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} align="left" />
                                     </div>
@@ -641,7 +647,7 @@ export const AnaliseModule = ({
                         <tbody className="divide-y divide-slate-100">
                             {paginatedData.length === 0 ? (
                                 <tr>
-                                    <td colSpan="10" className="text-center py-12 text-slate-400 italic">Nenhum processo operacional encontrado.</td>
+                                    <td colSpan="11" className="text-center py-12 text-slate-400 italic">Nenhum processo operacional encontrado.</td>
                                 </tr>
                             ) : paginatedData.map(row => {
                                 const tecnico = casts.tecnico(row);
@@ -649,6 +655,7 @@ export const AnaliseModule = ({
                                     <tr key={row.id} className="hover:bg-slate-50/50">
                                         <td className="font-bold text-slate-800 text-[10px]">{row.docNum}</td>
                                         <td className="text-xs font-semibold text-slate-500">{row.serie || '-'}</td>
+                                        <td className="text-xs text-slate-500 font-mono">{row.dataGR || '-'}</td>
                                         <td className="text-xs text-slate-600 truncate max-w-[150px] font-medium" title={row.cliente}>{row.cliente || '-'}</td>
                                         <td className="text-xs text-slate-500 font-semibold">{tecnico ? tecnico.split('@')[0] : '—'}</td>
                                         <td className="text-xs text-slate-500 font-mono">{row.dataArmazenamento || '-'}</td>
@@ -797,7 +804,7 @@ export const AnaliseModule = ({
                             onChange={e => { setGlobalSearch(e.target.value); setAnalisePage(1); }} 
                         />
                         <button 
-                            onClick={() => exportAnaliseTableToCsv('Faturacao_GRs_V_G', ['GR', 'Série', 'Cliente', 'Nº Pedido/Referência', 'Assinada', 'Entrega', 'Decisão da faturação', 'Nº da fatura', 'Workflow', 'Etapa atual'], ['docNum', 'serie', 'cliente', 'projecto', 'isAssinada', 'entregaType', 'billingDecision', 'invoiceNum', 'workflowType', 'etapaAtual'], filtered)} 
+                            onClick={() => exportAnaliseTableToCsv('Faturacao_GRs_V_G', ['GR', 'Série', 'Data da GR', 'Cliente', 'Nº Pedido/Referência', 'Assinada', 'Entrega', 'Decisão da faturação', 'Nº da fatura', 'Workflow', 'Etapa atual'], ['docNum', 'serie', 'dataGR', 'cliente', 'projecto', 'isAssinada', 'entregaType', 'billingDecision', 'invoiceNum', 'workflowType', 'etapaAtual'], filtered)} 
                             className="btn btn-sm border-emerald-600 text-emerald-600 bg-white hover:bg-emerald-50 hover:border-emerald-700 border-2 gap-2 rounded-full font-bold h-9 px-4 text-xs shrink-0"
                             disabled={filtered.length === 0}
                         >
@@ -846,6 +853,12 @@ export const AnaliseModule = ({
                                 </th>
                                 <th className="py-3">
                                     <div className="flex items-center justify-between gap-1 select-none">
+                                        <span onClick={() => handleAnaliseSort('dataGR')} className="cursor-pointer hover:text-indigo-600">Data da GR</span>
+                                        <ColumnFilter column={{ name: 'dataGR', label: 'Data GR' }} uniqueValues={getUniqueValues('dataGR')} selectedValues={colFilters['dataGR'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} align="left" />
+                                    </div>
+                                </th>
+                                <th className="py-3">
+                                    <div className="flex items-center justify-between gap-1 select-none">
                                         <span onClick={() => handleAnaliseSort('cliente')} className="cursor-pointer hover:text-indigo-600">Cliente</span>
                                         <ColumnFilter column={{ name: 'cliente', label: 'Cliente' }} uniqueValues={getUniqueValues('cliente')} selectedValues={colFilters['cliente'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} align="left" />
                                     </div>
@@ -853,7 +866,7 @@ export const AnaliseModule = ({
                                 <th className="py-3">
                                     <div className="flex items-center justify-between gap-1 select-none">
                                         <span onClick={() => handleAnaliseSort('projecto')} className="cursor-pointer hover:text-indigo-600">Nº Pedido/Referência</span>
-                                        <ColumnFilter column={{ name: 'projecto', label: 'Pedido' }} uniqueValues={getUniqueValues('projecto')} selectedValues={colFilters['projecto'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} align="left" />
+                                        <ColumnFilter column={{ name: 'projecto', label: 'Pedido' }} uniqueValues={getUniqueValues('projecto')} selectedValues={colFilters['projecto'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} />
                                     </div>
                                 </th>
                                 <th className="py-3">
@@ -898,7 +911,7 @@ export const AnaliseModule = ({
                         <tbody className="divide-y divide-slate-100">
                             {paginatedData.length === 0 ? (
                                 <tr>
-                                    <td colSpan="11" className="text-center py-12 text-slate-400 italic">Nenhum processo de faturação encontrado.</td>
+                                    <td colSpan="12" className="text-center py-12 text-slate-400 italic">Nenhum processo de faturação encontrado.</td>
                                 </tr>
                             ) : paginatedData.map(row => {
                                 const utilizadorFat = getDocFieldValue(row.doc, 'UTILIZADOR_FATURACAO') || getDocFieldValue(row.doc, 'Utilizador Faturação') || '';
@@ -906,6 +919,7 @@ export const AnaliseModule = ({
                                     <tr key={row.id} className="hover:bg-slate-50/50">
                                         <td className="font-bold text-slate-800 text-[10px]">{row.docNum}</td>
                                         <td className="text-xs font-semibold text-slate-500">{row.serie || '-'}</td>
+                                        <td className="text-xs text-slate-500 font-mono">{row.dataGR || '-'}</td>
                                         <td className="text-xs text-slate-600 truncate max-w-[150px] font-medium" title={row.cliente}>{row.cliente || '-'}</td>
                                         <td className="text-xs text-slate-500 font-semibold">{row.projecto || '-'}</td>
                                         <td className="text-xs">
@@ -1159,19 +1173,19 @@ export const AnaliseModule = ({
                                 <th className="py-3">
                                     <div className="flex items-center justify-between gap-1 select-none">
                                         <span>Número esperado</span>
-                                        <ColumnFilter column={{ name: 'numeroEsperado', label: 'Esperado' }} uniqueValues={getUniqueSequenceValues('numeroEsperado')} selectedValues={colFilters['numeroEsperado'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} />
+                                        <ColumnFilter column={{ name: 'numeroEsperado', label: 'Esperado' }} uniqueValues={getUniqueSequenceValues('numeroEsperado')} selectedValues={colFilters['numeroEsperado'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} align="left" />
                                     </div>
                                 </th>
                                 <th className="py-3">
                                     <div className="flex items-center justify-between gap-1 select-none">
                                         <span>Número completo</span>
-                                        <ColumnFilter column={{ name: 'numeroCompleto', label: 'GR' }} uniqueValues={getUniqueSequenceValues('numeroCompleto')} selectedValues={colFilters['numeroCompleto'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} />
+                                        <ColumnFilter column={{ name: 'numeroCompleto', label: 'GR' }} uniqueValues={getUniqueSequenceValues('numeroCompleto')} selectedValues={colFilters['numeroCompleto'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} align="left" />
                                     </div>
                                 </th>
                                 <th className="py-3">
                                     <div className="flex items-center justify-between gap-1 select-none">
                                         <span>Encontrado</span>
-                                        <ColumnFilter column={{ name: 'encontrada', label: 'Encontrada' }} uniqueValues={['Sim', 'Não']} selectedValues={colFilters['encontrada'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} />
+                                        <ColumnFilter column={{ name: 'encontrada', label: 'Encontrada' }} uniqueValues={['Sim', 'Não']} selectedValues={colFilters['encontrada'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} align="left" />
                                     </div>
                                 </th>
                                 <th className="py-3 select-none">Assinada</th>
