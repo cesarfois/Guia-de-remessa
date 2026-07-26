@@ -238,6 +238,11 @@ export const AnaliseModule = ({
 
         return (
             <div className="space-y-6">
+                {/* Under Development Banner */}
+                <div className="bg-amber-50/80 border border-amber-200 rounded-xl p-3 px-4 flex items-center gap-2 text-xs text-amber-800 font-semibold shadow-sm select-none">
+                    <span className="text-sm">⚠️</span>
+                    <span>Esta aba está em fase de desenvolvimento e validação de dados.</span>
+                </div>
                 {/* KPIs Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-4">
                     <div onClick={() => { setKpiFilters({ assinada: 'all', faturada: 'all', entrega: 'all' }); setGlobalSearch(''); setColFilters({}); setAnalisePage(1); }} className={`bg-white border rounded-xl p-4 shadow-sm cursor-pointer hover:shadow-md transition-all duration-200 border-l-[6px] ${kpiFilters.assinada === 'all' && kpiFilters.faturada === 'all' ? 'border-[#4f46e5] bg-indigo-50/10' : 'border-slate-200'}`}>
@@ -512,6 +517,11 @@ export const AnaliseModule = ({
 
         return (
             <div className="space-y-6">
+                {/* Under Development Banner */}
+                <div className="bg-amber-50/80 border border-amber-200 rounded-xl p-3 px-4 flex items-center gap-2 text-xs text-amber-800 font-semibold shadow-sm select-none">
+                    <span className="text-sm">⚠️</span>
+                    <span>Esta aba está em fase de desenvolvimento e validação de dados.</span>
+                </div>
                 {/* KPIs Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-8 gap-4">
                     <div onClick={() => toggleKpiFilter('assinada', 'Não Assinada')} className={`bg-white border rounded-xl p-4 shadow-sm cursor-pointer hover:shadow-md transition-all duration-200 border-l-[6px] ${borderAguardando}`}>
@@ -773,6 +783,11 @@ export const AnaliseModule = ({
 
         return (
             <div className="space-y-6">
+                {/* Under Development Banner */}
+                <div className="bg-amber-50/80 border border-amber-200 rounded-xl p-3 px-4 flex items-center gap-2 text-xs text-amber-800 font-semibold shadow-sm select-none">
+                    <span className="text-sm">⚠️</span>
+                    <span>Esta aba está em fase de desenvolvimento e validação de dados.</span>
+                </div>
                 {/* KPIs Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-8 gap-4">
                     <div onClick={() => { setKpiFilters({ assinada: 'all', faturada: 'all', entrega: 'all' }); setGlobalSearch(''); setColFilters({}); setAnalisePage(1); }} className={`bg-white border rounded-xl p-4 shadow-sm cursor-pointer hover:shadow-md transition-all duration-200 border-l-[6px] ${kpiFilters.faturada === 'all' ? 'border-[#4f46e5] bg-indigo-50/10' : 'border-slate-200'}`}>
@@ -1098,6 +1113,11 @@ export const AnaliseModule = ({
 
         return (
             <div className="space-y-6">
+                {/* Under Development Banner */}
+                <div className="bg-amber-50/80 border border-amber-200 rounded-xl p-3 px-4 flex items-center gap-2 text-xs text-amber-800 font-semibold shadow-sm select-none">
+                    <span className="text-sm">⚠️</span>
+                    <span>Esta aba está em fase de desenvolvimento e validação de dados.</span>
+                </div>
                 {/* KPIs Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
                     <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
