@@ -98,10 +98,11 @@ export const AnaliseModule = ({
         setAnalisePage(1);
     };
 
-    // Get unique values for a column dynamically from analyticalRows
-    const getUniqueValues = (field, castFn) => {
+    // Get unique values for a column dynamically from analyticalRows or custom subset
+    const getUniqueValues = (field, castFn, customRows) => {
         const vals = new Set();
-        analyticalRows.forEach(row => {
+        const rows = customRows || analyticalRows;
+        rows.forEach(row => {
             let val = row[field];
             if (castFn) {
                 val = castFn(row);
@@ -698,6 +699,8 @@ export const AnaliseModule = ({
 
     // --- FATURAÇÃO SUB-VIEW ---
     const renderFaturacao = () => {
+        const baseRows = useMemo(() => analyticalRows.filter(row => row.serie === 'V' || row.serie === 'G'), [analyticalRows]);
+
         const casts = {
             isAssinada: (r) => r.isAssinada ? 'Sim' : 'Não'
         };
@@ -855,31 +858,31 @@ export const AnaliseModule = ({
                                 <th className="py-3">
                                     <div className="flex items-center justify-between gap-1 select-none">
                                         <span onClick={() => handleAnaliseSort('docNum')} className="cursor-pointer hover:text-indigo-600">GR {analiseSortField === 'docNum' ? (analiseSortDirection === 'asc' ? '↑' : '↓') : '↕'}</span>
-                                        <ColumnFilter column={{ name: 'docNum', label: 'GR' }} uniqueValues={getUniqueValues('docNum')} selectedValues={colFilters['docNum'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} align="left" />
+                                        <ColumnFilter column={{ name: 'docNum', label: 'GR' }} uniqueValues={getUniqueValues('docNum', null, baseRows)} selectedValues={colFilters['docNum'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} align="left" />
                                     </div>
                                 </th>
                                 <th className="py-3">
                                     <div className="flex items-center justify-between gap-1 select-none">
                                         <span onClick={() => handleAnaliseSort('serie')} className="cursor-pointer hover:text-indigo-600">Série</span>
-                                        <ColumnFilter column={{ name: 'serie', label: 'Série' }} uniqueValues={getUniqueValues('serie')} selectedValues={colFilters['serie'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} align="left" />
+                                        <ColumnFilter column={{ name: 'serie', label: 'Série' }} uniqueValues={getUniqueValues('serie', null, baseRows)} selectedValues={colFilters['serie'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} align="left" />
                                     </div>
                                 </th>
                                 <th className="py-3">
                                     <div className="flex items-center justify-between gap-1 select-none">
                                         <span onClick={() => handleAnaliseSort('dataGR')} className="cursor-pointer hover:text-indigo-600">Data da GR</span>
-                                        <ColumnFilter column={{ name: 'dataGR', label: 'Data GR' }} uniqueValues={getUniqueValues('dataGR')} selectedValues={colFilters['dataGR'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} align="left" />
+                                        <ColumnFilter column={{ name: 'dataGR', label: 'Data GR' }} uniqueValues={getUniqueValues('dataGR', null, baseRows)} selectedValues={colFilters['dataGR'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} align="left" />
                                     </div>
                                 </th>
                                 <th className="py-3">
                                     <div className="flex items-center justify-between gap-1 select-none">
                                         <span onClick={() => handleAnaliseSort('cliente')} className="cursor-pointer hover:text-indigo-600">Cliente</span>
-                                        <ColumnFilter column={{ name: 'cliente', label: 'Cliente' }} uniqueValues={getUniqueValues('cliente')} selectedValues={colFilters['cliente'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} align="left" />
+                                        <ColumnFilter column={{ name: 'cliente', label: 'Cliente' }} uniqueValues={getUniqueValues('cliente', null, baseRows)} selectedValues={colFilters['cliente'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} align="left" />
                                     </div>
                                 </th>
                                 <th className="py-3">
                                     <div className="flex items-center justify-between gap-1 select-none">
                                         <span onClick={() => handleAnaliseSort('projecto')} className="cursor-pointer hover:text-indigo-600">Projecto</span>
-                                        <ColumnFilter column={{ name: 'projecto', label: 'Projecto' }} uniqueValues={getUniqueValues('projecto')} selectedValues={colFilters['projecto'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} />
+                                        <ColumnFilter column={{ name: 'projecto', label: 'Projecto' }} uniqueValues={getUniqueValues('projecto', null, baseRows)} selectedValues={colFilters['projecto'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} />
                                     </div>
                                 </th>
                                 <th className="py-3">
@@ -891,37 +894,37 @@ export const AnaliseModule = ({
                                 <th className="py-3">
                                     <div className="flex items-center justify-between gap-1 select-none">
                                         <span onClick={() => handleAnaliseSort('entregaType')} className="cursor-pointer hover:text-indigo-600">Entrega</span>
-                                        <ColumnFilter column={{ name: 'entregaType', label: 'Entrega' }} uniqueValues={getUniqueValues('entregaType')} selectedValues={colFilters['entregaType'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} />
+                                        <ColumnFilter column={{ name: 'entregaType', label: 'Entrega' }} uniqueValues={getUniqueValues('entregaType', null, baseRows)} selectedValues={colFilters['entregaType'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} />
                                     </div>
                                 </th>
                                 <th className="py-3">
                                     <div className="flex items-center justify-between gap-1 select-none">
                                         <span onClick={() => handleAnaliseSort('billingDecision')} className="cursor-pointer hover:text-indigo-600">Decisão Faturação</span>
-                                        <ColumnFilter column={{ name: 'billingDecision', label: 'Faturação' }} uniqueValues={getUniqueValues('billingDecision')} selectedValues={colFilters['billingDecision'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} />
+                                        <ColumnFilter column={{ name: 'billingDecision', label: 'Faturação' }} uniqueValues={getUniqueValues('billingDecision', null, baseRows)} selectedValues={colFilters['billingDecision'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} />
                                     </div>
                                 </th>
                                 <th className="py-3">
                                     <div className="flex items-center justify-between gap-1 select-none">
                                         <span onClick={() => handleAnaliseSort('invoiceNum')} className="cursor-pointer hover:text-indigo-600">Nº Fatura</span>
-                                        <ColumnFilter column={{ name: 'invoiceNum', label: 'Nº Fatura' }} uniqueValues={getUniqueValues('invoiceNum')} selectedValues={colFilters['invoiceNum'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} />
+                                        <ColumnFilter column={{ name: 'invoiceNum', label: 'Nº Fatura' }} uniqueValues={getUniqueValues('invoiceNum', null, baseRows)} selectedValues={colFilters['invoiceNum'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} />
                                     </div>
                                 </th>
                                 <th className="py-3">
                                     <div className="flex items-center justify-between gap-1 select-none">
                                         <span onClick={() => handleAnaliseSort('workflowType')} className="cursor-pointer hover:text-indigo-600">Workflow</span>
-                                        <ColumnFilter column={{ name: 'workflowType', label: 'Workflow' }} uniqueValues={getUniqueValues('workflowType')} selectedValues={colFilters['workflowType'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} />
+                                        <ColumnFilter column={{ name: 'workflowType', label: 'Workflow' }} uniqueValues={getUniqueValues('workflowType', null, baseRows)} selectedValues={colFilters['workflowType'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} />
                                     </div>
                                 </th>
                                 <th className="py-3">
                                     <div className="flex items-center justify-between gap-1 select-none">
                                         <span onClick={() => handleAnaliseSort('etapaAtual')} className="cursor-pointer hover:text-indigo-600">Etapa Atual</span>
-                                        <ColumnFilter column={{ name: 'etapaAtual', label: 'Etapa' }} uniqueValues={getUniqueValues('etapaAtual')} selectedValues={colFilters['etapaAtual'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} />
+                                        <ColumnFilter column={{ name: 'etapaAtual', label: 'Etapa' }} uniqueValues={getUniqueValues('etapaAtual', null, baseRows)} selectedValues={colFilters['etapaAtual'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} />
                                     </div>
                                 </th>
                                 <th className="py-3">
                                     <div className="flex items-center justify-between gap-1 select-none">
                                         <span onClick={() => handleAnaliseSort('comentarios')} className="cursor-pointer hover:text-indigo-600">Comentários</span>
-                                        <ColumnFilter column={{ name: 'comentarios', label: 'Comentários' }} uniqueValues={getUniqueValues('comentarios')} selectedValues={colFilters['comentarios'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} />
+                                        <ColumnFilter column={{ name: 'comentarios', label: 'Comentários' }} uniqueValues={getUniqueValues('comentarios', null, baseRows)} selectedValues={colFilters['comentarios'] || []} onToggleValue={toggleFilterValue} onClear={clearColumnFilter} />
                                     </div>
                                 </th>
                                 <th className="text-center py-3 select-none">Ações</th>
