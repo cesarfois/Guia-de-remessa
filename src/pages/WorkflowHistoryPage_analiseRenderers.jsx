@@ -206,8 +206,8 @@ export const AnaliseModule = ({
 
             if (typeof valA === 'string' && typeof valB === 'string') {
                 return analiseSortDirection === 'asc' 
-                    ? valA.localeCompare(valB, 'pt-BR') 
-                    : valB.localeCompare(valA, 'pt-BR');
+                    ? valA.localeCompare(valB, 'pt-BR', { numeric: true, sensitivity: 'base' }) 
+                    : valB.localeCompare(valA, 'pt-BR', { numeric: true, sensitivity: 'base' });
             } else {
                 return analiseSortDirection === 'asc' 
                     ? (valA > valB ? 1 : valA < valB ? -1 : 0) 
@@ -472,8 +472,8 @@ export const AnaliseModule = ({
 
             if (typeof valA === 'string' && typeof valB === 'string') {
                 return analiseSortDirection === 'asc' 
-                    ? valA.localeCompare(valB, 'pt-BR') 
-                    : valB.localeCompare(valA, 'pt-BR');
+                    ? valA.localeCompare(valB, 'pt-BR', { numeric: true, sensitivity: 'base' }) 
+                    : valB.localeCompare(valA, 'pt-BR', { numeric: true, sensitivity: 'base' });
             } else {
                 return analiseSortDirection === 'asc' 
                     ? (valA > valB ? 1 : valA < valB ? -1 : 0) 
@@ -741,8 +741,8 @@ export const AnaliseModule = ({
 
             if (typeof valA === 'string' && typeof valB === 'string') {
                 return analiseSortDirection === 'asc' 
-                    ? valA.localeCompare(valB, 'pt-BR') 
-                    : valB.localeCompare(valA, 'pt-BR');
+                    ? valA.localeCompare(valB, 'pt-BR', { numeric: true, sensitivity: 'base' }) 
+                    : valB.localeCompare(valA, 'pt-BR', { numeric: true, sensitivity: 'base' });
             } else {
                 return analiseSortDirection === 'asc' 
                     ? (valA > valB ? 1 : valA < valB ? -1 : 0) 
