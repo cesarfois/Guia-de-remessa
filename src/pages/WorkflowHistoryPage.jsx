@@ -242,7 +242,8 @@ const getDocFieldValue = (doc, fieldName) => {
     if (!doc || !doc.Fields) return '';
     const field = doc.Fields.find(f => f.FieldName === fieldName);
     if (!field) return '';
-    return field.Item || field.Value || '';
+    const val = field.Item || field.Int || field.Decimal || field.Date || field.DateTime || field.Value || '';
+    return val;
 };
 
 const getDocumentNumber = (doc) => {
