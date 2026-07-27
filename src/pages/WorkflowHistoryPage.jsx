@@ -2957,57 +2957,66 @@ const WorkflowHistoryPage = () => {
                 </div>
             )}
 
-            {/* Sub-tabs bar rendered only in Analise mode */}
-            {viewMode === 'analise' && (
-                <div className="flex justify-start">
-                    <div className="bg-slate-200/60 p-1 rounded-full border border-slate-200 flex flex-wrap gap-1 shadow-sm select-none">
-                        <button 
-                            onClick={() => setAnaliseTab('faturacao')}
-                            className={`px-5 py-2 text-xs font-bold rounded-full transition-all duration-150 flex items-center gap-1.5 ${
-                                analiseTab === 'faturacao' 
-                                    ? 'bg-[#4f46e5] text-white shadow-md' 
-                                    : 'text-slate-600 hover:bg-slate-100 hover:text-slate-800'
-                            }`}
-                        >
-                            <FaBoxes className="text-[10px]" />
-                            <span>Faturação</span>
-                        </button>
-                        <button 
-                            onClick={() => setAnaliseTab('controle')}
-                            className={`px-5 py-2 text-xs font-bold rounded-full transition-all duration-150 flex items-center gap-1.5 ${
-                                analiseTab === 'controle' 
-                                    ? 'bg-[#4f46e5] text-white shadow-md' 
-                                    : 'text-slate-600 hover:bg-slate-100 hover:text-slate-800'
-                            }`}
-                        >
-                            <FaList className="text-[10px]" />
-                            <span>Controle de GRs</span>
-                        </button>
-                        <button 
-                            onClick={() => setAnaliseTab('armazem')}
-                            className={`px-5 py-2 text-xs font-bold rounded-full transition-all duration-150 flex items-center gap-1.5 ${
-                                analiseTab === 'armazem' 
-                                    ? 'bg-[#4f46e5] text-white shadow-md' 
-                                    : 'text-slate-600 hover:bg-slate-100 hover:text-slate-800'
-                            }`}
-                        >
-                            <FaBoxes className="text-[10px]" />
-                            <span>Armazém e Entregas</span>
-                        </button>
-                        <button 
-                            onClick={() => setAnaliseTab('sequencia')}
-                            className={`px-5 py-2 text-xs font-bold rounded-full transition-all duration-150 flex items-center gap-1.5 ${
-                                analiseTab === 'sequencia' 
-                                    ? 'bg-[#4f46e5] text-white shadow-md' 
-                                    : 'text-slate-600 hover:bg-slate-100 hover:text-slate-800'
-                            }`}
-                        >
-                            <FaBoxes className="text-[10px]" />
-                            <span>Sequência de GRs</span>
-                        </button>
-                    </div>
+            {/* Unified Navigation Tabs Capsule Selector */}
+            <div className="flex justify-start">
+                <div className="bg-slate-200/60 p-1 rounded-full border border-slate-200 flex flex-wrap gap-1 shadow-sm select-none">
+                    <button 
+                        onClick={() => setViewMode('operacional')}
+                        className={`px-5 py-2 text-xs font-bold rounded-full transition-all duration-150 flex items-center gap-1.5 ${
+                            viewMode === 'operacional' 
+                                ? 'bg-[#4f46e5] text-white shadow-md' 
+                                : 'text-slate-600 hover:bg-slate-100 hover:text-slate-800'
+                        }`}
+                    >
+                        <FaList className="text-[10px]" />
+                        <span>Visão Operacional</span>
+                    </button>
+                    <button 
+                        onClick={() => { setViewMode('analise'); setAnaliseTab('faturacao'); }}
+                        className={`px-5 py-2 text-xs font-bold rounded-full transition-all duration-150 flex items-center gap-1.5 ${
+                            viewMode === 'analise' && analiseTab === 'faturacao' 
+                                ? 'bg-[#4f46e5] text-white shadow-md' 
+                                : 'text-slate-600 hover:bg-slate-100 hover:text-slate-800'
+                        }`}
+                    >
+                        <FaBoxes className="text-[10px]" />
+                        <span>Faturação</span>
+                    </button>
+                    <button 
+                        onClick={() => { setViewMode('analise'); setAnaliseTab('controle'); }}
+                        className={`px-5 py-2 text-xs font-bold rounded-full transition-all duration-150 flex items-center gap-1.5 ${
+                            viewMode === 'analise' && analiseTab === 'controle' 
+                                ? 'bg-[#4f46e5] text-white shadow-md' 
+                                : 'text-slate-600 hover:bg-slate-100 hover:text-slate-800'
+                        }`}
+                    >
+                        <FaList className="text-[10px]" />
+                        <span>Controle de GRs</span>
+                    </button>
+                    <button 
+                        onClick={() => { setViewMode('analise'); setAnaliseTab('armazem'); }}
+                        className={`px-5 py-2 text-xs font-bold rounded-full transition-all duration-150 flex items-center gap-1.5 ${
+                            viewMode === 'analise' && analiseTab === 'armazem' 
+                                ? 'bg-[#4f46e5] text-white shadow-md' 
+                                : 'text-slate-600 hover:bg-slate-100 hover:text-slate-800'
+                        }`}
+                    >
+                        <FaBoxes className="text-[10px]" />
+                        <span>Armazém e Entregas</span>
+                    </button>
+                    <button 
+                        onClick={() => { setViewMode('analise'); setAnaliseTab('sequencia'); }}
+                        className={`px-5 py-2 text-xs font-bold rounded-full transition-all duration-150 flex items-center gap-1.5 ${
+                            viewMode === 'analise' && analiseTab === 'sequencia' 
+                                ? 'bg-[#4f46e5] text-white shadow-md' 
+                                : 'text-slate-600 hover:bg-slate-100 hover:text-slate-800'
+                        }`}
+                    >
+                        <FaBoxes className="text-[10px]" />
+                        <span>Sequência de GRs</span>
+                    </button>
                 </div>
-            )}
+            </div>
 
             {/* Filtros Globais de Análise Card */}
             <div className="card bg-white border border-slate-200 border-l-[6px] border-l-[#4f46e5] shadow-[0_8px_30px_rgb(0,0,0,0.02)] rounded-2xl">
