@@ -1186,7 +1186,7 @@ export const AnaliseModule = ({
                     </div>
 
                     <div className="flex items-center justify-between md:justify-end gap-4 text-xs text-slate-500 font-semibold w-full md:w-auto shrink-0 select-none">
-                        <span>Exibindo {filtered.length} de {sequenceRows.length} processos</span>
+                        <span>Exibindo {searchedSequenceRows.length} de {sequenceRows.length} processos</span>
                         <div className="flex gap-1">
                             <button 
                                 className="btn btn-xs btn-outline border-slate-300 text-slate-600 rounded-full w-7 h-7 flex items-center justify-center p-0" 
